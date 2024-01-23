@@ -1,0 +1,282 @@
+{
+  "main": {
+    "name":"Chen Gu",
+    "occupation":"Software Engineer",
+    "description":" with about 3 year of working experience in software development",
+    "image":"profilepic.jpg",
+    "intro":"Software engineer with about 3 year of working experience",
+    "bio":"Experienced in designing and building multiple back-end and front-end applications and worked on projects in various domains with tech stacks including Java, Python, MySQL, PostgreSQL, AWS, React.js, and CI/CD.\n\nI am a great problem solver, a self-motivated individual, a technophile obsessed with the latest new tech. I’ve always been willing to learn new technologies and am passionate to apply my skills to tackle and solve business challenges.",
+    "skills": [
+      "Programing languages: Java, Python, JavaScript, HTML, CSS",
+      "Database: MySQL, PostgreSQL, MongoDB, Redis, SQLite",
+      "Framework/Libraries: Spring Boot, React.js, Node.js, jQuery",
+      "Version Control & CI/CD: GitHub, TFS, Azure DevOps, Jenkins, Jira",
+      "Others: AWS, Docker, Maven, Tomcat, Postman, Cloud Foundry, REST, Wireshark, Hibernate, Servlet, Junit"
+    ],
+    "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
+    "email": "guchennn@gmail.com / gu.che@northeastern.edu",
+    "phone": "617-899-7626",
+    "city":"Boston",
+    "nameUnderImage": "   Chen Gu",
+    "address":{
+      "street":"",
+      "city":"Boston",
+      "state":"MA",
+      "zip": ""
+    },
+    "website": "",
+    "resumedownload":"images/ChenGu_Resume (2).pdf",
+    "social":[
+
+      {
+        "name":"linkedin",
+        "url":"https://www.linkedin.com/in/chen-gu-7141a7a8/",
+        "className":"fa fa-linkedin"
+      },
+
+      {
+        "name":"github",
+        "url":"https://github.com/damonchen6886",
+        "className":"fa fa-github"
+      }
+
+    ]
+  },
+  "resume":{
+    "skillmessage":"Here you can create a short write-up of your skills to show off to employers",
+    "education":[
+      {
+        "school":"Northeastern University",
+        "degree":"Master of Science in Computer Science",
+        "graduated":"Dec 2020",
+        "Coursework":"Object-Oriented Design, Algorithm, Web Development, Computer System, Database Management, Mobile Application Development, Computer Networks",
+        "description":"Relevant Coursework: ",
+        "image": "education.jpg",
+        "honor": "",
+        "awards": ""
+      },
+      {
+        "school":"Northeastern University",
+        "degree":"Bachelor of Science in Business Administration",
+        "graduated":"May 2018",
+        "description":"Relevant Coursework: ",
+        "Coursework":"Management Information Systems, Data Mining for Business, Data Management in the Enterprise, Business Systems Integration, Financial Management",
+        "image": "education.jpg",
+        "honor": "Dean's List",
+        "awards": "Award: "
+      }
+    ],
+    "work":[
+      {
+        "company":"Michigan State University RDP Lab",
+        "title":"Software Engineer",
+        "years":"Apr 2020 - Current, Remote",
+        "image":"msu.jpg",
+        "description":
+        [
+        "Participate in developing and maintaining scientific analysis tool and database for scientists to analyze microbial Genomes \n ",
+        "Implement new features in backend java app under the guidance of a group of scientists, improved front end web UI\n",
+        "Maintain the project CI/CD, ensured the latest version of software is always reflected on docker hub \n"
+      ]
+                
+      },
+      {
+        "company":"Philips North America",
+        "title":"Software Engineer Coop ",
+        "years":"Jan 2020 - Aug 2020, Cambridge, MA",
+        "image":"Philips2.png",
+        "description":
+        [
+        "Participated in cloud-based framework implementation for the project under patient Monitoring that enables predictive analytics for multiple connected healthcare application \n ",
+        "Enhanced Backend Java and C# application under Spring framework, .NET Core, improved front-end app under jQuery\n",
+        "Analyzed and fixed 20 security vulnerabilities for both on-prem application and cloud application\n",
+        "Developed and implemented IAM onboarding scripts in python for test team",
+        "Maintained services using HTTP, REST, JSON and XML and performed unit test on services end to end ensuring system working healthily with logging monitor",
+        "Composed and improved various documents including feature spec, deployments, and compliance"
+      ]
+                
+      },
+      {
+        "company":"State Street Corporation",
+        "title":"Data Analyst Intern",
+        "years":"Jun 2016 - Dec 2016,  Boston, MA",
+        "image":"StateStreet.png",
+        "description":
+        [" Participated in client data migration projects and improved the quality and accuracy of Client reference data by 20% \n",
+          "Improved reports procedures and saved five hours of manual work every week \n",
+          "Processed an average of ten requests every day, created and corrected data elements on the Salesforce platform"
+        ]
+      },
+      {
+        "company":"Brown Brothers Harriman & Co.",
+        "title":"Reconciliation Analyst Coop",
+        "years":"Jul 2017 - Dec 2017,  Boston, MA",
+        "image":"bbh-logo.jpg",
+        "description":
+        [" Ensured all daily financial reports are delivered and automated data feeds are properly posted to all reconciliation platform \n",
+          "Provided detailed commentary to facilitate ledger breaks clearances and escalate to responsible party for research\n",
+          "Communicated with various internal and external clients and responded to inquiries in a timely manner"
+        ]
+      }
+    ],
+    "skills":[
+      {
+        "name":"Java",
+        "level":"60%"
+      },
+      {
+        "name":"Python",
+        "level":"60%"
+      },
+      {
+        "name":"JavaScript",
+        "level":"60%"
+      },
+      {
+        "name":"Elixir",
+        "level":"60%"
+      },
+      {
+        "name":"MySQL",
+        "level":"60%"
+      },
+      {
+        "name":"PostgreSQL",
+        "level":"60%"
+      },
+      {
+        "name":"MongoDB",
+        "level":"60%"
+      },
+      {
+        "name":"React.js",
+        "level":"60%"
+      },
+      {
+        "name":"Node.js",
+        "level":"60%"
+      },
+      {
+        "name":"Express.js",
+        "level":"60%"
+      },
+      {
+        "name":"Bootstrap",
+        "level":"60%"
+      },
+      {
+        "name":"jQuery",
+        "level":"60%"
+      },
+      {
+        "name":"Ant Design",
+        "level":"60%"
+      },
+      {
+        "name":"Spring Boot",
+        "level":"60%"
+      },
+      {
+        "name":"AWS",
+        "level":"60%"
+      },
+      {
+        "name":"Linux",
+        "level":"60%"
+      },
+      {
+        "name":"Git",
+        "level":"55%"
+      },
+      {
+        "name":"Jenkins",
+        "level":"50%"
+      },
+      {
+        "name":"Maven",
+        "level":"90%"
+      },
+      {
+        "name":"Postman",
+        "level":"80%"
+      },
+      {
+        "name":"Tomcat",
+        "level":"50%"
+      },
+      {
+        "name":"Jira",
+        "level":"80%"
+      },
+      {
+        "name":"RESTful API",
+        "level":"80%"
+      }
+    ]
+  },
+  "portfolio":{
+    "projects": [
+
+      {
+        "title":"Inventory Management System",
+        "category":"– A Web-based ERP Application for small business",
+        "description": 
+        ["Developed a web ERP application to calculating ratios, manipulate CRUD with GAPP accounting principle applied",
+        "Designed and built schema in MySQL on AWS RDS, applied stored procedures and triggers to facilitate order manipulation",
+        "Created RESTful API using Servlet in Java, used Hibernate for ORM, structured web interface using Bootstrap and jQuery"
+        ],
+        "image":"InventoryManagement/inventoryManagement.jpg",
+        "url":"https://github.com/damonchen6886/Inventory_Management_System"
+      },
+      
+      {
+        "title":"NewsBee Forum Web Application",
+        "category":"– A SPA web Application",
+        "description": 
+        ["Developed a single page web application for individuals to read news along with peer commentators",
+        "Built the web interface using React.js and Phoenix, implemented SPA with Redux and React-Router",
+        "Structured the relational database (Postgres), implemented server to server external API connection to third-party libraries"
+        ],
+        "image":"newsbee/newsbee.png",
+        "url":"https://github.com/damonchen6886/NewsForum"
+      },
+      {
+        "title":"Roll Own CDN",
+        "category":"– A sample Content Delivery Network",
+        "description": 
+        ["Built a small content delivery networks(CDN) in python, used multiple AWS EC2 server as original and replica server",
+        "Implemented DNS server dynamically respond to client the best replica server, constructed DNS packet from scratch",
+        "Developed an LRU cache mechanism in HTTP server that effectively fetches content from the origin server",
+        "Ranked top 3 fastest CDN in performance competition in class"
+        ],
+        "image":"CDN/cdn.jpg",
+        "url":"https://github.com/damonchen6886/CDN-project"
+      },
+
+      {
+        "title":"Diglett Chat Application",
+        "category":"– A Web Online Chatting Application",
+        "description": 
+        ["Built a web-based online chatting application that supports 500 users online, deployed the service locally using Tomcat",
+        "Created RESTful API with Java, structured web interface using ReactJS framework",
+        "Implemented Hibernate for ORM with the MySQL database and deployed on AWS RDS"
+        ],
+        "image":"chat/chat2.png",
+        "url":"https://github.com/damonchen6886/Diglett_chat_App"
+      },
+
+      {
+        "title":"Sleep Forest Android Application",
+        "category":"– A Sleep Management Android Application",
+        "description": 
+        ["Built an android Sleep management application in java and deployed on Google Play",
+        "Utilized android sensor to capture data from end-users, stored data using android SQLite database",
+        "Implemented reward system, updated user interface to improve user engagement"
+        ],
+        "image":"sleepForest/sleepForest.png",
+        "url":"https://github.com/damonchen6886/Sleep-Forest"
+      }
+    ]
+  }
+  
+}
