@@ -1,11 +1,11 @@
 {
   "main": {
-    "name":"Chen Gu",
-    "occupation":"Software Engineer",
-    "description":" with about 3 year of working experience in software development",
+    "name":"Andy (Xiang-Yu) Cui",
+    "occupation":" Artificial Intelligence Master Student of Khoury College in Northeastern University (Boston)",
+    "description":" Actively Seeking for SDE/DS/ML Roles | MSCS-AI",
     "image":"profilepic.jpg",
-    "intro":"Software engineer with about 3 year of working experience",
-    "bio":"Experienced in designing and building multiple back-end and front-end applications and worked on projects in various domains with tech stacks including Java, Python, MySQL, PostgreSQL, AWS, React.js, and CI/CD.\n\nI am a great problem solver, a self-motivated individual, a technophile obsessed with the latest new tech. I’ve always been willing to learn new technologies and am passionate to apply my skills to tackle and solve business challenges.",
+    "intro":"Actively Seeking for SDE/DS/ML Roles | MSCS-AI",
+    "bio":"Experienced in designing and building multiple Machine Learning, back-end and front-end applications and worked on projects in various domains with tech stacks including Java, Python, MySQL, PostgreSQL, AWS, React.js, and CI/CD.\n\nI am a great problem solver, a self-motivated individual, a technophile obsessed with the latest new tech. I’ve always been willing to learn new technologies and am passionate to apply my skills to tackle and solve business challenges.",
     "skills": [
       "Programing languages: Java, Python, JavaScript, HTML, CSS",
       "Database: MySQL, PostgreSQL, MongoDB, Redis, SQLite",
