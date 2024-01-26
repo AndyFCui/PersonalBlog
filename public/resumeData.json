@@ -1,7 +1,7 @@
 {
   "main": {
     "name":"Andy (Xiang-Yu) Cui",
-    "occupation":" Artificial Intelligence Master Student of Khoury College in Northeastern University (Boston)",
+    "occupation":"  Artificial Intelligence Master Student of Khoury College in Northeastern University (Boston)",
     "description":" Actively Seeking for SDE/DS/ML Roles | MSCS-AI",
     "image":"profilepic.jpg",
     "intro":"Actively Seeking for SDE/DS/ML Roles | MSCS-AI",
@@ -14,10 +14,10 @@
       "Others: AWS, Docker, Maven, Tomcat, Postman, Cloud Foundry, REST, Wireshark, Hibernate, Servlet, Junit"
     ],
     "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
-    "email": "guchennn@gmail.com / gu.che@northeastern.edu",
-    "phone": "617-899-7626",
+    "email": "xiangyucui@outlook.com  cui.xiangyu@northeastern.edu",
+    "phone": "(402-853-3000)",
     "city":"Boston",
-    "nameUnderImage": "   Chen Gu",
+    "nameUnderImage": "Andy    Cui",
     "address":{
       "street":"",
       "city":"Boston",
@@ -25,18 +25,18 @@
       "zip": ""
     },
     "website": "",
-    "resumedownload":"images/ChenGu_Resume (2).pdf",
+    "resumedownload":"images/CUIXIANGYU.pdf",
     "social":[
 
       {
         "name":"linkedin",
-        "url":"https://www.linkedin.com/in/chen-gu-7141a7a8/",
+        "url":"https://www.linkedin.com/in/andyfcui/",
         "className":"fa fa-linkedin"
       },
 
       {
         "name":"github",
-        "url":"https://github.com/damonchen6886",
+        "url":"https://github.com/AndyFCui",
         "className":"fa fa-github"
       }
 
@@ -47,8 +47,8 @@
     "education":[
       {
         "school":"Northeastern University",
-        "degree":"Master of Science in Computer Science",
-        "graduated":"Dec 2020",
+        "degree":"Master of Science in Artificial Intelligence",
+        "graduated":"Dec 2023",
         "Coursework":"Object-Oriented Design, Algorithm, Web Development, Computer System, Database Management, Mobile Application Development, Computer Networks",
         "description":"Relevant Coursework: ",
         "image": "education.jpg",
@@ -56,13 +56,13 @@
         "awards": ""
       },
       {
-        "school":"Northeastern University",
-        "degree":"Bachelor of Science in Business Administration",
-        "graduated":"May 2018",
+        "school":"University of Nebraska Lincoln",
+        "degree":"Bachelor of Computer Science",
+        "graduated":"May 2020",
         "description":"Relevant Coursework: ",
         "Coursework":"Management Information Systems, Data Mining for Business, Data Management in the Enterprise, Business Systems Integration, Financial Management",
         "image": "education.jpg",
-        "honor": "Dean's List",
+        "honor": "ACM ICPC",
         "awards": "Award: "
       }
     ],
