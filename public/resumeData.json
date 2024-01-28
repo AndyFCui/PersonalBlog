@@ -7,15 +7,16 @@
     "intro":"Actively Seeking for SDE/DS/ML Roles | MSCS-AI",
     "bio":"Experienced in designing and building multiple Machine Learning, back-end and front-end applications and worked on projects in various domains with tech stacks including Java, Python, MySQL, PostgreSQL, AWS, React.js, and CI/CD.\n\nI am a great problem solver, a self-motivated individual, a technophile obsessed with the latest new tech. I’ve always been willing to learn new technologies and am passionate to apply my skills to tackle and solve business challenges.",
     "skills": [
-      "Programing languages: Java, Python, JavaScript, HTML, CSS",
+      "Programing languages: Java, Python, JavaScript, HTML, CSS, C/C++, Assembly, VB",
       "Database: MySQL, PostgreSQL, MongoDB, Redis, SQLite",
+      "Machine Learning: TF-IDF, Naïve Bayes, GPT-2, Bert, CNN, Transform",
       "Framework/Libraries: Spring Boot, React.js, Node.js, jQuery",
       "Version Control & CI/CD: GitHub, TFS, Azure DevOps, Jenkins, Jira",
-      "Others: AWS, Docker, Maven, Tomcat, Postman, Cloud Foundry, REST, Wireshark, Hibernate, Servlet, Junit"
+      "Others: AWS, Docker, Maven, Tomcat, Axure, Servlet, Junit, Nginx, Office"
     ],
     "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
     "email": "xiangyucui@outlook.com  cui.xiangyu@northeastern.edu",
-    "phone": "(402-853-3000)",
+    "phone": "(402)-853-3000",
     "city":"Boston",
     "nameUnderImage": "Andy    Cui",
     "address":{
@@ -46,7 +47,7 @@
     "skillmessage":"Here you can create a short write-up of your skills to show off to employers",
     "education":[
       {
-        "school":"Northeastern University",
+        "school":"Northeastern University (NEU)",
         "degree":"Master of Science in Artificial Intelligence",
         "graduated":"Dec 2023",
         "Coursework":"Object-Oriented Design, Algorithm, Web Development, Computer System, Database Management, Mobile Application Development, Computer Networks",
@@ -56,13 +57,23 @@
         "awards": ""
       },
       {
-        "school":"University of Nebraska Lincoln",
+        "school":"University of Nebraska Lincoln (UNL)",
         "degree":"Bachelor of Computer Science",
         "graduated":"May 2020",
         "description":"Relevant Coursework: ",
         "Coursework":"Management Information Systems, Data Mining for Business, Data Management in the Enterprise, Business Systems Integration, Financial Management",
-        "image": "education.jpg",
+        "image": "education2.png",
         "honor": "ACM ICPC",
+        "awards": "Award: "
+      },
+      {
+        "school":"Dalian Neusoft University of Information (DUNI)",
+        "degree":"Eletronic Infomation Engineering",
+        "graduated":"July 2015",
+        "description":"Relevant Coursework: ",
+        "Coursework":"Management Information Systems, Data Mining for Business, Data Management in the Enterprise, Business Systems Integration, Financial Management",
+        "image": "education2.png",
+        "honor": "Transfer to University of Nebraska Lincoln",
         "awards": "Award: "
       }
     ],
@@ -119,98 +130,154 @@
         ]
       }
     ],
-    "skills":[
+    "skills": [
       {
-        "name":"Java",
-        "level":"60%"
+        "name": "Java",
+        "level": "60%"
       },
       {
-        "name":"Python",
-        "level":"60%"
+        "name": "Python",
+        "level": "60%"
       },
       {
-        "name":"JavaScript",
-        "level":"60%"
+        "name": "JavaScript",
+        "level": "60%"
       },
       {
-        "name":"Elixir",
-        "level":"60%"
+        "name": "HTML",
+        "level": "60%"
       },
       {
-        "name":"MySQL",
-        "level":"60%"
+        "name": "CSS",
+        "level": "60%"
       },
       {
-        "name":"PostgreSQL",
-        "level":"60%"
+        "name": "C/C++",
+        "level": "60%"
       },
       {
-        "name":"MongoDB",
-        "level":"60%"
+        "name": "Assembly",
+        "level": "60%"
       },
       {
-        "name":"React.js",
-        "level":"60%"
+        "name": "VB",
+        "level": "60%"
       },
       {
-        "name":"Node.js",
-        "level":"60%"
+        "name": "MySQL",
+        "level": "60%"
       },
       {
-        "name":"Express.js",
-        "level":"60%"
+        "name": "PostgreSQL",
+        "level": "60%"
       },
       {
-        "name":"Bootstrap",
-        "level":"60%"
+        "name": "MongoDB",
+        "level": "60%"
       },
       {
-        "name":"jQuery",
-        "level":"60%"
+        "name": "Redis",
+        "level": "60%"
       },
       {
-        "name":"Ant Design",
-        "level":"60%"
+        "name": "SQLite",
+        "level": "60%"
       },
       {
-        "name":"Spring Boot",
-        "level":"60%"
+        "name": "TF-IDF",
+        "level": "60%"
       },
       {
-        "name":"AWS",
-        "level":"60%"
+        "name": "Naive Bayes",
+        "level": "60%"
       },
       {
-        "name":"Linux",
-        "level":"60%"
+        "name": "GPT-2",
+        "level": "60%"
       },
       {
-        "name":"Git",
-        "level":"55%"
+        "name": "Bert",
+        "level": "60%"
       },
       {
-        "name":"Jenkins",
-        "level":"50%"
+        "name": "CNN",
+        "level": "60%"
       },
       {
-        "name":"Maven",
-        "level":"90%"
+        "name": "Transform",
+        "level": "60%"
       },
       {
-        "name":"Postman",
-        "level":"80%"
+        "name": "Spring Boot",
+        "level": "60%"
       },
       {
-        "name":"Tomcat",
-        "level":"50%"
+        "name": "React.js",
+        "level": "60%"
       },
       {
-        "name":"Jira",
-        "level":"80%"
+        "name": "Node.js",
+        "level": "60%"
       },
       {
-        "name":"RESTful API",
-        "level":"80%"
+        "name": "jQuery",
+        "level": "60%"
+      },
+      {
+        "name": "GitHub",
+        "level": "60%"
+      },
+      {
+        "name": "TFS",
+        "level": "60%"
+      },
+      {
+        "name": "Azure DevOps",
+        "level": "60%"
+      },
+      {
+        "name": "Jenkins",
+        "level": "60%"
+      },
+      {
+        "name": "Jira",
+        "level": "60%"
+      },
+      {
+        "name": "AWS",
+        "level": "60%"
+      },
+      {
+        "name": "Docker",
+        "level": "60%"
+      },
+      {
+        "name": "Maven",
+        "level": "60%"
+      },
+      {
+        "name": "Tomcat",
+        "level": "60%"
+      },
+      {
+        "name": "Axure",
+        "level": "60%"
+      },
+      {
+        "name": "Servlet",
+        "level": "60%"
+      },
+      {
+        "name": "JUnit",
+        "level": "60%"
+      },
+      {
+        "name": "Nginx",
+        "level": "60%"
+      },
+      {
+        "name": "Office",
+        "level": "60%"
       }
     ]
   },
