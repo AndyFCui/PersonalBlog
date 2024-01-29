@@ -21,7 +21,7 @@ class Footer extends Component {
            </ul>
 
            <ul className="copyright">
-              <li>Andy(Xiangyu) Cui 2024</li>
+              <li>Andy(Xiangyu) Cui xiangyucui@outlook.com | Coporight 2024</li>
               {/* <li>Design by <a title="Styleshout" href="http://www.styleshout.com/">Styleshout</a></li> */}
            </ul>
 
