@@ -12,7 +12,7 @@
       "Machine Learning: TF-IDF, Naïve Bayes, GPT-2, Bert, CNN, Transform",
       "Framework/Libraries: Spring Boot, React.js, Node.js, jQuery",
       "Version Control & CI/CD: GitHub, TFS, Azure DevOps, Jenkins, Jira",
-      "Others: AWS, Docker, Maven, Tomcat, Axure, Servlet, Junit, Nginx, Office"
+      "Others: AWS, Docker, Maven, Tomcat, Axure, Servlet, Junit, Nginx, Office, CAD design"
     ],
     "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
     "email": "xiangyucui@outlook.com  cui.xiangyu@northeastern.edu",
@@ -25,7 +25,7 @@
       "state":"MA",
       "zip": ""
     },
-    "website": "",
+    "website": "andyfcui",
     "resumedownload":"images/CUIXIANGYU.pdf",
     "social":[
 
@@ -50,7 +50,7 @@
         "school":"Northeastern University (NEU)",
         "degree":"Master of Science in Artificial Intelligence",
         "graduated":"Dec 2023",
-        "Coursework":"Object-Oriented Design, Algorithm, Web Development, Computer System, Database Management, Mobile Application Development, Computer Networks",
+        "Coursework":"Object-Oriented Design, Natural Language Processing, Game Artificial Intelligence, Machine Learning, Computer/Human Interaction, Algorithm, Wireless Sensor/Internet Things, Deterministic Ops Reaserch, Database Managemen",
         "description":"Relevant Coursework: ",
         "image": "education.jpg",
         "honor": "",
@@ -61,72 +61,60 @@
         "degree":"Bachelor of Computer Science",
         "graduated":"May 2020",
         "description":"Relevant Coursework: ",
-        "Coursework":"Management Information Systems, Data Mining for Business, Data Management in the Enterprise, Business Systems Integration, Financial Management",
+        "Coursework":"Wireless Communication Networks, Automata Theory, Unix Programming, Discrete Structure, Internet Systems & Programming, VR Programming of Unity, Numerical Analysis, Data Structure & Algorithm, Operating Systems Kernels, Basic Programming",
         "image": "education2.png",
-        "honor": "ACM ICPC",
+        "honor": "Authentication Place in ICPC ACM 2017 Central American Finals",
         "awards": "Award: "
       },
       {
         "school":"Dalian Neusoft University of Information (DUNI)",
         "degree":"Eletronic Infomation Engineering",
-        "graduated":"July 2015",
+        "graduated":"July 2015 - Transfered to University of Nebraska Lincoln",
         "description":"Relevant Coursework: ",
-        "Coursework":"Management Information Systems, Data Mining for Business, Data Management in the Enterprise, Business Systems Integration, Financial Management",
-        "image": "education2.png",
-        "honor": "Transfer to University of Nebraska Lincoln",
+        "Coursework":"Embeded System Proramming, Sensor & Signal Theory, C Basic Programming, Analog Circuit, Digital Circuit, CAD Engineering Drawing, PCB Design with Auto CAD, TCP/IP Network Programming",
+        "image": "education3.png",
+        "honor": "<1st Prize in Computer Business Entrepreneurship Contest>, <Winner of 2015 Freescale Smart Car Competition>",
         "awards": "Award: "
       }
     ],
     "work":[
       {
-        "company":"Michigan State University RDP Lab",
-        "title":"Software Engineer",
-        "years":"Apr 2020 - Current, Remote",
-        "image":"msu.jpg",
+        "company":"AlpaLifeBio Inc",
+        "title":"Software Engineer / Data Analyst - Intership",
+        "years":"Dec 2022 - Jun 2023, Woburn, MA, United States",
+        "image":"alpalife_logo.jpg",
         "description":
         [
-        "Participate in developing and maintaining scientific analysis tool and database for scientists to analyze microbial Genomes \n ",
-        "Implement new features in backend java app under the guidance of a group of scientists, improved front end web UI\n",
-        "Maintain the project CI/CD, ensured the latest version of software is always reflected on docker hub \n"
+        "Executed data collection from biomedical public databases through Python and graphical web scraping tools, enhancing the dataset for advanced analysis.  \n ",
+        "Applied TF-IDF techniques for data comparison and matching, effectively identifying potential clients and contributing to targeted marketing strategies. \n",
+        "Processed and analyzed over 50,000 data entries daily, utilizing graphical data representations to streamline reporting and significantly boost workflow efficiency. \n",
+        "Consolidated existing datasets for integrated analysis and established a structured SQL database, implementing tag processing for improved search and retrieval operations. \n"
       ]
                 
       },
       {
-        "company":"Philips North America",
-        "title":"Software Engineer Coop ",
-        "years":"Jan 2020 - Aug 2020, Cambridge, MA",
-        "image":"Philips2.png",
+        "company":"Dutchgo LLC",
+        "title":"Software Engineer Leader - Self-employed/CEO",
+        "years":"Oct 2020 - Apr 2022, Omaha, NE, United States",
+        "image":"dutchgo.png",
         "description":
         [
-        "Participated in cloud-based framework implementation for the project under patient Monitoring that enables predictive analytics for multiple connected healthcare application \n ",
-        "Enhanced Backend Java and C# application under Spring framework, .NET Core, improved front-end app under jQuery\n",
-        "Analyzed and fixed 20 security vulnerabilities for both on-prem application and cloud application\n",
-        "Developed and implemented IAM onboarding scripts in python for test team",
-        "Maintained services using HTTP, REST, JSON and XML and performed unit test on services end to end ensuring system working healthily with logging monitor",
-        "Composed and improved various documents including feature spec, deployments, and compliance"
+        "Spearheaded the team in analyzing market conditions, conducted investigative analytics on Netflix user data to develop similar products, enhancing competitive market positioning. \n ",
+        "Employed web scraping technologies to aggregate and statistically analyze over 80 million data points across the web, employing graphical data flow techniques for targeted user demographic analysis.\n",
+        "Led product development initiatives that generated $3 million in revenue, employing daily data analysis to inform strategies and rapidly deploy solutions, significantly contributing to the company’s operational efficiency.\n",
+        "Implemented process controls to ensure precision in the deployment of all development stages and work segments, resulting in a marked efficiency improvement in a small company setting."
       ]
                 
       },
       {
-        "company":"State Street Corporation",
-        "title":"Data Analyst Intern",
-        "years":"Jun 2016 - Dec 2016,  Boston, MA",
-        "image":"StateStreet.png",
+        "company":"Dell Inc",
+        "title":"IT Support Specialist",
+        "years":"Oct 2013 - Oct 2015, Dalian, LiaoNing, China",
+        "image":"dell_logo.jpg",
         "description":
-        [" Participated in client data migration projects and improved the quality and accuracy of Client reference data by 20% \n",
-          "Improved reports procedures and saved five hours of manual work every week \n",
-          "Processed an average of ten requests every day, created and corrected data elements on the Salesforce platform"
-        ]
-      },
-      {
-        "company":"Brown Brothers Harriman & Co.",
-        "title":"Reconciliation Analyst Coop",
-        "years":"Jul 2017 - Dec 2017,  Boston, MA",
-        "image":"bbh-logo.jpg",
-        "description":
-        [" Ensured all daily financial reports are delivered and automated data feeds are properly posted to all reconciliation platform \n",
-          "Provided detailed commentary to facilitate ledger breaks clearances and escalate to responsible party for research\n",
-          "Communicated with various internal and external clients and responded to inquiries in a timely manner"
+        [" Organized on-campus after sales technology support events for Dell products. \n",
+          "Improved reports procedures and saved five hours of manual work every week. \n",
+          "Managed an average of ten requests daily, creating and updating data elements on the Dell Campus platform."
         ]
       }
     ],
@@ -285,63 +273,75 @@
     "projects": [
 
       {
-        "title":"Inventory Management System",
-        "category":"– A Web-based ERP Application for small business",
+        "title":"Employment Website Design",
+        "category":"– A Web-based Axure based on CRAP interface interaction",
         "description": 
-        ["Developed a web ERP application to calculating ratios, manipulate CRUD with GAPP accounting principle applied",
-        "Designed and built schema in MySQL on AWS RDS, applied stored procedures and triggers to facilitate order manipulation",
-        "Created RESTful API using Servlet in Java, used Hibernate for ORM, structured web interface using Bootstrap and jQuery"
+        ["Orchestrated the design of an Employment Website tailored for co-op opportunities, meticulously realized through the principles of Human-Computer Interaction (HCI) and ensuring an intuitive user experience that aligns with non-technical user habits for widespread acceptance.",
+        "Applied CRAP design principles to create a visually cohesive and navigable interface, addressing existing website pain points by incorporating critical features such as visa type and field of work.",
+        "Championed a cohesive UI design philosophy across the platform, securing a seamless and inclusive user experience that appeals to a diverse audience. The design's efficacy and user satisfaction were substantiated through extensive usability testing, confirming that the interface meets high standards of effectiveness and user gratification."
         ],
-        "image":"InventoryManagement/inventoryManagement.jpg",
-        "url":"https://github.com/damonchen6886/Inventory_Management_System"
+        "image":"EmploymentWebsiteDesign/job_web.png",
+        "url":"https://github.com/AndyFCui/HCI_Design_Job_website"
       },
       
       {
-        "title":"NewsBee Forum Web Application",
-        "category":"– A SPA web Application",
+        "title":"Amazon QA robot trained by BERT & GPT-2",
+        "category":"– Trained amazon toy customers' comment to train a QA robot",
         "description": 
-        ["Developed a single page web application for individuals to read news along with peer commentators",
-        "Built the web interface using React.js and Phoenix, implemented SPA with Redux and React-Router",
-        "Structured the relational database (Postgres), implemented server to server external API connection to third-party libraries"
-        ],
-        "image":"newsbee/newsbee.png",
-        "url":"https://github.com/damonchen6886/NewsForum"
+        ["Developed a Question Answering (QA) system using GPT-2 and BERT models focused on Amazon product reviews, assessing their performance in natural language processing tasks.",
+        "Applied advanced NLP techniques, including TF-IDF Vectorization, CBOW, and Skip-gram, for effective data preprocessing and analysis.",
+        "Performed comprehensive model training and fine-tuning with a Kaggle dataset, utilizing accuracy, LOSS, and BLEU score metrics for evaluation.",
+        "Executed a detailed K-Fold Cross-Validation to enhance the model's predictive stability and generalization by systematically partitioning the dataset into K distinct subsets, iteratively training and validating the model across each fold to ensure consistent performance. Simultaneously, conducted ablation studies to determine the impact of individual components on the overall model efficacy." 
+      ],
+        "image":"amazonQArobot/qaRobot.png",
+        "url":"https://github.com/AndyFCui/Amazon_QA_Robot"
       },
       {
-        "title":"Roll Own CDN",
-        "category":"– A sample Content Delivery Network",
+        "title":"Online Shop Database",
+        "category":"– A online shop database system, deploy by SQL and python.",
         "description": 
-        ["Built a small content delivery networks(CDN) in python, used multiple AWS EC2 server as original and replica server",
-        "Implemented DNS server dynamically respond to client the best replica server, constructed DNS packet from scratch",
-        "Developed an LRU cache mechanism in HTTP server that effectively fetches content from the origin server",
-        "Ranked top 3 fastest CDN in performance competition in class"
+        ["Developed a Python and MySQL-based Robot Store Management System to streamline operations for small supermarkets, featured in a terminal user interface.",
+        "Implemented SQL database structures and Python-MySQL connections, enabling efficient user account, order, and refund management.",
+        "Constructed and documented a secure, offline management system, accommodating customer and operator interactions with potential for web expansion using Django.",
+        "Managed project version control with Anaconda and maintained code repository on GitHub, with comprehensive end-user documentation and test cases."
         ],
-        "image":"CDN/cdn.jpg",
-        "url":"https://github.com/damonchen6886/CDN-project"
+        "image":"onlineDatabase/onlineDatabase.png",
+        "url":"https://github.com/AndyFCui/OnlineShop-Database"
       },
-
       {
-        "title":"Diglett Chat Application",
-        "category":"– A Web Online Chatting Application",
+        "title":"Crash Loyal AI Agent collision method",
+        "category":"– An AI agent's collision method implemented Crash Loyalty game",
         "description": 
-        ["Built a web-based online chatting application that supports 500 users online, deployed the service locally using Tomcat",
-        "Created RESTful API with Java, structured web interface using ReactJS framework",
-        "Implemented Hibernate for ORM with the MySQL database and deployed on AWS RDS"
+        ["Implemented character behavior logic that prioritizes enemy engagements and tactical decisions, ensuring actions adhere to game rationality and strategy.",
+        "Conducted thorough testing and debugging to maintain game balance and performance, ensuring characters operate within defined routes and adhere to game boundaries.",
+        "Orchestrated a dynamic unit deployment and resource management mechanic, incorporating a strategic elixir accumulation system for gameplay depth.",
+        "Managed project documentation and version control, ensuring robust testing and functionality within the set development timeframe."
         ],
-        "image":"chat/chat2.png",
-        "url":"https://github.com/damonchen6886/Diglett_chat_App"
+        "image":"aiAgent_CrashLoyal/aiAgent.png",
+        "url":"https://github.com/AndyFCui/CrashLoyal_AI_agent"
       },
-
       {
-        "title":"Sleep Forest Android Application",
-        "category":"– A Sleep Management Android Application",
+        "title":"Doctor Lucky java Jframe game",
+        "category":"– An OOD use MVC implemented by java Jframe game",
         "description": 
-        ["Built an android Sleep management application in java and deployed on Google Play",
-        "Utilized android sensor to capture data from end-users, stored data using android SQLite database",
-        "Implemented reward system, updated user interface to improve user engagement"
+        ["Implemented character behavior logic that prioritizes enemy engagements and tactical decisions, ensuring actions adhere to game rationality and strategy.",
+        "Conducted thorough testing and debugging to maintain game balance and performance, ensuring characters operate within defined routes and adhere to game boundaries.",
+        "Orchestrated a dynamic unit deployment and resource management mechanic, incorporating a strategic elixir accumulation system for gameplay depth.",
+        "Managed project documentation and version control, ensuring robust testing and functionality within the set development timeframe."
         ],
-        "image":"sleepForest/sleepForest.png",
-        "url":"https://github.com/damonchen6886/Sleep-Forest"
+        "image":"doctorLucky/doctorLucky.png",
+        "url":"https://github.com/AndyFCui/DuctorLuctorMVC"
+      },
+      {
+        "title":"Gobang AI Game Agent",
+        "category":"– An alpha-beta AI Agent implemented with Bobang",
+        "description": 
+        ["Implemented a Gobang AI agent leveraging alpha-beta pruning to calculate stepwise rewards, enabling the agent to strategically discard less rewarding moves for enhanced gameplay efficacy.",
+        "Architected predefined Gobang chess strategies with assigned value metrics, which were intricately incorporated into the AI's decision-making process, augmenting the competitiveness of the agent.",
+        "Synthesized traditional Gobang tactics with algorithmic precision, optimizing the AI's play style to reflect a deep understanding of the game's cultural strategy elements."
+        ],
+        "image":"goBang_agent/goBang.png",
+        "url":"https://github.com/AndyFCui/Gobang_AI_Agent__alphaBetaa"
       }
     ]
   }
