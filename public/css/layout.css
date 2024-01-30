@@ -1050,7 +1050,8 @@ footer {
    position: relative;
 }
 
-footer a, footer a:visited { color: #525252; }
+/* footer a, footer a:visited { color: #525252; }*/
+footer a, footer a:visited { color: #474747; }
 footer a:hover, footer a:focus { color: #fff; }
 
 /* copyright */
