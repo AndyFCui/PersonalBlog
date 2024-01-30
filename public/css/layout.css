@@ -1074,7 +1074,7 @@ footer .copyright li:before {
     padding-left: 10px;
     padding-right: 10px;
     color: #EBEEEE;
-    /*color: #095153;*/
+    /*color: #095153;   */
 }
 footer .copyright  li:first-child:before {
     display: none;
