@@ -8,11 +8,11 @@
     "bio":"Integrating state-of-the-art design and development practices, I specialize in creating robust Machine Learning, back-end, and front-end applications, having delivered multifaceted projects across diverse domains. My technical toolkit is comprehensive, encompassing Java, Python, MySQL, PostgreSQL, AWS, React.js, and adept implementation of CI/CD pipelines. Mastering complex problem-solving, I am a self-driven technophile, relentlessly chasing the latest technological breakthroughs. As a fervent learner in Machine Learning and Natural Language Processing, I am particularly captivated by the prospects of mining cutting-edge big data and transforming it into insightful visual representations.",
     "skills": [
       "Programing languages: Java, Python, JavaScript, HTML, CSS, C/C++, Assembly, VB",
-      "Database: MySQL, PostgreSQL, MongoDB, Redis, SQLite",
+      "Database: MySQL, PostgreSQL, MongoDB, Redis, SQLite, Hive",
       "Machine Learning: TF-IDF, Naïve Bayes, GPT-2, Bert, CNN, Transformer",
       "Framework/Libraries: Spring Boot, React.js, Node.js, jQuery",
       "Version Control & CI/CD: GitHub, TFS, Azure DevOps, Jenkins, Jira",
-      "Others: AWS, Docker, Maven, Tomcat, Axure, Servlet, Junit, Nginx, LaTeX, CAD design"
+      "Others: AWS, Docker, Maven, Tomcat, Axure, Servlet, Junit, Nginx, LaTeX, CAD design, Tableau"
     ],
     "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
     "email": "xiangyucui@outlook.com  cui.xiangyu@northeastern.edu",
