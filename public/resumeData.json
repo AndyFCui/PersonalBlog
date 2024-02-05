@@ -47,7 +47,7 @@
     "skillmessage":"Here you can create a short write-up of your skills to show off to employers",
     "education":[
       {
-        "school":"Northeastern University (NEU)",
+        "school":"Northeastern University",
         "degree":"Master of Science in Artificial Intelligence",
         "graduated":"Dec 2023",
         "Coursework":"Object-Oriented Design, Natural Language Processing, Game Artificial Intelligence, Machine Learning, Computer/Human Interaction, Algorithm, Wireless Sensor/Internet Things, Deterministic Ops Reaserch, Database Managemen",
@@ -57,7 +57,7 @@
         "awards": ""
       },
       {
-        "school":"University of Nebraska Lincoln (UNL)",
+        "school":"University of Nebraska Lincoln",
         "degree":"Bachelor of Computer Science",
         "graduated":"May 2020",
         "description":"Relevant Coursework: ",
@@ -67,7 +67,7 @@
         "awards": "Award: "
       },
       {
-        "school":"Dalian Neusoft University of Information (DUNI)",
+        "school":"Dalian Neusoft University of Information",
         "degree":"Eletronic Infomation Engineering",
         "graduated":"July 2015 - Transfered to University of Nebraska Lincoln",
         "description":"Relevant Coursework: ",
