@@ -85,10 +85,9 @@
         "image":"alpalife_logo.jpg",
         "description":
         [
-        "Executed data collection from biomedical public databases through Python and graphical web scraping tools, enhancing the dataset for advanced analysis.  \n ",
-        "Applied TF-IDF techniques for data comparison and matching, effectively identifying potential clients and contributing to targeted marketing strategies. \n",
-        "Processed and analyzed over 50,000 data entries daily, utilizing graphical data representations to streamline reporting and significantly boost workflow efficiency. \n",
-        "Consolidated existing datasets for integrated analysis and established a structured SQL database, implementing tag processing for improved search and retrieval operations. \n"
+        "Executed data collection from biomedical public databases using Python and graphical web scraping tools, enhancing the dataset for advanced analysis. Additionally, processed and analyzed over 50,000 data entries daily, utilizing graphical data representations to streamline reporting and significantly boost workflow efficiency.  \n ",
+        "Applied TF-IDF techniques for data comparison and matching, effectively identifying potential clients with a match rate of up to 95%, significantly contributing to targeted marketing strategies. \n",
+        "Consolidated existing datasets for integrated analysis and established a structured SQL database, implementing tag processing for improved search and retrieval operations. This approach has saved 80% of the time for future data searches and significantly enhanced work efficiency, thereby saving costs for the company. \n"
       ]
                 
       },
@@ -290,8 +289,7 @@
         "description": 
         ["Developed a Question Answering (QA) system using GPT-2 and BERT models focused on Amazon product reviews, assessing their performance in natural language processing tasks.",
         "Applied advanced NLP techniques, including TF-IDF Vectorization, CBOW, and Skip-gram, for effective data preprocessing and analysis.",
-        "Performed comprehensive model training and fine-tuning with a Kaggle dataset, utilizing accuracy, LOSS, and BLEU score metrics for evaluation.",
-        "Executed a detailed K-Fold Cross-Validation to enhance the model's predictive stability and generalization by systematically partitioning the dataset into K distinct subsets, iteratively training and validating the model across each fold to ensure consistent performance. Simultaneously, conducted ablation studies to determine the impact of individual components on the overall model efficacy." 
+        "Conducted K-Fold Cross-Validation and ablation studies to optimize model performance and robustness, utilizing comprehensive model training and fine-tuning with a Kaggle dataset. We focused on accuracy, LOSS, and BLEU score metrics for evaluation, ultimately achieving high precision with an Accuracy F1 score of up to 94%."
       ],
         "image":"amazonQArobot/qaRobot.png",
         "url":"https://github.com/AndyFCui/Amazon_QA_Robot"
