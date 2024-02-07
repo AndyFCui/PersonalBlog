@@ -85,7 +85,7 @@
         "image":"alpalife_logo.jpg",
         "description":
         [
-        "Executed data collection from biomedical public databases using Python and graphical web scraping tools, enhancing the dataset for advanced analysis. Additionally, processed and analyzed over 5,000,000 data entries daily, utilizing graphical data representations to streamline reporting and significantly boost workflow efficiency.  \n ",
+        "Executed data collection from biomedical public databases using Python and graphical web scraping tools, enhancing the dataset for advanced analysis. Additionally, processed and analyzed over 500,000 data entries daily, utilizing graphical data representations to streamline reporting and significantly boost workflow efficiency.  \n ",
         "Applied TF-IDF techniques for data comparison and matching, effectively identifying potential clients with a match rate of up to 95%, significantly contributing to targeted marketing strategies. \n",
         "Consolidated existing datasets for integrated analysis and established a structured SQL database, implementing tag processing for improved search and retrieval operations. This approach has saved 80% of the time for future data searches and significantly enhanced work efficiency, thereby saving costs for the company. \n"
       ]
