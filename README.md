@@ -1,4 +1,4 @@
 # PersonalBlog
 My personal blog for portfolio
 
-website: dreamslink.me
+website: www.dreamslink.me
