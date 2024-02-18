@@ -39,6 +39,12 @@
         "name":"github",
         "url":"https://github.com/AndyFCui",
         "className":"fa fa-github"
+      },
+
+      {
+        "name":"nuwork",
+        "url":"https://northeastern-csm.symplicity.com/profiles/xiangyu.cui",
+        "className":"fa fa-nuwork"
       }
 
     ]
