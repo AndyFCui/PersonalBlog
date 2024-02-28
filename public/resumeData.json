@@ -91,6 +91,7 @@
         "image":"alpalife_logo.jpg",
         "description":
         [
+        "Analysis of Potential Consumer Demand:\n",
         "Executed data collection from biomedical public databases using Python and graphical web scraping tools, enhancing the dataset for advanced analysis. Additionally, processed and analyzed over 500,000 data entries daily, utilizing graphical data representations to streamline reporting and significantly boost workflow efficiency.  \n ",
         "Applied TF-IDF techniques for data comparison and matching, effectively identifying potential clients with a match rate of up to 95%, significantly contributing to targeted marketing strategies. \n",
         "Consolidated existing datasets for integrated analysis and established a structured SQL database, implementing tag processing for improved search and retrieval operations. This approach has saved 80% of the time for future data searches and significantly enhanced work efficiency, thereby saving costs for the company. \n"
@@ -99,17 +100,34 @@
       },
       {
         "company":"Dutchgo LLC",
-        "title":"Software Engineer Leader - Self-employed/CEO",
+        "title":"Team Leader & Project Analyst  - Self-employed & Co-founder",
         "years":"Oct 2020 - Apr 2022, Omaha, NE, United States",
         "image":"dutchgo.png",
         "description":
         [
-        "Spearheaded the team in analyzing market conditions, conducted investigative analytics on Netflix user data to develop similar products, enhancing competitive market positioning. \n ",
-        "Employed web scraping technologies to aggregate and statistically analyze over 80 million data points across the web, employing graphical data flow techniques for targeted user demographic analysis.\n",
-        "Led product development initiatives that generated $3 million in revenue, employing daily data analysis to inform strategies and rapidly deploy solutions, significantly contributing to the company’s operational efficiency.\n",
-        "Implemented process controls to ensure precision in the deployment of all development stages and work segments, resulting in a marked efficiency improvement in a small company setting."
+        "Analysis and Strategy Optimization: \n",
+        "Analyzed customer demand for streaming media during the Covid-19 pandemic using advanced SQL queries and Python, then trained and tested a Random Forest model with Python to identify potential user profiles for conversion, achieving an accuracy of 98%. \n ",
+        "Determined customer markets and consumption levels based on selected categories, extracted and preprocessed monthly market data of customers using SQL and Python, and predicted revenue trends using a multiple regression model with an accuracy of 85%, providing recommendations for strategic business decisions.\n",
+        "Built a secondary sales server pipeline based on selected categories and customer markets, analyzed key churn points in the conversion funnel using funnel analysis in SQL, communicated critical insights to the engineering team, and implemented funnel improvements based on findings.\n",
+        "Created interactive dashboards with Tableau to monitor key investment metrics for stakeholders, including ROI (Return on Investment), growth rate, and portfolio balance, and conducted comprehensive root cause analysis of any abnormal trends."
       ]
                 
+      },
+
+      {
+        "company":"Chatchup(Zhuiguang) Information Technology Co. Ltd",
+        "title":"Team Leader & Project Analyst",
+        "years":"Jan 2019 - Sept 2020, Henan, Zhengzhou, China",
+        "image":"catchup.png",
+        "description":
+        [
+          "Customized Analysis for Client Requirements:\n",
+          "Analyzed customer requirements to draft an activity diagram and outlined preliminary UML page functionality scenarios. Initiated the development of customized software (Web & App) tailored to customer needs. \n",
+          "Employed advanced SQL queries and Python to analyze over 50GB of market data on similar products, identifying customer usage patterns and business requirements. \n",
+          "Conducted exploratory data analysis on numerical, categorical, and time-series data using Matplotlib and Seaborn. Constructed multivariance Time Series Clustering model, DTW (Dynamic Time Warping) with Hierarchical clustering, on 120 features to group customers, segment market and described the clustering centroid by DBA (DTW Barycenter Averaging). \n",
+          "Trained market demand models, including Isolation Forest and Robust PCA (Principal Component Analysis), as well as Linear Models and Random Forests, to establish a system for identifying and responding to customers' potential requirements.\n", 
+          "Constructed dashboards with Tableau to depict customer usage activities and submitted analytical reports to clients."
+        ]
       },
       {
         "company":"Dell Inc",
@@ -117,7 +135,9 @@
         "years":"Oct 2013 - Oct 2015, Dalian, LiaoNing, China",
         "image":"dell_logo.jpg",
         "description":
-        [" Organized on-campus after sales technology support events for Dell products. \n",
+        [
+          "Technical Support for Software, Hardware, Networking, and System Maintenance:\n",
+          "Organized on-campus after sales technology support events for Dell products. \n",
           "Improved reports procedures and saved five hours of manual work every week. \n",
           "Managed an average of ten requests daily, creating and updating data elements on the Dell Campus platform."
         ]
