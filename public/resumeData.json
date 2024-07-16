@@ -85,6 +85,20 @@
     ],
     "work":[
       {
+        "company":"CAC Auto Group LLC",
+        "title":"Data Analyst & Full Stack - Full Time",
+        "years":"Feb 2024 - Present, Southborough, MA, United States",
+        "image":"catchup.png",
+        "description":
+        [
+        "Utilized advanced SQL queries to retrieve vehicle sales data from 5 different sub-store locations, creating a structured database for comparative analysis. Employed data visualization techniques to analyze trends and performances across stores.  \n ",
+        "Developed backend systems for the official website using Python, integrating real-time sales data tracking. Additionally, implemented web scraping tools to gather current market data on car sales from Cars and CarMax, focusing on best-selling models. Analyzed over 500,000 local vehicle data entries daily, applying regression analysis to determine optimal vehicle pricing. Achieved a daily price match with market rates, which contributed to a 70% increase in store revenue. \n",
+        "Constructed reports in Tableau to present to management, providing insights on pricing trends and sales volume, accompanied by data-driven recommendations for strategic decision-making. \n",
+        "Rebuild the company's business management system based on daily operational logic and business processes using Node.js, Express, and MongoDB. \n"
+      ]
+                
+      },
+      {
         "company":"AlpaLifeBio Inc",
         "title":"Software Engineer & Data Analyst - Intership",
         "years":"Dec 2022 - Jun 2023, Woburn, MA, United States",
