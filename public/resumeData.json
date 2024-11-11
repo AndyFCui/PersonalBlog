@@ -86,42 +86,49 @@
     "work":[
       {
         "company":"CAC Auto Group LLC",
-        "title":"Data Analyst & Full Stack - Full Time",
+        "title":"Data Engineer - Full Time",
         "years":"Feb 2024 - Present, Southborough, MA, United States",
         "image":"cacauto.png",
         "description":
         [
-        "Utilized advanced SQL queries to retrieve vehicle sales data from 5 different sub-store locations, creating a structured database for comparative analysis. Employed data visualization techniques to analyze trends and performances across stores.  \n ",
-        "Developed backend systems for the official website using Python, integrating real-time sales data tracking. Additionally, implemented web scraping tools to gather current market data on car sales from Cars and CarMax, focusing on best-selling models. Analyzed over 500,000 local vehicle data entries daily, applying regression analysis to determine optimal vehicle pricing. Achieved a daily price match with market rates, which contributed to a 70% increase in store revenue. \n",
-        "Constructed reports in Tableau to present to management, providing insights on pricing trends and sales volume, accompanied by data-driven recommendations for strategic decision-making. \n",
-        "Rebuild the company's business management system based on daily operational logic and business processes using Node.js, Express, and MongoDB. \n"
+        "Develop and maintain a predictive price forecast system for vehicles listed on CarGurus using a serverless architecture on AWS. This system enhances market compatibility for vehicle pricing and optimizes operational efficiency. Leveraged core AWS services such as S3, Lambda, DynamoDB, SNS, CloudWatch, and Kinesis for real-time data processing, with Python as the primary programming language and AWS CloudFormation (YAML) for Infrastructure as Code (IaC).  \n ",
+        "Implemented real-time data monitoring using AWS Kinesis to track market data fluctuations, enabling the system to detect and trigger S3 events when vehicle prices deviate from predefined ranges. This near real-time data handling detects discrepancies in vehicle market prices promptly, allowing quick corrective actions to keep vehicle listings competitive and accurate. \n",
+        "Established Automated Alert notifications through Amazon SNS and integrated with AWS SQS and Lambda to automatically notify the team when specific events are triggered. This system improved the accuracy and market compatibility of vehicle prices displayed on the company's website, resulting in an 80% boost in daily operational efficiency and over 50% improvement in real-time price adjustments compared to industry standards. \n",
+        "Designed and managed a data lake architecture on AWS, incorporating raw, cleansed, and application data layers stored in S3. This data lake supports the BI team with enhanced access to structured data, improving data processing efficiency by 50%. \n",
+        "Orchestrated data processing workflows through AWS Step Functions, which automate the execution of multiple Glue Crawlers and ETL jobs to process data and update S3 layers. Enabled continuous monitoring through Glue Data Catalog and Athena to maintain data quality and consistency across all data lake layers. \n",
+        "Enhanced infrastructure reliability by using AWS CloudFormation to deploy reproducible infrastructure configurations across environments, which streamlined deployment, reduced development costs by 70%, and supported faster product iteration for an agile startup environment. \n",
+        "Automated SNS notifications to alert the team about Glue Crawler or ETL job failures, improving response time and reducing data pipeline downtime by 30%. \n",
+        "Implemented a Lambda-based schema change detection system that uses Glue Crawler and Glue Data Catalog to track metadata changes in source data and trigger alert emails for schema inconsistencies. This setup led to a 60% reduction in troubleshooting time and a 50% decrease in data delivery delays. \n",
+        "Managed Agile processes for development, participating in Scrum meetings and data pipeline structure design, while maintaining version control through Git and tracking project tasks on Jira. Established a continuous integration pipeline via Bamboo from Bitbucket, ensuring streamlined deployments."
       ]
                 
       },
       {
         "company":"AlpaLifeBio Inc",
-        "title":"Software Engineer & Data Analyst - Intership",
+        "title":"Software Engineer of Data Engineer  - Intership",
         "years":"Dec 2022 - Jun 2023, Woburn, MA, United States",
         "image":"alpalife_logo.jpg",
         "description":
         [
-        "Executed data collection from biomedical public databases using Python and graphical web scraping tools, enhancing the dataset for advanced analysis. Additionally, processed and analyzed over 500,000 data entries daily, utilizing graphical data representations to streamline reporting and significantly boost workflow efficiency.  \n ",
-        "Applied TF-IDF techniques for data comparison and matching, effectively identifying potential clients with a match rate of up to 95%, significantly contributing to targeted marketing strategies. \n",
-        "Consolidated existing datasets for integrated analysis and established a structured SQL database, implementing tag processing for improved search and retrieval operations. This approach has saved 80% of the time for future data searches and significantly enhanced work efficiency, thereby saving costs for the company. \n"
+        "Built and managed a robust AWS streaming data pipeline to automate biomedical data ingestion from multiple public databases into Kinesis Data Stream. This system processed over 500,000 data entries daily, using Lambda Functions for real-time data transfer and S3 and DynamoDB for efficient, scalable storage and retrieval. This architecture allowed seamless handling of high-volume data with minimized latency and reduced operational costs.  \n ",
+        "Configured and optimized a structured SQL database to integrate and process data from diverse biomedical sources. Implemented an efficient tag-processing system for enhanced search and retrieval operations, reducing data retrieval time by 80%. This improvement significantly boosted operational efficiency, making it easier to access and analyze critical information for downstream applications. \n",
+        "Applied advanced data matching algorithms and TF-IDF (Term Frequency-Inverse Document Frequency) techniques to perform data comparison and accurately identify potential client profiles with a 95% match rate. This methodology directly supported targeted marketing strategies by enabling precise identification of high-value clients within the biomedical field. \n",
+        "Enabled real-time notifications for data updates by setting up DynamoDB Streams to capture table modifications. Configured Lambda Functions to process these events and send automated alert emails through Amazon SES, enhancing response times by 30% and streamlining the data update workflow."
       ]
                 
       },
       {
         "company":"Dutchgo LLC",
-        "title":"Project Manager & Project Analyst  - Self-employed & Co-founder",
+        "title":"Software Engineer - Self-employed & Co-founder",
         "years":"Oct 2020 - Apr 2022, Omaha, NE, United States",
         "image":"dutchgo.png",
         "description":
         [
-        "Analyzed customer demand for streaming media during the Covid-19 pandemic using advanced SQL queries and Python, then trained and tested a Random Forest model with Python to identify potential user profiles for conversion, achieving an accuracy of 98%. \n ",
-        "Determined customer markets and consumption levels based on selected categories, extracted and preprocessed monthly market data of customers using SQL and Python, and predicted revenue trends using a multiple regression model with an accuracy of 85%, providing recommendations for strategic business decisions.\n",
-        "Built a secondary sales server pipeline based on selected categories and customer markets, analyzed key churn points in the conversion funnel using funnel analysis in SQL, communicated critical insights to the engineering team, and implemented funnel improvements based on findings.\n",
-        "Created interactive dashboards with Tableau to monitor key investment metrics for stakeholders, including ROI (Return on Investment), growth rate, and portfolio balance, and conducted comprehensive root cause analysis of any abnormal trends."
+        "Developed a customer demand analysis pipeline during the Covid-19 pandemic using AWS S3 for secure data storage and Lambda for serverless processing, combined with SQL and Python. Built and deployed a Random Forest model on AWS SageMaker to identify high-potential user profiles for conversion, achieving an accuracy of 98%. This automated approach saved considerable processing time and improved prediction accuracy for strategic marketing efforts. \n ",
+        "Established a data ingestion and processing framework using AWS Glue to automate data ETL processes, enabling seamless integration of monthly customer market data from S3 into DynamoDB for structured storage. Employed SQL and Python to preprocess data and built a multiple regression model on SageMaker to predict revenue trends, achieving an 85% accuracy rate. This solution provided valuable insights for strategic decision-making regarding resource allocation and customer segmentation. \n",
+        "Analyzed user behavior patterns to inform UX design by employing Human-Computer Interaction (HCI) principles. Utilized Axure RP to create interactive software prototypes aligned with user behavior insights. Additionally, used AWS Amplify to deploy and test front-end prototypes rapidly, ensuring seamless integration with back-end data and enhancing user experience. \n",
+        "Constructed real-time monitoring dashboards using Tableau to track essential investment metrics, such as ROI (Return on Investment), growth rate, and portfolio balance. Integrated AWS Kinesis for real-time data streaming, enabling prompt anomaly detection and root cause analysis. This system provided stakeholders with actionable insights on data trends, supporting a 30% faster decision-making process for adjusting business strategies. \n",
+        "Set up AWS CloudFormation templates to manage and automate infrastructure provisioning, ensuring efficient resource management and scalability of the analysis system. Leveraged AWS IAM to implement robust access control, securing data and model resources across the team."
       ]
                 
       },
