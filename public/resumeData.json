@@ -164,27 +164,27 @@
     "skills": [
       {
         "name": "Java",
-        "level": "60%"
+        "level": "85%"
       },
       {
         "name": "Python",
-        "level": "60%"
+        "level": "90%"
       },
       {
         "name": "JavaScript",
-        "level": "60%"
+        "level": "80%"
       },
       {
         "name": "HTML",
-        "level": "60%"
+        "level": "85%"
       },
       {
         "name": "CSS",
-        "level": "60%"
+        "level": "75%"
       },
       {
         "name": "C/C++",
-        "level": "60%"
+        "level": "70%"
       },
       {
         "name": "Assembly",
@@ -192,63 +192,63 @@
       },
       {
         "name": "VB",
-        "level": "60%"
+        "level": "65%"
       },
       {
         "name": "MySQL",
-        "level": "60%"
+        "level": "90%"
       },
       {
         "name": "PostgreSQL",
-        "level": "60%"
+        "level": "85%"
       },
       {
         "name": "MongoDB",
-        "level": "60%"
+        "level": "80%"
       },
       {
         "name": "Redis",
-        "level": "60%"
+        "level": "75%"
       },
       {
         "name": "SQLite",
-        "level": "60%"
+        "level": "80%"
       },
       {
         "name": "TF-IDF",
-        "level": "60%"
+        "level": "85%"
       },
       {
         "name": "Naive Bayes",
-        "level": "60%"
+        "level": "80%"
       },
       {
         "name": "GPT-2",
-        "level": "60%"
+        "level": "75%"
       },
       {
         "name": "Bert",
-        "level": "60%"
+        "level": "80%"
       },
       {
         "name": "CNN",
-        "level": "60%"
+        "level": "85%"
       },
       {
         "name": "Transform",
-        "level": "60%"
+        "level": "80%"
       },
       {
         "name": "Spring Boot",
-        "level": "60%"
+        "level": "85%"
       },
       {
         "name": "React.js",
-        "level": "60%"
+        "level": "80%"
       },
       {
         "name": "Node.js",
-        "level": "60%"
+        "level": "85%"
       },
       {
         "name": "jQuery",
