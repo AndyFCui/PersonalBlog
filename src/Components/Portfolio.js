@@ -2,48 +2,48 @@ import React, { Component } from 'react';
 
 class Portfolio extends Component {
   render() {
-
     if(this.props.data){
-
       var projects = this.props.data.projects.map(function(projects){
         var projectImage = 'images/portfolio/'+projects.image;
-        return <div key={projects.title} className="columns portfolio-item">
-           <div className="item-wrap">
-            <a href={projects.url} target="_blank" title={projects.title}>
-               <img alt={projects.title} src={projectImage} />
-               <h3 className = "title">{projects.title}</h3>
-              <div className="link-icon"><i className="fa fa-link"></i></div>
-            </a>
-            <div className>
-                  <div className="portfolio-item-meta">
-                 
-                     <h6>{projects.category}</h6>
-                     
-                     {projects.description.map(item=>(
-                       <div><li>{item}</li></div>
-                     ))}
-                  </div>
-                </div>
-          </div>
+        return <div key={projects.title} className="portfolio-card">
+           <div className="portfolio-image">
+             <img src={projectImage} alt={projects.title} />
+           </div>
+           <div className="portfolio-content">
+             <h3 className="portfolio-title">{projects.title}</h3>
+             <p className="portfolio-category">{projects.category}</p>
+             <div className="portfolio-description">
+               {projects.description.map((item, index) => (
+                 <div key={index} className="description-item">
+                   <span className="bullet">•</span>
+                   <span>{item}</span>
+                 </div>
+               ))}
+             </div>
+             {projects.url && (
+               <a href={projects.url} target="_blank" rel="noopener noreferrer" className="portfolio-link">
+                 <i className="fa fa-link"></i> View Project
+               </a>
+             )}
+           </div>
         </div>
       })
     }
 
     return (
       <section id="portfolio">
+        <div className="row">
+          <div className="three columns header-col">
+            <h1><span>Projects</span><div className="third-line"></div></h1>
+          </div>
 
-      <div className="row">
-
-         <div className="twelve columns collapsed">
-
-            <h1>Check Out Some of My Works</h1>
-
-            <div id="portfolio-wrapper" className="bgrid-quarters s-bgrid-thirds cf">
-                {projects}
+          <div className="ten columns main-col">
+            <div className="portfolio-grid">
+              {projects}
             </div>
           </div>
-      </div>
-   </section>
+        </div>
+      </section>
     );
   }
 }
