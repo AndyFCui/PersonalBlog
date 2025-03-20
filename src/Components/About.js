@@ -22,7 +22,8 @@ class About extends Component {
       var name = this.props.data.name;
       var profilepic= "images/"+this.props.data.image;
       var bio = this.props.data.bio;
-      var intro = this.props.data.intro;
+      var role = this.props.data.intro.role;
+      var company = this.props.data.intro.company;
       var street = this.props.data.address.street;
       var city = this.props.data.address.city;
       var state = this.props.data.address.state;
@@ -51,44 +52,52 @@ class About extends Component {
                     <i className="fa fa-user"></i>
                     <strong>Name:</strong>
                   </div>
-                  <div className="contact-text">Andy (Xiang-Yu) Cui</div>
+                  <div className="contact-text">{name}</div>
                 </span>
                 <span>
                   <div className="label-row">
                     <i className="fa fa-map-marker"></i>
                     <strong>Current Address:</strong>
                   </div>
-                  <div className="contact-text">Boston MA</div>
+                  <div className="contact-text">{city} {state}</div>
                 </span>
                 <span>
                   <div className="label-row">
                     <i className="fa fa-phone"></i>
                     <strong>Phone:</strong>
                   </div>
-                  <div className="contact-text">(402)-853-3000</div>
+                  <div className="contact-text">{phone}</div>
                 </span>
                 <span>
                   <div className="label-row">
                     <i className="fa fa-envelope"></i>
                     <strong>Email:</strong>
                   </div>
-                  <div className="contact-text">xiangyucui@outlook.com</div>
+                  <div className="contact-text">{email}</div>
                 </span>
               </div>
             </div>
           </div>
           <div className="nine columns main-col">
             <h2 className="about-me">About Me</h2>
-            <p>{intro}</p>
+            <p className="role-company">
+              <span className="role">
+                <i className="fa fa-briefcase"></i> {role}
+              </span>
+              <span className="spacer"> </span>
+              <span className="company">
+                <i className="fa fa-building-o"></i> {company}
+              </span>
+            </p>
             <p>{bio}</p>
             <p>{skills}</p>
             <div className="row">
               <div className="columns download">
-                <p>
-                  <a href={resumeDownload} className="button" download target="_blank">
-                    <i className="fa fa-download"></i>Download Resume
+                <div className="download">
+                  <a href={resumeDownload} className="download-button">
+                    <i className="fa fa-download"></i>DOWNLOAD RESUME
                   </a>
-                </p>
+                </div>
               </div>
             </div>
           </div>

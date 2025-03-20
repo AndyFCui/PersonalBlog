@@ -788,6 +788,94 @@ ul#nav li.current a::before {
    text-shadow: 0 0 5px rgba(154, 154, 154, 0.3);
 }
 
+.download-button {
+   position: relative;
+   display: inline-block;
+   padding: 15px 30px;
+   color: #11ABB0;
+   border: 2px solid #11ABB0;
+   border-radius: 5px;
+   text-decoration: none;
+   font-weight: 600;
+   transition: all 0.3s ease;
+   background: linear-gradient(to right, rgba(17, 171, 176, 0.2) 50%, transparent 50%);
+   background-size: 200% 100%;
+   background-position: right bottom;
+   z-index: 1;
+}
+
+.download-button:hover {
+   background-position: left bottom;
+   color: #FFFFFF;
+   transform: translateY(-3px);
+   box-shadow: 0 5px 15px rgba(17, 171, 176, 0.3);
+   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+   font-weight: bold;
+}
+
+.download-button i {
+   margin-right: 10px;
+   transition: all 0.3s ease;
+   color: inherit;
+}
+
+.download-button:hover i {
+   color: #FFFFFF;
+   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.download-button::after {
+   content: "H1B Visa Currently";
+   position: absolute;
+   top: 50%;
+   right: -180px;
+   transform: translateY(-50%);
+   background: rgba(17, 171, 176, 0.15);
+   color: rgba(255, 255, 255, 0.8);
+   padding: 10px 20px;
+   border-radius: 8px;
+   font-size: 14px;
+   opacity: 0;
+   visibility: hidden;
+   transition: all 0.3s ease;
+   backdrop-filter: blur(8px);
+   -webkit-backdrop-filter: blur(8px);
+   box-shadow: 
+      0 2px 15px rgba(17, 171, 176, 0.1),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+   white-space: nowrap;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.download-button::before {
+   content: "";
+   position: absolute;
+   top: 50%;
+   right: -20px;
+   transform: translateY(-50%);
+   border-width: 8px;
+   border-style: solid;
+   border-color: transparent rgba(17, 171, 176, 0.15) transparent transparent;
+   opacity: 0;
+   visibility: hidden;
+   transition: all 0.3s ease;
+}
+
+.download-button:hover::after {
+   opacity: 1;
+   visibility: visible;
+   transform: translateY(-50%) translateX(-5px);
+   box-shadow: 
+      0 4px 20px rgba(17, 171, 176, 0.15),
+      inset 0 0 25px rgba(255, 255, 255, 0.15);
+}
+
+.download-button:hover::before {
+   opacity: 1;
+   visibility: visible;
+   transform: translateY(-50%) translateX(-5px);
+}
+
 #about .download .button {
    position: relative;
    background: rgba(17, 171, 176, 0.1);
@@ -3076,4 +3164,42 @@ footer .copyright li:before {
 
 .portfolio-link:hover i {
   transform: translateX(3px);
+}
+
+/* About Section */
+#about {
+// ... existing code ...
+}
+
+#about .role-company {
+  margin-bottom: 30px;
+  font-size: 1.2em;
+  color: #E8E8E8;
+}
+
+#about .role-company .role,
+#about .role-company .company {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 15px;
+  background: rgba(17, 171, 176, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+#about .role-company .role:hover,
+#about .role-company .company:hover {
+  background: rgba(17, 171, 176, 0.2);
+  transform: translateX(5px);
+}
+
+#about .role-company i {
+  margin-right: 10px;
+  color: #11ABB0;
+  font-size: 1.1em;
+}
+
+#about .role-company .spacer {
+  margin: 0 15px;
+  display: inline-block;
 }

@@ -26,8 +26,9 @@ class App extends Component {
   }
 
   getResumeData(){
+    const timestamp = new Date().getTime();
     $.ajax({
-      url:'/resumeData.json',
+      url:`/resumeData.json?v=${timestamp}`,
       dataType:'json',
       cache: false,
       success: function(data){
