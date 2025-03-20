@@ -43,6 +43,12 @@ class Header extends Component {
    }
 
    render() {
+      if(this.props.data){
+         var social = this.props.data.social.map(function(network){
+            return <li key={network.name}><a href={network.url}><i className={network.className}></i></a></li>
+         });
+      }
+
       return (
          <header id="home">
             <nav id="nav-wrap">
@@ -66,8 +72,7 @@ class Header extends Component {
                   <h3 className="matrix-container"></h3>
                   <hr />
                   <ul className="social">
-                     <li><a href="https://www.linkedin.com/in/xiangyu-cui/"><i className="fa fa-linkedin"></i></a></li>
-                     <li><a href="https://github.com/AndyCui"><i className="fa fa-github"></i></a></li>
+                     {social}
                   </ul>
                </div>
             </div>
