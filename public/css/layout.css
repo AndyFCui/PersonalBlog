@@ -3115,55 +3115,55 @@ footer .copyright li:before {
 }
 
 .portfolio-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 20px;
-  background: transparent;
-  color: #FFFFFF;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 1em;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  margin-top: auto;
-  width: fit-content;
-  align-self: center;
-  border: 2px solid #11ABB0;
-  font-weight: bold;
-  z-index: 1;
+   display: inline-flex;
+   align-items: center;
+   padding: 8px 15px;
+   margin-top: 15px;
+   color: #333333;  /* Changed to dark gray/black */
+   background: rgba(17, 171, 176, 0.1);
+   border: 1px solid rgba(17, 171, 176, 0.3);
+   border-radius: 5px;
+   text-decoration: none;
+   font-size: 14px;
+   transition: all 0.3s ease;
+   position: relative;
+   overflow: hidden;
+   opacity: 1;
+   transform: translateY(0);
 }
 
 .portfolio-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(45deg, #11ABB0, #0f9296);
-  transition: width 0.5s ease;
-  z-index: -1;
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 0;
+   height: 100%;
+   background: linear-gradient(90deg, rgba(17, 171, 176, 0.2), rgba(17, 171, 176, 0.1));
+   transition: width 0.3s ease;
+   z-index: 1;
 }
 
 .portfolio-link:hover {
-  color: #FFFFFF;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+   color: #333333;  /* Keep text dark on hover */
+   border-color: rgba(17, 171, 176, 0.6);
+   box-shadow: 0 0 15px rgba(17, 171, 176, 0.3);
+   transform: translateY(-2px);
 }
 
 .portfolio-link:hover::before {
-  width: 100%;
+   width: 100%;
 }
 
 .portfolio-link i {
-  margin-right: 10px;
-  font-size: 1.1em;
-  transition: transform 0.3s ease;
+   margin-left: 8px;
+   position: relative;
+   z-index: 2;
+   transition: transform 0.3s ease;
 }
 
 .portfolio-link:hover i {
-  transform: translateX(3px);
+   transform: translateX(3px);
 }
 
 /* About Section */
