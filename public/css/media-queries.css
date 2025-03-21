@@ -206,13 +206,22 @@
 
    /* About Section
    -------------------------------------------------------------------- */
-   #about .profile-pic { display: none; }
+   #about .profile-pic { 
+      display: block;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 20px auto;
+      border-radius: 100%;
+   }
    #about .download .button {
       width: 100%;
       text-align: center;
       padding: 15px 20px;
    }
-   #about .main-col { padding-right: 30px; }
+   #about .main-col { 
+      padding-right: 30px;
+      text-align: center;
+   }
 
 
    /* Resume Section
