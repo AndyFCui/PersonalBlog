@@ -10,13 +10,43 @@
     },
     "bio":"Integrating state-of-the-art design and development practices, I specialize in creating robust Machine Learning, back-end, and front-end applications, having delivered multifaceted projects across diverse domains. My technical toolkit is comprehensive, encompassing Java, Python, MySQL, PostgreSQL, AWS, React.js, and adept implementation of CI/CD pipelines. Mastering complex problem-solving, I am a self-driven technophile, relentlessly chasing the latest technological breakthroughs. As a fervent learner in Machine Learning and Natural Language Processing, I am particularly captivated by the prospects of mining cutting-edge big data and transforming it into insightful visual representations.",
     "skills": [
-      "Programing languages: Java, Python, JavaScript, HTML, CSS, C/C++, Assembly, VB",
-      "Database: MySQL, PostgreSQL, MongoDB, Redis, SQLite, Hive",
-      "Machine Learning: TF-IDF, Naïve Bayes, GPT-2, Bert, CNN, Transformer",
-      "Framework/Libraries: Spring Boot, React.js, Node.js, jQuery",
-      "Version Control & CI/CD: GitHub, TFS, Azure DevOps, Jenkins, Jira",
-      "AI Tools: Cursor, Bubble, OpenCV, UiPath, Google Colab, Deepseek R1",
-      "Others: AWS, Docker, Maven, Tomcat, Axure RP, Servlet, Junit, Nginx, LaTeX, CAD design, Tableau"
+      {
+        "category": "Cloud & DevOps",
+        "items": [
+          {"name": "AWS", "image": "images/logos/aws.png"},
+          {"name": "Docker", "image": "images/logos/docker.png"},
+          {"name": "Supabase", "image": "images/logos/supabase.png"}
+        ]
+      },
+      {
+        "category": "AI & Development Tools",
+        "items": [
+          {"name": "Cursor", "image": "images/logos/cursor.png"},
+          {"name": "Deepseek", "image": "images/logos/deepseek.png"},
+          {"name": "GPT2", "image": "images/logos/gpt2.png"}
+        ]
+      },
+      {
+        "category": "Programming & Frameworks",
+        "items": [
+          {"name": "Python", "image": "images/logos/python.png"},
+          {"name": "NodeJS", "image": "images/logos/nodejs.png"},
+          {"name": "Java", "image": "images/logos/java.png"}
+        ]
+      },
+      {
+        "category": "Operating Systems",
+        "items": [
+          {"name": "Ubuntu", "image": "images/logos/ubuntu.png"},
+          {"name": "Gentoo", "image": "images/logos/gentoo.png"}
+        ]
+      },
+      {
+        "category": "Databases",
+        "items": [
+          {"name": "MySQL", "image": "images/logos/mysql.png"}
+        ]
+      }
     ],
     "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
     "email": "xiangyucui@outlook.com",
