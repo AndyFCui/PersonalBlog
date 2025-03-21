@@ -32,9 +32,7 @@ class About extends Component {
       var email = this.props.data.email;
       var resumeDownload = this.props.data.resumedownload;
       var nameUnderImage = this.props.data.nameUnderImage;
-      var skills = this.props.data.skills.map(skill=>
-        <li>{skill}</li>
-      );
+      var skills = this.props.data.skills;
     }
 
     return (
@@ -89,16 +87,73 @@ class About extends Component {
                 <i className="fa fa-building-o"></i> {company}
               </span>
             </p>
-            <p>{bio}</p>
-            <p>{skills}</p>
-            <div className="row">
-              <div className="columns download">
-                <div className="download">
-                  <a href={resumeDownload} className="download-button">
-                    <i className="fa fa-download"></i>DOWNLOAD RESUME
-                  </a>
-                </div>
-              </div>
+
+            <p className="bio-text">{bio}</p>
+
+            <div className="tech-stack-container">
+               <div className="animations-container">
+                  <div className="loader-wrapper">
+                     <div className="packman"></div>
+                     <div className="dots">
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                     </div>
+                  </div>
+                  <div id="ghost" className="ghost-left">
+                     <div id="red">
+                        <div id="eye"><div id="pupil"></div></div>
+                        <div id="eye1"><div id="pupil1"></div></div>
+                        <div id="shadow"></div>
+                        <div id="top0"></div>
+                        <div id="top1"></div>
+                        <div id="top2"></div>
+                        <div id="top3"></div>
+                        <div id="top4"></div>
+                        <div id="st0"></div>
+                        <div id="st1"></div>
+                        <div id="st2"></div>
+                        <div id="st3"></div>
+                        <div id="st4"></div>
+                        <div id="st5"></div>
+                        <div id="an1"></div>
+                        <div id="an2"></div>
+                        <div id="an3"></div>
+                        <div id="an4"></div>
+                        <div id="an6"></div>
+                        <div id="an7"></div>
+                        <div id="an8"></div>
+                        <div id="an9"></div>
+                        <div id="an10"></div>
+                        <div id="an11"></div>
+                        <div id="an12"></div>
+                        <div id="an13"></div>
+                        <div id="an15"></div>
+                        <div id="an16"></div>
+                        <div id="an17"></div>
+                        <div id="an18"></div>
+                     </div>
+                  </div>
+               </div>
+               <div className="tech-stack">
+                  {skills && skills.map((category) => (
+                    category.items.map((item, index) => (
+                      <div key={index} className="tech-item" style={{"--animation-order": index}}>
+                        <div className="tech-item-content">
+                          <img src={item.image} alt={item.name} title={item.name} />
+                          <span className="tech-name">{item.name}</span>
+                        </div>
+                      </div>
+                    ))
+                  ))}
+               </div>
+            </div>
+
+            <div className="download">
+               <a href={resumeDownload} className="download-button">
+                  <i className="fa fa-download"></i>DOWNLOAD RESUME
+               </a>
             </div>
           </div>
         </div>
