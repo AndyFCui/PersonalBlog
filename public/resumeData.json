@@ -5,8 +5,8 @@
     "description":"Full stack design Sale System By NodeJs",
     "image":"profilepic.jpg",
     "intro":{
-      "role": "Software Engineer",
-      "company": "CAC Auto Group Boston"
+      "role": "Senior Full Stack Software Engineer",
+      "company": "King 7 Club LLC"
     },
     "bio":"Integrating state-of-the-art design and development practices, I specialize in creating robust Machine Learning, back-end, and front-end applications, having delivered multifaceted projects across diverse domains. My technical toolkit is comprehensive, encompassing Java, Python, MySQL, PostgreSQL, AWS, React.js, and adept implementation of CI/CD pipelines. Mastering complex problem-solving, I am a self-driven technophile, relentlessly chasing the latest technological breakthroughs. As a fervent learner in Machine Learning and Natural Language Processing, I am particularly captivated by the prospects of mining cutting-edge big data and transforming it into insightful visual representations.",
     "skills": [
@@ -119,9 +119,25 @@
     ],
     "work":[
       {
+        "company":"King 7 Club LLC",
+        "title":"Senior Full Stack Software Engineer - Full Time",
+        "years":"Dec 2024 - Present, Remote, MA, United States",
+        "image":"kingsclub.png",
+        "description":
+        [
+        "Developed and deployed a responsive website using React and Node.js, enhanced with CSS 5 animations and hover effects for superior UI/UX, and implemented a local storage-based language toggle to efficiently switch between English and Chinese, reducing API latency and speeding up page loads.\n ",
+        "Integrated Google Analytics Reporting API to track website traffic and generate detailed reports, providing insights that helped design interactive dashboards for monitoring metrics such as page views and URL clicks, thereby facilitating data-driven strategies to boost social media engagement on platforms like TikTok, Red Book, and YouTube. \n",
+        "Optimized global website performance by deploying through AWS with mirrored servers in China, ensuring top access speeds and using JSON for data structuring to support scalable backend development and consistent data management. \n",
+        "Automated tracking and reporting of web-driven social media engagement, increasing operational efficiency by 80%, and organized common modules like navigation bars and footers into separate directories for better scalability and maintainability through modular design.\n",
+        "Managed version control with Git and led Agile development processes, ensuring effective project execution and timely delivery."
+      ]
+                
+      },
+      
+      {
         "company":"CAC Auto Group LLC",
         "title":"Software Engineer - Full Time",
-        "years":"Feb 2024 - Present, Southborough, MA, United States",
+        "years":"Feb 2024 - Dec 2024, Southborough, MA, United States",
         "image":"cacauto.png",
         "description":
         [
@@ -137,6 +153,7 @@
       ]
                 
       },
+
       {
         "company":"AlpaLifeBio Inc",
         "title":"Software Engineer of Data Engineer  - Intership",
@@ -151,6 +168,7 @@
       ]
                 
       },
+
       {
         "company":"Dutchgo LLC",
         "title":"Software Engineer - Self-employed & Co-founder",
