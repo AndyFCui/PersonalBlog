@@ -11,9 +11,9 @@ const Footer = () => {
             <li><a href="https://northeastern-csm.symplicity.com/profiles/xiangyu.cui"><i className="fa fa-nuwork"></i></a></li>
           </ul>
           <ul className="copyright">
-            <li>&copy; Copyright 2025 dreamslink</li>
-            <li>Deployed on <a href="https://www.digitalocean.com/">Digital Ocean</a></li>
-            <li>Powered by <a href="https://github.com/AndyFCui/PersonalBlog" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li>&copy; 2025 Andy Cui. All rights reserved.</li>
+            <li>Hosted on <a href="https://www.digitalocean.com/" target="_blank" rel="noopener noreferrer">DigitalOcean</a></li>
+            <li>Source code on <a href="https://github.com/AndyFCui/PersonalBlog" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           </ul>
         </div>
         <div id="go-top">
