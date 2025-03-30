@@ -12,7 +12,7 @@ const Footer = () => {
           </ul>
           <ul className="copyright">
             <li>&copy; Copyright 2025 dreamslink</li>
-            <li>Released on <a href="https://www.digitalocean.com/">Digital Ocean</a></li>
+            <li>Deployed on <a href="https://www.digitalocean.com/">Digital Ocean</a></li>
             <li>Powered by <a href="https://github.com/AndyFCui/PersonalBlog" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           </ul>
         </div>
