@@ -6,7 +6,7 @@
     "image":"profilepic.jpg",
     "intro":{
       "role": "Senior Full Stack Software Engineer",
-      "company": "King 7 Club LLC"
+      "company": "King 7 Club Corp"
     },
     "bio":"Integrating state-of-the-art design and development practices, I specialize in creating robust Machine Learning, back-end, and front-end applications, having delivered multifaceted projects across diverse domains. My technical toolkit is comprehensive, encompassing Java, Python, MySQL, PostgreSQL, AWS, React.js, and adept implementation of CI/CD pipelines. Mastering complex problem-solving, I am a self-driven technophile, relentlessly chasing the latest technological breakthroughs. As a fervent learner in Machine Learning and Natural Language Processing, I am particularly captivated by the prospects of mining cutting-edge big data and transforming it into insightful visual representations.",
     "skills": [
@@ -119,9 +119,9 @@
     ],
     "work":[
       {
-        "company":"King 7 Club LLC",
+        "company":"King 7 Club Corp",
         "title":"Senior Full Stack Software Engineer - Full Time",
-        "years":"Dec 2024 - Present, Remote, MA, United States",
+        "years":"Jan 2025 - Present, Los Angeles, CA, United States",
         "image":"kingsclub.png",
         "description":
         [
