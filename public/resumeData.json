@@ -125,11 +125,11 @@
         "image":"kingsclub.png",
         "description":
         [
-        "Developed and deployed a responsive website using React and Node.js, enhanced with CSS 5 animations and hover effects for superior UI/UX, and implemented a local storage-based language toggle to efficiently switch between English and Chinese, reducing API latency and speeding up page loads.\n ",
-        "Integrated Google Analytics Reporting API to track website traffic and generate detailed reports, providing insights that helped design interactive dashboards for monitoring metrics such as page views and URL clicks, thereby facilitating data-driven strategies to boost social media engagement on platforms like TikTok, Red Book, and YouTube. \n",
-        "Optimized global website performance by deploying through AWS with mirrored servers in China, ensuring top access speeds and using JSON for data structuring to support scalable backend development and consistent data management. \n",
-        "Automated tracking and reporting of web-driven social media engagement, increasing operational efficiency by 80%, and organized common modules like navigation bars and footers into separate directories for better scalability and maintainability through modular design.\n",
-        "Managed version control with Git and led Agile development processes, ensuring effective project execution and timely delivery."
+        "DDeveloped and deployed a responsive website using Node.js for the frontend and FastAPI for the backend, with component-based architecture for modular scalability. Implemented dynamic UI with custom JavaScript logic and CSS animations to ensure a seamless user experience across devices and languages.\n ",
+        "Hosted static assets via GitHub, containerized the full-stack environment with Docker, and deployed the application on AWS EC2, ensuring consistent and reproducible builds across development and production. Utilized PostgreSQL as the backend database to securely manage and store user data.\n",
+        "To optimize access for both international and Chinese users, implemented intelligent DNS-based traffic routing: international traffic is served through AWS Global Accelerator, while Chinese users are redirected to a mirror deployment on Alibaba Cloud. This global traffic segregation strategy reduced cross-region latency by up to 90%, significantly improving page load times and user experience across all target markets.\n",
+        "Integrated Google Analytics Reporting API to track traffic and user behavior, enabling the development of interactive dashboards to monitor key metrics such as page views and user engagement across platforms like TikTok, Red Book (Xiaohongshu), and YouTube. This real-time data integration streamlined reporting workflows and automated insight generation, improving backend operational efficiency by 80%.\n",
+        "Enhanced backend performance and frontend delivery using CDN and caching strategies, and structured API responses in JSON format for clean integration. "
       ]
                 
       },
@@ -141,15 +141,9 @@
         "image":"cacauto.png",
         "description":
         [
-        "Develop and maintain a predictive price forecast system for vehicles listed on CarGurus using a serverless architecture on AWS. This system enhances market compatibility for vehicle pricing and optimizes operational efficiency. Leveraged core AWS services such as S3, Lambda, DynamoDB, SNS, CloudWatch, and Kinesis for real-time data processing, with Python as the primary programming language and AWS CloudFormation (YAML) for Infrastructure as Code (IaC).  \n ",
-        "Implemented real-time data monitoring using AWS Kinesis to track market data fluctuations, enabling the system to detect and trigger S3 events when vehicle prices deviate from predefined ranges. This near real-time data handling detects discrepancies in vehicle market prices promptly, allowing quick corrective actions to keep vehicle listings competitive and accurate. \n",
-        "Established Automated Alert notifications through Amazon SNS and integrated with AWS SQS and Lambda to automatically notify the team when specific events are triggered. This system improved the accuracy and market compatibility of vehicle prices displayed on the company's website, resulting in an 80% boost in daily operational efficiency and over 50% improvement in real-time price adjustments compared to industry standards. \n",
-        "Designed and managed a data lake architecture on AWS, incorporating raw, cleansed, and application data layers stored in S3. This data lake supports the BI team with enhanced access to structured data, improving data processing efficiency by 50%. \n",
-        "Orchestrated data processing workflows through AWS Step Functions, which automate the execution of multiple Glue Crawlers and ETL jobs to process data and update S3 layers. Enabled continuous monitoring through Glue Data Catalog and Athena to maintain data quality and consistency across all data lake layers. \n",
-        "Enhanced infrastructure reliability by using AWS CloudFormation to deploy reproducible infrastructure configurations across environments, which streamlined deployment, reduced development costs by 70%, and supported faster product iteration for an agile startup environment. \n",
-        "Automated SNS notifications to alert the team about Glue Crawler or ETL job failures, improving response time and reducing data pipeline downtime by 30%. \n",
-        "Implemented a Lambda-based schema change detection system that uses Glue Crawler and Glue Data Catalog to track metadata changes in source data and trigger alert emails for schema inconsistencies. This setup led to a 60% reduction in troubleshooting time and a 50% decrease in data delivery delays. \n",
-        "Managed Agile processes for development, participating in Scrum meetings and data pipeline structure design, while maintaining version control through Git and tracking project tasks on Jira. Established a continuous integration pipeline via Bamboo from Bitbucket, ensuring streamlined deployments."
+        "Developed and maintained a predictive pricing system for vehicles on CarGurus using AWS serverless architecture, enhancing market compatibility and streamlining operations. Leveraged key AWS services including S3, Lambda, DynamoDB, SNS, CloudWatch, and Kinesis, and used Python with AWS CloudFormation for scalable infrastructure deployment.\n ",
+        "Designed and implemented a fully serverless data pipeline to continuously monitor target data sources using Kinesis streams and Lambda triggers, eliminating the need for traditional polling. This approach reduced infrastructure and processing costs by 80%, while maintaining high scalability and responsiveness. \n",
+        "Integrated real-time monitoring to track market data fluctuations, enabling automated detection and adjustment of vehicle prices in response to deviations. This solution boosted daily operational efficiency by 80% and improved pricing accuracy by over 50% compared to industry standards."
       ]
                 
       },
