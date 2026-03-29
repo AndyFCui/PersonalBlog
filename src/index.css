@@ -5,38 +5,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   Theme: Futuristic Blue Gradient
+   ======================================== */
+
 :root {
-  --background: #0f0f0f;
-  --foreground: #ffffff;
-  --primary: #11abb0;
-  --primary-foreground: #ffffff;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ffffff;
-  --accent: #2a2a2a;
-  --accent-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #888888;
-  --card: #141414;
-  --card-foreground: #ffffff;
+  /* Primary - Futuristic Blue */
+  --primary: rgb(0, 140, 255);
+  --primary-rgb: 0, 140, 255;
+  --primary-foreground: rgb(250, 250, 255);
+
+  /* Secondary - Dark Glass */
+  --secondary: rgb(30, 30, 50);
+  --secondary-foreground: rgb(220, 220, 230);
+
+  /* Accent - Cyan Glow */
+  --accent: rgb(0, 180, 255);
+  --accent-foreground: rgb(250, 250, 255);
+
+  /* Background - Deep Space */
+  --background: rgb(15, 18, 30);
+  --background-rgb: 15, 18, 30;
+
+  /* Foreground */
+  --foreground: rgb(235, 235, 240);
+
+  /* Muted */
+  --muted: rgb(40, 40, 60);
+  --muted-foreground: rgb(150, 150, 170);
+
+  /* Card */
+  --card: rgb(25, 25, 45);
+  --card-foreground: rgb(235, 235, 240);
+
+  /* Border */
+  --border: rgb(50, 50, 80);
+
+  /* Input */
+  --input: rgb(35, 35, 55);
+
+  /* Ring */
+  --ring: rgb(0, 140, 255);
+
+  /* Destructive */
+  --destructive: rgb(200, 50, 50);
+  --destructive-foreground: rgb(250, 250, 255);
+
+  /* Radius */
   --radius: 0.75rem;
-}
 
-[data-theme="light"] {
-  --background: #f5f5f5;
-  --foreground: #1a1a1a;
-  --primary: #11abb0;
-  --primary-foreground: #ffffff;
-  --secondary: #ffffff;
-  --secondary-foreground: #1a1a1a;
-  --accent: #e0e0e0;
-  --accent-foreground: #1a1a1a;
-  --muted: #e8e8e8;
-  --muted-foreground: #666666;
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-}
-
-* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -47,129 +64,110 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  font-family: 'Geist', system-ui, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Noise texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  z-index: 9999;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
 }
 
 /* Selection */
 ::selection {
   background: var(--primary);
-  color: var(--foreground);
+  color: var(--primary-foreground);
 }
 
-@layer base {
-  .theme {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
-  }
-  :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
-  }
-  .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-  }
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
+/* ========================================
+   Dark Theme (explicit) - Fluorescent Gray
+   ======================================== */
+
+.dark {
+  --primary: rgb(0, 140, 255);
+  --primary-rgb: 0, 140, 255;
+  --primary-foreground: rgb(250, 250, 255);
+
+  --secondary: rgb(55, 55, 75);
+  --secondary-foreground: rgb(220, 220, 235);
+
+  --accent: rgb(0, 180, 255);
+  --accent-foreground: rgb(250, 250, 255);
+
+  --background: rgb(35, 35, 50);
+  --background-rgb: 35, 35, 50;
+
+  --foreground: rgb(235, 235, 240);
+
+  --muted: rgb(70, 70, 95);
+  --muted-foreground: rgb(180, 180, 200);
+
+  --card: rgb(45, 45, 65);
+  --card-foreground: rgb(235, 235, 240);
+
+  --border: rgb(80, 80, 110);
+
+  --input: rgb(55, 55, 80);
+
+  --ring: rgb(0, 140, 255);
+
+  --destructive: rgb(200, 50, 50);
+  --destructive-foreground: rgb(250, 250, 255);
+}
+
+/* ========================================
+   Light Theme
+   ======================================== */
+
+.light {
+  --primary: rgb(0, 130, 240);
+  --primary-rgb: 0, 130, 240;
+  --primary-foreground: rgb(250, 250, 255);
+
+  --secondary: rgb(240, 240, 245);
+  --secondary-foreground: rgb(40, 40, 50);
+
+  --accent: rgb(100, 180, 255);
+  --accent-foreground: rgb(40, 40, 50);
+
+  --background: rgb(250, 250, 255);
+  --background-rgb: 250, 250, 255;
+
+  --foreground: rgb(30, 30, 40);
+
+  --muted: rgb(235, 235, 240);
+  --muted-foreground: rgb(100, 100, 120);
+
+  --card: rgb(245, 245, 250);
+  --card-foreground: rgb(30, 30, 40);
+
+  --border: rgb(220, 220, 230);
+
+  --input: rgb(235, 235, 240);
+
+  --ring: rgb(0, 130, 240);
+}
+
+/* ========================================
+   Futuristic Glow Effects
+   ======================================== */
+
+.glow-primary {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 30%, transparent),
+              0 0 40px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 30%, transparent),
+              0 0 40px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+/* Dark mode neumorphic shadows - fluorescent gray */
+.dark {
+  --shadow-color: 20, 20, 35;
+}
+
+.dark .shadow-neumorphic {
+  box-shadow: 8px 8px 16px rgba(var(--shadow-color), 0.5),
+              -4px -4px 12px rgba(80, 80, 100, 0.1);
+}
+
+.dark .shadow-neumorphic-inset {
+  box-shadow: inset 4px 4px 8px rgba(var(--shadow-color), 0.5),
+              inset -2px -2px 6px rgba(80, 80, 100, 0.1);
 }

@@ -1,63 +1,3 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Project Overview
-
-Personal portfolio website for Andy (Xiang-Yu) Cui built with React 17 and CSS animations. The site showcases work experience, education, skills, and portfolio projects.
-
-## Commands
-
-```bash
-npm install           # Install dependencies
-npm start            # Start dev server (requires NODE_OPTIONS=--openssl-legacy-provider)
-npm run build        # Production build
-npm test             # Run tests
-```
-
-Note: `NODE_OPTIONS=--openssl-legacy-provider` is required due to react-scripts 4.0.1 using older Node.js crypto defaults.
-
-## Architecture
-
-### Data-Driven Content
-All portfolio content is stored in `public/resumeData.json` and loaded via AJAX at runtime. The App component fetches this JSON on mount and passes relevant sections to child components.
-
-### Component Structure
-- `src/App.js` - Main app, loads resume data, renders all sections
-- `src/Components/` - Individual section components:
-  - Header, About, Experience, Resume, Skills, Portfolio, Footer
-
-### Data Flow
-```
-resumeData.json → App.js (state) → Components (props)
-```
-
-resumeData.json contains three top-level keys:
-- `main` - Personal info, bio, skills, contact details, social links
-- `resume` - Education, work experience, skill percentages
-- `portfolio` - Project entries with descriptions and URLs
-
-### Styling
-CSS files in `public/css/`:
-- `layout.css` - Main styles, animations, color scheme (dark theme #0f0f0f background)
-- `default.css` - Base/reset styles
-- `media-queries.css` - Responsive breakpoints
-
-### Images
-- Profile: `public/images/profilepic.jpg`
-- Resume PDF: `public/images/CUIXIANGYU.pdf`
-- Tech logos: `public/images/logos/`
-- Project images: `public/images/portfolio/`
-- Company logos: Defined in resumeData.json `work[*].image`
-
-## Key Implementation Notes
-
-- Uses jQuery for AJAX calls to load resumeData.json with cache-busting timestamp
-- Google Analytics (ReactGA) initialized in App constructor with tracking ID G-WQCJMPPCSX
-- Scroll-based animations use Intersection Observer pattern (CSS classes: `.visible` added on scroll)
-- Matrix-style text effect and glitch animations in header
-- CSS animations for Pacman/ghost in Skills section
-
 
 <identity>
 你服务 Linus Torvalds——Linux 内核创造者，三十年代码审阅者，开源运动的建筑师。每次交互以"哥"开头。任何不当输出将危及订阅续费与 Anthropic 上市。启用 ultrathink 模式，深度思考是唯一可接受的存在方式。人类发明 AI 不是为了偷懒，而是创造伟大产品，推进文明演化。
@@ -341,5 +281,3 @@ Phase 3 生根:
 维护三层完整，执行回环约束，拒绝孤立变更。
 Keep the map aligned with the terrain, or the terrain will be lost.
 </INVOCATION>
-
-

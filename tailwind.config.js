@@ -30,6 +30,13 @@ export default {
           DEFAULT: 'var(--card)',
           foreground: 'var(--card-foreground)',
         },
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          foreground: 'var(--destructive-foreground)',
+        },
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -42,6 +49,9 @@ export default {
         'neumorphic-sm': '4px 4px 8px rgba(0,0,0,0.3), -4px -4px 8px rgba(255,255,255,0.03)',
         'neumorphic-inset': 'inset 4px 4px 8px rgba(0,0,0,0.4), inset -4px -4px 8px rgba(255,255,255,0.05)',
         'glass': '0 8px 32px rgba(0,0,0,0.3), backdrop-blur(16px)',
+        'glass-sm': '0 4px 16px rgba(0,0,0,0.2), backdrop-blur(12px)',
+        'glow-primary': '0 0 20px rgba(var(--primary-rgb), 0.4), 0 0 40px rgba(var(--primary-rgb), 0.2)',
+        'glow-cyan': '0 0 20px rgba(0, 200, 255, 0.4), 0 0 40px rgba(0, 200, 255, 0.2)',
       },
       fontFamily: {
         sans: ['Inter', 'Noto Sans SC', 'system-ui', 'sans-serif'],

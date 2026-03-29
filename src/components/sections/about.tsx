@@ -12,11 +12,26 @@ interface AboutProps {
 export function About({ data }: AboutProps) {
   if (!data) return null
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
-    <section id="about" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="py-24 px-4">
+      <div className="max-w-7xl mx-auto">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-12"
+          className="text-4xl md:text-5xl font-bold text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -24,102 +39,192 @@ export function About({ data }: AboutProps) {
           About <span className="text-primary">Me</span>
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left column - Avatar and contact */}
           <motion.div
-            className="flex flex-col items-center"
-            initial={{ opacity: 0, x: -20 }}
+            className="flex flex-col items-center lg:items-start"
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="relative mb-6">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/50 rounded-full blur-xl opacity-30" />
-              <Avatar className="w-48 h-48 border-4 border-primary/20 shadow-glass">
-                <AvatarImage
-                  src={`/images/${data.image}`}
-                  alt={data.name}
-                  loading="lazy"
-                />
-                <AvatarFallback>{data.name.charAt(0)}</AvatarFallback>
-              </Avatar>
+            {/* Avatar with glow effect */}
+            <div className="relative mb-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/50 to-accent rounded-full blur-3xl opacity-40 animate-pulse" />
+              <div className="relative">
+                <Avatar className="w-56 h-56 border-4 border-primary/30 shadow-2xl">
+                  <AvatarImage
+                    src={`/images/${data.image}`}
+                    alt={data.name}
+                    loading="lazy"
+                  />
+                  <AvatarFallback className="text-3xl">{data.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-transparent" />
+              </div>
             </div>
 
-            <h3 className="text-2xl font-semibold mb-2">{data.nameUnderImage}</h3>
-            <p className="text-foreground/60 mb-2">{data.city}, {data.address.state}</p>
+            {/* Name and role */}
+            <motion.h3
+              className="text-3xl font-bold mb-2 text-center lg:text-left"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {data.nameUnderImage}
+            </motion.h3>
+            <motion.p
+              className="text-lg text-foreground/70 mb-4 text-center lg:text-left"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {data.city}, {data.address.state}
+            </motion.p>
+
             {data.intro && (
-              <div className="text-center">
-                <p className="text-primary font-medium">{data.intro.role}</p>
+              <motion.div
+                className="text-center lg:text-left mb-8"
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <p className="text-xl text-primary font-semibold">{data.intro.role}</p>
                 <p className="text-sm text-foreground/60">{data.intro.company}</p>
-              </div>
+              </motion.div>
             )}
 
-            {/* Contact info */}
-            <div className="w-full space-y-3 mb-6">
-              <a
-                href={`mailto:${data.email}`}
-                className="flex items-center gap-3 p-3 rounded-neumorphic bg-secondary hover:bg-secondary/80 transition-colors"
-              >
-                <Mail className="h-5 w-5 text-primary" />
-                <span className="text-sm">{data.email}</span>
-              </a>
-              <a
-                href={`tel:${data.phone}`}
-                className="flex items-center gap-3 p-3 rounded-neumorphic bg-secondary hover:bg-secondary/80 transition-colors"
-              >
-                <Phone className="h-5 w-5 text-primary" />
-                <span className="text-sm">{data.phone}</span>
-              </a>
-              <div className="flex items-center gap-3 p-3 rounded-neumorphic bg-secondary">
-                <MapPin className="h-5 w-5 text-primary" />
-                <span className="text-sm">{data.address.city}, {data.address.state}</span>
-              </div>
-            </div>
+            {/* Contact info cards */}
+            <motion.div
+              className="w-full space-y-4 mb-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {[
+                { icon: Mail, label: data.email, href: `mailto:${data.email}` },
+                { icon: Phone, label: data.phone, href: `tel:${data.phone}` },
+                { icon: MapPin, label: `${data.address.city}, ${data.address.state}`, href: null },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="group"
+                >
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+                    >
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 group-hover:from-primary/30 group-hover:to-primary/10 transition-all">
+                        <item.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 border border-border/50">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5">
+                        <item.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
 
-            <Button variant="default" size="lg" asChild>
-              <a href={`/images/CUIXIANGYU.pdf`} download>
-                <Download className="h-5 w-5" />
-                Download CV
-              </a>
-            </Button>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <Button variant="default" size="xl" className="shadow-lg shadow-primary/20" asChild>
+                <a href={`/images/CUIXIANGYU.pdf`} download>
+                  <Download className="h-5 w-5" />
+                  Download CV
+                </a>
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Right column - Bio and skills */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            className="space-y-10"
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-4">Biography</h3>
-              <p className="text-foreground/80 leading-relaxed">{data.bio}</p>
-            </div>
+            {/* Biography */}
+            <motion.div
+              className="p-8 rounded-3xl bg-secondary/30 border border-border/50 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-semibold mb-4 flex items-center gap-3">
+                <span className="w-8 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+                Biography
+              </h3>
+              <p className="text-base leading-relaxed text-foreground/90">{data.bio}</p>
+            </motion.div>
 
             {/* Tech stack */}
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Tech Stack</h3>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
+                <span className="w-8 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+                Tech Stack
+              </h3>
               <div className="space-y-6">
-                {data.skills.map((category) => (
-                  <div key={category.category}>
-                    <h4 className="text-sm font-medium text-foreground/60 mb-3">
+                {data.skills.map((category, categoryIndex) => (
+                  <motion.div
+                    key={category.category}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: categoryIndex * 0.1 }}
+                  >
+                    <h4 className="text-sm font-medium text-foreground/50 mb-4 uppercase tracking-wider">
                       {category.category}
                     </h4>
                     <div className="flex flex-wrap gap-3">
-                      {category.items.map((item) => (
-                        <Badge key={item.name} variant="secondary" className="px-3 py-1.5">
-                          <img
-                            src={`/${item.image}`}
-                            alt={item.name}
-                            className="w-5 h-5 mr-2"
-                            loading="lazy"
-                          />
-                          {item.name}
-                        </Badge>
+                      {category.items.map((item, itemIndex) => (
+                        <motion.div
+                          key={item.name}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: categoryIndex * 0.1 + itemIndex * 0.05 }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                        >
+                          <Badge
+                            variant="secondary"
+                            className="px-4 py-2.5 text-sm font-medium hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 cursor-default"
+                          >
+                            <img
+                              src={`/${item.image}`}
+                              alt={item.name}
+                              className="w-5 h-5 mr-2"
+                              loading="lazy"
+                            />
+                            {item.name}
+                          </Badge>
+                        </motion.div>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

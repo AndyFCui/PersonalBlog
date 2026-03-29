@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Sun, Moon, Download, Linkedin, Github, ExternalLink } from 'lucide-react'
+import { Menu, X, Sun, Moon, Download, Linkedin, Github, ExternalLink, ChevronDown, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { useThemeStore } from '@/lib/theme'
 import type { MainData } from '@/types/resume'
 
@@ -53,11 +59,13 @@ export function Header({ data }: HeaderProps) {
     return () => clearInterval(interval)
   }, [data?.name])
 
-  const navLinks = [
-    { href: '#about', label: 'About' },
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const infoLinks = [
     { href: '#experience', label: 'Experience' },
     { href: '#education', label: 'Education' },
-    { href: '#skills', label: 'Skills' },
     { href: '#portfolio', label: 'Portfolio' },
     { href: '#contact', label: 'Contact' },
   ]
@@ -103,25 +111,47 @@ export function Header({ data }: HeaderProps) {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <motion.span
-              className="text-xl font-bold text-primary"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              AC
-            </motion.span>
+            {/* Logo */}
+            <motion.div
+              className="w-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            />
 
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+              <button
+                onClick={scrollToTop}
+                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              >
+                Home
+              </button>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors cursor-pointer">
+                  Info
+                  <ChevronDown className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="rounded-xl bg-card border border-border/50 shadow-lg p-2 min-w-[160px]">
+                  {infoLinks.map((link) => (
+                    <DropdownMenuItem key={link.href} asChild>
+                      <a
+                        href={link.href}
+                        className="w-full px-3 py-2 text-sm rounded-lg hover:bg-secondary/80 cursor-pointer transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <button
+                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+              >
+                Blog
+              </button>
+
               <Button variant="ghost" size="icon" onClick={toggleTheme}>
                 {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
@@ -147,16 +177,32 @@ export function Header({ data }: HeaderProps) {
             className="md:hidden bg-background/95 backdrop-blur-md"
           >
             <div className="px-4 py-4 space-y-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="block py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+              <button
+                onClick={() => { scrollToTop(); setIsMobileMenuOpen(false) }}
+                className="block w-full text-left py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              >
+                Home
+              </button>
+              <div className="py-2">
+                <p className="text-sm font-medium text-foreground/50 mb-2">Info</p>
+                <div className="pl-4 space-y-2">
+                  {infoLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="block py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <button
+                className="block w-full text-left py-2 text-sm font-medium text-foreground/50 cursor-not-allowed"
+              >
+                Blog (Coming Soon)
+              </button>
             </div>
           </motion.div>
         )}
