@@ -2,7 +2,7 @@
 
 Modern personal portfolio website built with React 19, TypeScript, Vite, and shadcn/ui design system.
 
-**Live Demo**: https://andyfcui.com
+**Live Demo**: https://dreamslink.me
 
 ---
 
