@@ -2,7 +2,6 @@
   "main": {
     "name":"Andy (Xiang-Yu) Cui",
     "occupation":"  5 Years PM with software experience, 2 years Data Engineer and 1 year Full Stack Engineer.",
-    "description":"Full stack design Sale System By NodeJs",
     "image":"profilepic.jpg",
     "intro":{
       "role": "Senior Full Stack Software Engineer",
@@ -62,7 +61,6 @@
     "website": "andyfcui",
     "resumedownload":"images/CUIXIANGYU.pdf",
     "social":[
-
       {
         "name":"linkedin",
         "url":"https://www.linkedin.com/in/andyfcui/",
@@ -73,14 +71,7 @@
         "name":"github",
         "url":"https://github.com/AndyFCui",
         "className":"fa fa-github"
-      },
-
-      {
-        "name":"nuwork",
-        "url":"https://northeastern-csm.symplicity.com/profiles/xiangyu.cui",
-        "className":"fa fa-nuwork"
       }
-
     ]
   },
   "resume":{
