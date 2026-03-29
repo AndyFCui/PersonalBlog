@@ -42,11 +42,6 @@ export function Footer({ data }: FooterProps) {
                 Email Me
               </a>
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a href={data?.social.find((s) => s.name === 'linkedin')?.url || '#'} target="_blank" rel="noopener noreferrer">
-                LinkedIn
-              </a>
-            </Button>
           </div>
 
           {/* Social links */}

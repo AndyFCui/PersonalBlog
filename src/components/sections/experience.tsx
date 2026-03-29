@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import type { ResumeData } from '@/types/resume'
 
 interface ExperienceProps {
@@ -10,6 +10,8 @@ interface ExperienceProps {
 }
 
 export function Experience({ data }: ExperienceProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
   if (!data?.work) return null
 
   return (
@@ -45,7 +47,11 @@ export function Experience({ data }: ExperienceProps) {
 
                 {/* Content card */}
                 <div className="flex-1 ml-16 md:ml-0">
-                  <Card className="hover:shadow-glass transition-shadow duration-300">
+                  <Card
+                    className="hover:shadow-glass transition-all duration-300 cursor-pointer"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4 mb-4">
                         <Avatar className="w-16 h-16 border-2 border-primary/20">
@@ -68,25 +74,41 @@ export function Experience({ data }: ExperienceProps) {
                         </div>
                       </div>
 
-                      <Accordion type="single" collapsible>
-                        <AccordionItem value="description">
-                          <AccordionTrigger className="text-sm">
-                            View Details
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <ul className="space-y-2">
-                              {work.description.map((desc, i) => (
-                                <li
-                                  key={i}
-                                  className="text-sm text-foreground/80 leading-relaxed"
-                                >
-                                  {desc}
-                                </li>
-                              ))}
-                            </ul>
-                          </AccordionContent>
-                        </AccordionItem>
-                      </Accordion>
+                      {/* Expandable description */}
+                      <AnimatePresence>
+                        {hoveredIndex === index && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pt-4 border-t border-border/50">
+                              <ul className="space-y-2">
+                                {work.description.map((desc, i) => (
+                                  <li
+                                    key={i}
+                                    className="text-sm text-foreground/80 leading-relaxed"
+                                  >
+                                    {desc}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {hoveredIndex !== index && (
+                        <motion.p
+                          initial={{ opacity: 0.6 }}
+                          animate={{ opacity: 0.6 }}
+                          className="text-sm text-foreground/50 italic"
+                        >
+                          Hover to view details...
+                        </motion.p>
+                      )}
                     </CardContent>
                   </Card>
                 </div>
