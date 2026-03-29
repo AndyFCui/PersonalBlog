@@ -1,113 +1,105 @@
-# Personal Portfolio Website Template
+# Andy Cui - Personal Portfolio
 
-A modern, animated personal portfolio website template built with React and CSS animations.
+Modern portfolio website built with React 19, TypeScript, Vite, and shadcn/ui design system.
+
+## Tech Stack
+
+- **Framework**: React 19 + TypeScript
+- **Build**: Vite
+- **Styling**: TailwindCSS v4 + CSS Variables
+- **UI**: shadcn/ui (base-ui primitives)
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **State**: Zustand
+- **Routing**: React Router
 
 ## Features
 
-### 1. Header Section
-- Animated banner with matrix-style text effect
-- Glitch animation on subtitle
-- Smooth scroll navigation
-- Responsive navigation menu with dropdown support
-- Social media links with hover effects
+### Sections
 
-### 2. About Section
-- Profile picture with animated border and glow effects
-- Role and company information with icons
-- Bio text with decryption animation effect
-- Contact details with interactive hover effects
-- Download resume button with floating animation
+| Section | Description |
+|---------|-------------|
+| **Header** | Navigation + Hero with Matrix typewriter effect, Home/Info/Blog links |
+| **About** | Avatar with glow, contact cards, biography, tech stack badges |
+| **Experience** | Timeline layout with hover-to-expand details |
+| **Education** | Timeline layout for academic background |
+| **Portfolio** | Project cards with gradient modal dialog |
+| **Footer** | Email CTA, social links |
 
-### 3. Technology Stack Section
-- Grid layout for technology icons
-- Animated Pacman loader
-- Red ghost animation
-- Hover effects on tech stack items
-- Responsive design for mobile devices
+### Design System
 
-### 4. Experience Section
-- Timeline-style work experience display
-- Company logos with hover effects
-- Animated section transitions
-- Detailed job descriptions
+- **Neumorphism** - 3D shadows with gradient backgrounds
+- **Dark/Light Theme** - Fluorescent gray tones with persistence
+- **Responsive** - Mobile-first approach
 
-### 5. Portfolio Section
-- Grid layout for projects
-- Hover effects with overlay
-- Project details modal
-- Category filtering
-- Responsive image handling
+### Routes
 
-### 6. Contact Section
-- Contact form with validation
-- Social media integration
-- Location information
-- Email and phone details
-
-## Technical Features
-
-### Animations
-- CSS-based animations for smooth performance
-- Intersection Observer for scroll-based animations
-- Custom keyframe animations for various effects
-- Hover state transitions
-
-### Responsive Design
-- Mobile-first approach
-- Flexible grid system
-- Adaptive layouts for different screen sizes
-- Touch-friendly interactions
-
-### Performance
-- Optimized CSS animations
-- Lazy loading for images
-- Efficient React component structure
-- Minimal dependencies
+| Path | Page |
+|------|------|
+| `/` | Portfolio (main page) |
+| `/design-system` | Component showcase |
 
 ## Getting Started
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+```bash
+# Install dependencies
+npm install
 
-## Customization
+# Start development server
+npm run dev
 
-### Data Configuration
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── ui/           # Design system components
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   ├── dialog.tsx
+│   │   └── ...
+│   └── sections/     # Page sections
+│       ├── header.tsx
+│       ├── about.tsx
+│       ├── experience.tsx
+│       └── ...
+├── pages/
+│   ├── portfolio.tsx  # Main page
+│   └── design-system.tsx
+├── hooks/
+│   └── useResumeData.ts
+├── lib/
+│   ├── utils.ts      # cn() utility
+│   └── theme.ts      # Theme store
+├── types/
+│   └── resume.ts      # Type definitions
+├── App.tsx
+└── main.tsx
+```
+
+## Data Configuration
+
 Edit `public/resumeData.json` to update:
-- Personal information
+- Personal information (name, bio, contact)
 - Work experience
-- Skills and technologies
+- Education history
 - Portfolio projects
-- Contact details
 
-### Styling
-Main styles are in `public/css/layout.css`:
-- Color scheme
-- Animations
-- Layout configurations
-- Responsive breakpoints
+## Color Palette
 
-### Images
-Place images in:
-- Profile picture: `public/images/`
-- Project images: `public/images/portfolio/`
-- Technology logos: `public/images/logos/`
-
-## Browser Support
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+| Token | Dark Mode | Light Mode |
+|-------|-----------|------------|
+| Primary | `rgb(0, 140, 255)` | `rgb(0, 130, 240)` |
+| Background | `rgb(35, 35, 50)` | `rgb(250, 250, 255)` |
+| Foreground | `rgb(235, 235, 240)` | `rgb(30, 30, 40)` |
 
 ## License
-MIT License - feel free to use this template for your personal portfolio.
+
+MIT
