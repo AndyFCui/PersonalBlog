@@ -18,10 +18,6 @@
 | accordion.tsx | 手风琴 - 展开收起动画 | base-ui/accordion |
 | dropdown-menu.tsx | 下拉菜单 - 卡片样式 | base-ui/dropdown-menu |
 | sheet.tsx | 侧边栏 - 右滑面板 | base-ui/dialog |
-| separator.tsx | 分隔线 - 渐变样式 | base-ui/separator |
-| label.tsx | 标签 - 简洁样式 | base-ui/label |
-| scroll-area.tsx | 滚动区域 - 自定义滚动条 | base-ui/scroll-area |
-| navigation-menu.tsx | 导航菜单 | base-ui/navigation-menu |
 | index.ts | 统一导出所有组件 | - |
 
 ## 设计规范
