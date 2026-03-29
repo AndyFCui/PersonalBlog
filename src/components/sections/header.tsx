@@ -134,13 +134,11 @@ export function Header({ data }: HeaderProps) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="rounded-xl bg-card border border-border/50 shadow-lg p-2 min-w-[160px]">
                   {infoLinks.map((link) => (
-                    <DropdownMenuItem key={link.href} asChild>
-                      <a
-                        href={link.href}
-                        className="w-full px-3 py-2 text-sm rounded-lg hover:bg-secondary/80 cursor-pointer transition-colors"
-                      >
-                        {link.label}
-                      </a>
+                    <DropdownMenuItem
+                      key={link.href}
+                      render={<a href={link.href} className="w-full px-3 py-2 text-sm rounded-lg hover:bg-secondary/80 cursor-pointer transition-colors" />}
+                    >
+                      {link.label}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
