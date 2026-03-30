@@ -1,17 +1,8 @@
 import { motion } from 'framer-motion'
-import { Heart, Linkedin, Github, ExternalLink } from 'lucide-react'
+import { Heart, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { socialIcons, socialColors } from '@/lib/social'
 import type { MainData } from '@/types/resume'
-
-const socialIcons: Record<string, { icon: typeof Linkedin; color: string; label: string }> = {
-  linkedin: { icon: Linkedin, color: '#0A66C2', label: 'LinkedIn' },
-  github: { icon: Github, color: '#333333', label: 'GitHub' },
-}
-
-const socialColors: Record<string, string> = {
-  linkedin: '#0A66C2',
-  github: '#333333',
-}
 
 interface FooterProps {
   data: MainData | null

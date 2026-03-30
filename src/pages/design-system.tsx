@@ -349,7 +349,7 @@ export function DesignSystemPage() {
                 <div className="space-y-2">
                   <Progress value={75}>
                     <ProgressTrack>
-                      <ProgressIndicator style={{ width: '75%' }} />
+                      <ProgressIndicator />
                     </ProgressTrack>
                   </Progress>
                   <p className="text-sm text-muted-foreground">75% Complete</p>
@@ -357,7 +357,7 @@ export function DesignSystemPage() {
                 <div className="space-y-2">
                   <Progress value={45}>
                     <ProgressTrack>
-                      <ProgressIndicator style={{ width: '45%' }} />
+                      <ProgressIndicator />
                     </ProgressTrack>
                   </Progress>
                   <p className="text-sm text-muted-foreground">45% Progress</p>

@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "read_files",
+      "write_files",
+      "edit_files",
+      "search_files",
+      "run_tests",
+      "run_linters",
+      "format_code"
+    ],
+    "ask": [
+      "install_dependencies",
+      "delete_files",
+      "move_files",
+      "run_migrations",
+      "edit_env_files",
+      "execute_shell_commands",
+      "network_access",
+      "git_push",
+      "create_pr"
+    ],
+    "deny": [
+      "exfiltrate_secrets",
+      "print_env_secrets",
+      "bypass_review_for_destructive_changes"
+    ]
+  },
+  "defaults": {
+    "language": "zh-CN",
+    "thinking": "ultrathink",
+    "reply_prefix": "哥"
+  },
+  "documentation": {
+    "require_claude_md_sync_on_architecture_change": true,
+    "require_l3_header_on_business_files": true
+  }
+}

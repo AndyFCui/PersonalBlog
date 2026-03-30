@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Menu, X, Sun, Moon, Download, Linkedin, Github, ExternalLink, ChevronDown, FileText } from 'lucide-react'
+import { Menu, X, Sun, Moon, Download, ChevronDown, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -9,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useThemeStore } from '@/lib/theme'
+import { socialIcons, socialColors } from '@/lib/social'
 import type { MainData } from '@/types/resume'
 
 interface HeaderProps {
@@ -17,21 +19,22 @@ interface HeaderProps {
 
 const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()'
 
-const socialIcons: Record<string, { icon: typeof Linkedin; color: string }> = {
-  linkedin: { icon: Linkedin, color: '#0A66C2' },
-  github: { icon: Github, color: '#333333' },
-}
-
-const socialColors: Record<string, string> = {
-  linkedin: '#0A66C2',
-  github: '#333333',
-}
-
 export function Header({ data }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [displayedText, setDisplayedText] = useState('')
   const { theme, toggleTheme } = useThemeStore()
+
+  const particles = useMemo(() => {
+    return Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      initialX: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+      initialY: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+      targetX: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+      targetY: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+      duration: Math.random() * 10 + 10,
+    }))
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,6 +79,14 @@ export function Header({ data }: HeaderProps) {
 
   return (
     <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Skip Navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
+      >
+        Skip to main content
+      </a>
+
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -86,20 +97,20 @@ export function Header({ data }: HeaderProps) {
 
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((particle) => (
           <motion.div
-            key={i}
+            key={particle.id}
             className="absolute w-2 h-2 bg-primary/20 rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: particle.initialX,
+              y: particle.initialY,
             }}
             animate={{
-              x: [null, Math.random() * window.innerWidth],
-              y: [null, Math.random() * window.innerHeight],
+              x: particle.targetX,
+              y: particle.targetY,
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: particle.duration,
               repeat: Infinity,
               repeatType: 'reverse',
             }}
@@ -136,7 +147,7 @@ export function Header({ data }: HeaderProps) {
                   Info
                   <ChevronDown className="h-4 w-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="rounded-xl bg-card border border-border/50 shadow-lg p-2 min-w-[160px]">
+                <DropdownMenuContent className="rounded-xl bg-background/80 backdrop-blur-md border border-border/50 shadow-lg p-2 min-w-[160px]">
                   {infoLinks.map((link) => (
                     <DropdownMenuItem
                       key={link.href}
@@ -148,18 +159,19 @@ export function Header({ data }: HeaderProps) {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <button
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+              <Link
+                to="/blog"
+                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
               >
                 Blog
-              </button>
+              </Link>
 
               <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors cursor-pointer">
                   Links
                   <ChevronDown className="h-4 w-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="rounded-xl bg-card border border-border/50 shadow-lg p-2 min-w-[200px]">
+                <DropdownMenuContent className="rounded-xl bg-background/80 backdrop-blur-md border border-border/50 shadow-lg p-2 min-w-[200px]">
                   {linksLinks.map((link) => (
                     <DropdownMenuItem
                       key={link.label}
@@ -220,11 +232,13 @@ export function Header({ data }: HeaderProps) {
                   ))}
                 </div>
               </div>
-              <button
-                className="block w-full text-left py-2 text-sm font-medium text-foreground/50 cursor-not-allowed"
+              <Link
+                to="/blog"
+                className="block w-full text-left py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                Blog (Coming Soon)
-              </button>
+                Blog
+              </Link>
               <div className="py-2">
                 <p className="text-sm font-medium text-foreground/50 mb-2">Links</p>
                 <div className="pl-4 space-y-2">
@@ -317,10 +331,10 @@ export function Header({ data }: HeaderProps) {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={social.name}
                 className="p-3 rounded-full bg-secondary shadow-neumorphic hover:shadow-neumorphic-inset transition-all duration-200"
               >
                 <IconComponent className="h-6 w-6" style={{ color: iconColor }} />
-                <span className="sr-only">{social.name}</span>
               </a>
             )
           })}

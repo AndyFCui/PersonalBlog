@@ -7,3 +7,6 @@ export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './
 export { Dialog, DialogPortal, DialogOverlay, DialogClose, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, DialogTrigger } from './dialog'
 export { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './dropdown-menu'
 export { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from './sheet'
+export { NavigationMenu, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuList, NavigationMenuItem } from './navigation-menu'
+export { ScrollArea } from './scroll-area'
+export { Separator } from './separator'
