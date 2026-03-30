@@ -70,6 +70,10 @@ export function Header({ data }: HeaderProps) {
     { href: '#contact', label: 'Contact' },
   ]
 
+  const linksLinks = [
+    { label: '雪山飞狐Snow Fox Club', description: '华人滑雪俱乐部', href: 'https://www.snowfox.life' },
+  ]
+
   return (
     <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
@@ -150,6 +154,26 @@ export function Header({ data }: HeaderProps) {
                 Blog
               </button>
 
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors cursor-pointer">
+                  Links
+                  <ChevronDown className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="rounded-xl bg-card border border-border/50 shadow-lg p-2 min-w-[200px]">
+                  {linksLinks.map((link) => (
+                    <DropdownMenuItem
+                      key={link.label}
+                      render={<a href={link.href} target="_blank" rel="noopener noreferrer" className="w-full px-3 py-2 rounded-lg hover:bg-secondary/80 cursor-pointer transition-colors" />}
+                    >
+                      <div className="flex flex-col">
+                        <span className="text-sm">{link.label}</span>
+                        <span className="text-xs text-muted-foreground">{link.description}</span>
+                      </div>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               <Button variant="ghost" size="icon" onClick={toggleTheme}>
                 {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
@@ -201,6 +225,26 @@ export function Header({ data }: HeaderProps) {
               >
                 Blog (Coming Soon)
               </button>
+              <div className="py-2">
+                <p className="text-sm font-medium text-foreground/50 mb-2">Links</p>
+                <div className="pl-4 space-y-2">
+                  {linksLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <div>
+                        <span>{link.label}</span>
+                        <span className="block text-xs text-muted-foreground">{link.description}</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
