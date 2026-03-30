@@ -31,6 +31,14 @@ export const useThemeStore = create<ThemeState>()(
   )
 )
 
+// Get system theme preference
+function getSystemTheme(): Theme {
+  if (typeof window !== 'undefined') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+  return 'dark'
+}
+
 // Initialize theme on load
 if (typeof window !== 'undefined') {
   const stored = localStorage.getItem('theme-storage')
@@ -41,7 +49,17 @@ if (typeof window !== 'undefined') {
       document.documentElement.classList.add(state.theme)
     }
   } else {
-    // Default to dark theme
-    document.documentElement.classList.add('dark')
+    // Follow system theme
+    document.documentElement.classList.add(getSystemTheme())
   }
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    const stored = localStorage.getItem('theme-storage')
+    if (!stored) {
+      // Only auto-switch if user hasn't set a preference
+      document.documentElement.classList.remove('dark', 'light')
+      document.documentElement.classList.add(e.matches ? 'dark' : 'light')
+    }
+  })
 }
