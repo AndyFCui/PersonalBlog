@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, Eye, Calendar, User, Search } from 'lucide-react'
+import { ArrowRight, Eye, Calendar, User, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { useBlogs, type Blog } from '@/hooks/useBlogs'
 import { useCategories } from '@/hooks/useCategories'
 import { AuthorSidebar } from '@/pages/blog-author-card'
+import { BlogHeader } from '@/components/blog-header'
 
 function BlogCard({ blog }: { blog: Blog }) {
   return (
@@ -135,51 +136,9 @@ export function BlogPage() {
 
   return (
     <div id="main-content" className="min-h-screen bg-background">
-      {/* Hero Header */}
-      <header className="relative py-16 px-4 bg-gradient-to-b from-primary/5 to-background">
-        {/* Grid Background */}
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="h-full"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(0,140,255,0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,140,255,0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: '40px 40px',
-            }}
-          />
-        </div>
-
-        <div className="relative max-w-6xl mx-auto text-center">
-          {/* Breadcrumb */}
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
-            <Link to="/" className="hover:text-primary transition-colors">Nerio</Link>
-            <span>/</span>
-            <span className="text-primary">Blog</span>
-          </div>
-
-          {/* Title */}
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            Blog
-          </motion.h1>
-          <motion.p
-            className="text-muted-foreground max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            Explore our latest articles, tutorials, and insights on technology, travel, and more.
-          </motion.p>
-        </div>
-      </header>
-
+      <BlogHeader />
       {/* Main Content with Sidebar */}
-      <main className="max-w-6xl mx-auto px-4 py-12">
+      <main className="max-w-6xl mx-auto px-4 pt-24 pb-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content Area - Left */}
           <div className="flex-1">
