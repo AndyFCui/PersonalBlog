@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { ResumeDataJSON } from '@/types/resume'
+import { validateResumeData, type ValidatedResumeData } from '@/lib/resume-schema'
 
 interface UseResumeDataReturn {
   data: ResumeDataJSON | null
@@ -22,8 +23,16 @@ export function useResumeData(): UseResumeDataReturn {
           throw new Error(`Failed to fetch resume data: ${response.statusText}`)
         }
 
-        const jsonData: ResumeDataJSON = await response.json()
-        setData(jsonData)
+        const jsonData = await response.json()
+
+        // Validate the data structure
+        const validatedData = validateResumeData(jsonData)
+
+        if (!validatedData) {
+          throw new Error('Invalid resume data structure')
+        }
+
+        setData(validatedData as ResumeDataJSON)
         setError(null)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')

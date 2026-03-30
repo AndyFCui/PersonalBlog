@@ -6,6 +6,34 @@ Modern personal portfolio website built with React 19, TypeScript, Vite, and sha
 
 ---
 
+## Changelog
+
+### 2026-03-30
+
+**Bug Fixes & Improvements:**
+
+- **Missing UI Components**: Added missing `navigation-menu.tsx`, `scroll-area.tsx`, and `separator.tsx` components that were causing errors on `/design-system` route
+- **Error Boundary**: Added `ErrorBoundary` component to prevent full app crashes on component errors
+- **Theme Store Module Side Effects**: Fixed `theme.ts` to use proper initialization pattern via `ThemeProvider` instead of module-level side effects that could run multiple times
+- **Route Code Splitting**: Added `React.lazy()` and `<Suspense>` for page components, significantly reducing initial bundle size
+- **Shared Social Constants**: Extracted `socialIcons` and `socialColors` to `src/lib/social.ts` to eliminate duplication between `header.tsx` and `footer.tsx`
+- **Resume Data Validation**: Added Zod schema validation in `src/lib/resume-schema.ts` with runtime validation in `useResumeData` hook
+- **Matrix Particles Optimization**: Fixed `header.tsx` particles to use `useMemo` for stable particle data, preventing recreation on every render
+- **Progress Component**: Removed hardcoded `style={{ width: '75%' }}` on `ProgressIndicator` that was ignoring the `value` prop
+- **Navigation Menu Styling**: Changed dropdown menus from solid `bg-card` to transparent frosted glass effect (`bg-background/80 backdrop-blur-md`)
+
+**Accessibility Improvements:**
+
+- **Skip Navigation**: Added "Skip to main content" link for keyboard users
+- **ARIA Labels**: Added `aria-label` to social icon links instead of relying on `sr-only` text
+- **Main Content ID**: Added `id="main-content"` to portfolio page for skip navigation target
+
+**Dependencies:**
+
+- Added `zod` for runtime data validation
+
+---
+
 ## Architecture Overview
 
 ```
@@ -90,6 +118,9 @@ PersonalBlog/
 │   │   │   ├── accordion.tsx     # │  手风琴
 │   │   │   ├── dropdown-menu.tsx  # │  下拉菜单
 │   │   │   ├── sheet.tsx         # │  侧边栏
+│   │   │   ├── navigation-menu.tsx # │  导航菜单
+│   │   │   ├── scroll-area.tsx    # │  滚动区域
+│   │   │   ├── separator.tsx      # │  分隔线
 │   │   │   └── index.ts          # └─ 统一导出
 │   │   │
 │   │   └── sections/              # ├─ Page Section 区块组件
@@ -112,7 +143,9 @@ PersonalBlog/
 │   │
 │   ├── lib/                       # ┬─ Shared Utilities
 │   │   ├── utils.ts               # │  cn() - className 拼接
-│   │   └── theme.ts               # └─ Zustand 主题状态管理
+│   │   ├── theme.ts               # │  Zustand 主题状态管理
+│   │   ├── social.ts              # │  社交链接图标/颜色常量
+│   │   └── resume-schema.ts       # └─ Zod 数据校验 Schema
 │   │
 │   ├── types/                     # ┬─ TypeScript Types
 │   │   └── resume.ts              # └─ 简历数据模型定义
@@ -157,8 +190,11 @@ PersonalBlog/
 | **Input** | 内凹阴影效果 |
 | **Progress** | inset 轨道 + 发光渐变指示器 |
 | **Accordion** | 展开收起动画 |
-| **DropdownMenu** | 卡片样式下拉菜单 |
+| **DropdownMenu** | 卡片样式下拉菜单，支持透明毛玻璃效果 |
 | **Sheet** | 侧边栏滑动面板 |
+| **NavigationMenu** | 导航菜单组件 |
+| **ScrollArea** | 自定义滚动条区域 |
+| **Separator** | 水平/垂直分隔线 |
 
 ### Interactive Features
 

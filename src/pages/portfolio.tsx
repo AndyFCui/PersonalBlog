@@ -27,7 +27,7 @@ export function PortfolioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div id="main-content" className="min-h-screen bg-background">
       <Header data={data?.main || null} />
       <About data={data?.main || null} />
       <Experience data={data?.resume || null} />
