@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useThemeStore } from '@/lib/theme'
 
 const navItems = [
@@ -63,6 +64,15 @@ export function BlogHeader() {
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
+
+            <Link to="/admin/login" className="ml-2">
+              <Avatar className="w-8 h-8 hover:ring-2 hover:ring-primary transition-all">
+                <AvatarImage src="/images/profilepic.jpg" alt="Admin" />
+                <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-sm">
+                  A
+                </AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
 
           {/* Mobile menu button */}

@@ -4,7 +4,12 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { ArrowLeft, Save, Eye, X } from 'lucide-react'
+import { Editor } from '@bytemd/react'
+import gfm from '@bytemd/plugin-gfm'
+import 'bytemd/dist/index.css'
 import type { Blog } from '@/hooks/useBlogs'
+
+const plugins = [gfm()]
 
 interface BlogEditorProps {
   blog?: Blog
@@ -133,17 +138,25 @@ export function BlogEditor({ blog }: BlogEditorProps) {
           </Card>
 
           {/* Content */}
-          <Card className="hover:shadow-lg transition-all">
+          <Card className="hover:shadow-lg transition-all bytemd-editor-card">
             <CardHeader>
               <CardTitle className="text-lg">Content</CardTitle>
             </CardHeader>
             <CardContent>
-              <textarea
-                className="w-full min-h-[400px] px-4 py-3 rounded-xl border border-input bg-secondary text-sm font-mono transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Write your blog content in Markdown..."
-              />
+              <div
+                className="border border-input rounded-xl overflow-hidden bytemd-editor-container"
+                style={{
+                  minHeight: '400px',
+                  background: 'linear-gradient(135deg, rgba(0,140,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
+                }}
+              >
+                <Editor
+                  value={content}
+                  plugins={plugins}
+                  onChange={(v) => setContent(v)}
+                  placeholder="Write your blog content..."
+                />
+              </div>
             </CardContent>
           </Card>
 
