@@ -52,9 +52,9 @@ export function AdminBlogList() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-2">
+            <Link to="/blog" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-2">
               <ArrowLeft className="h-4 w-4" />
-              Back to Portfolio
+              Back to Blog
             </Link>
             <h1 className="text-3xl font-bold">Admin Dashboard</h1>
             {user && <p className="text-sm text-muted-foreground mt-1">{user.email}</p>}
