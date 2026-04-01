@@ -7,13 +7,15 @@ import mermaid from '@bytemd/plugin-mermaid'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolink from 'rehype-autolink-headings'
 import 'bytemd/dist/index.css'
-import { ArrowLeft, Calendar, User, Eye, MessageCircle, ThumbsUp, MapPin, Clock, ChevronLeft, ChevronRight, Heart, ArrowUp } from 'lucide-react'
+import { ArrowLeft, Calendar, User, Eye, MessageCircle, ThumbsUp, MapPin, Clock, ChevronLeft, ChevronRight, Heart, ArrowUp, Share2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { useAuthor } from '@/hooks/useAuthor'
 import { BlogHeader } from '@/components/blog-header'
 import { useComments, type Comment } from '@/hooks/useComments'
+import { useBlogLikes } from '@/hooks/useBlogLikes'
+import { useBlogShares } from '@/hooks/useBlogShares'
 import type { Blog } from '@/hooks/useBlogs'
 import { supabase } from '@/lib/supabase'
 import {
@@ -114,6 +116,9 @@ export function BlogArticlePage() {
   })()
 
   const { comments, loading: commentsLoading, addComment, likeComment, unlikeComment } = useComments(blog?.id || '')
+  const { likes, hasLiked, toggleLike } = useBlogLikes(blog?.id || '')
+  const { shares, share } = useBlogShares(blog?.id || '')
+  const [copied, setCopied] = useState(false)
 
   // Fetch blog
   useEffect(() => {
@@ -208,6 +213,13 @@ export function BlogArticlePage() {
   return (
     <div className="min-h-screen bg-background">
       <BlogHeader />
+
+      {/* Toast Notification */}
+      {copied && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg animate-pulse">
+          ✅ 链接已复制到剪贴板
+        </div>
+      )}
 
       <main className="max-w-4xl mx-auto px-4 pt-24 pb-12">
         {/* Back Link */}
@@ -319,6 +331,35 @@ export function BlogArticlePage() {
             <div className={`flex-1 min-w-0 bytemd-viewer-container ${!showToc ? 'lg:ml-12' : ''}`}>
               <Viewer value={blog.content} plugins={plugins} rehypePlugins={rehypePlugins} />
             </div>
+          </div>
+
+          {/* Like & Share Section */}
+          <div className="mt-12 py-6 border-t border-border flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Button
+                variant={hasLiked ? 'default' : 'outline'}
+                size="sm"
+                className={`gap-2 ${hasLiked ? 'bg-primary text-primary-foreground' : 'dark:text-white'}`}
+                onClick={toggleLike}
+              >
+                <Heart className={`w-4 h-4 ${hasLiked ? 'fill-current' : ''}`} />
+                <span className="text-sm">点赞 {likes > 0 && `(${likes})`}</span>
+              </Button>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-2 dark:text-white"
+              onClick={async () => {
+                navigator.clipboard.writeText(window.location.href)
+                await share()
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
+              }}
+            >
+              <Share2 className="w-4 h-4" />
+              <span className="text-sm">分享 {shares > 0 && `(${shares})`}</span>
+            </Button>
           </div>
 
           {/* Tip / Support Section */}

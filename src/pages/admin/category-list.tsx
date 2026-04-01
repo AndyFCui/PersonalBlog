@@ -5,6 +5,7 @@ import { ArrowLeft, Plus, Edit2, Trash2, Save } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { IconPicker } from '@/components/icon-picker'
 import { useCategories, type Category } from '@/hooks/useCategories'
 import { useAuth } from '@/lib/auth-context'
 import { supabase } from '@/lib/supabase'
@@ -43,12 +44,7 @@ function CategoryRow({ category, onUpdate }: { category: Category; onUpdate: (ca
         animate={{ opacity: 1 }}
         className="flex items-center gap-3 p-4 rounded-xl bg-secondary/50"
       >
-        <Input
-          value={icon}
-          onChange={(e) => setIcon(e.target.value)}
-          className="w-16 text-center"
-          placeholder="😀"
-        />
+        <IconPicker value={icon} onChange={setIcon} />
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -142,12 +138,7 @@ export function AdminCategoryList() {
             <div className="flex items-end gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Icon</label>
-                <Input
-                  value={newIcon}
-                  onChange={(e) => setNewIcon(e.target.value)}
-                  className="w-20 text-center text-2xl"
-                  placeholder="😀"
-                />
+                <IconPicker value={newIcon} onChange={setNewIcon} />
               </div>
               <div className="flex-1 space-y-2">
                 <label className="text-sm font-medium">Name</label>
