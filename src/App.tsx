@@ -13,6 +13,7 @@ const AdminBlogList = lazy(() => import('@/pages/admin/blog-list').then(m => ({ 
 const AdminBlogEditor = lazy(() => import('@/pages/admin/blog-editor').then(m => ({ default: m.BlogEditor })))
 const AdminCategoryList = lazy(() => import('@/pages/admin/category-list').then(m => ({ default: m.AdminCategoryList })))
 const AdminAuthorEdit = lazy(() => import('@/pages/admin/author-edit').then(m => ({ default: m.AdminAuthorEdit })))
+const NotFoundPage = lazy(() => import('@/pages/not-found').then(m => ({ default: m.NotFoundPage })))
 
 function PageLoader() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/admin/blog/:id/edit" element={<AdminLayout><AdminBlogEditor /></AdminLayout>} />
             <Route path="/admin/categories" element={<AdminLayout><AdminCategoryList /></AdminLayout>} />
             <Route path="/admin/author" element={<AdminLayout><AdminAuthorEdit /></AdminLayout>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </AuthProvider>
