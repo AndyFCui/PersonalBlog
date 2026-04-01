@@ -519,3 +519,23 @@ body {
   background-color: var(--primary);
   opacity: 0.8;
 }
+
+/* ========================================
+   Tip Modal - Hover Effect
+   ======================================== */
+
+.tip-modal-grid:has(.tip-item:hover) .tip-item:not(:has(img:hover)) img {
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+/* ========================================
+   Golden Text Effect - Black stroke + Yellow glow
+   ======================================== */
+
+.golden-text {
+  color: #ca8a04;
+  -webkit-text-stroke: 0.5px black;
+  text-shadow: 0 0 8px #fbbf24;
+  font-weight: 600;
+}
