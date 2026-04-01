@@ -12,6 +12,7 @@ import {
 import { useThemeStore } from '@/lib/theme'
 import { socialIcons, socialColors } from '@/lib/social'
 import type { MainData } from '@/types/resume'
+import backendDevGif from '@/icons/icons8-backend-development-48.gif'
 
 interface HeaderProps {
   data: MainData | null

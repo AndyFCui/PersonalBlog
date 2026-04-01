@@ -7,7 +7,7 @@ import mermaid from '@bytemd/plugin-mermaid'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolink from 'rehype-autolink-headings'
 import 'bytemd/dist/index.css'
-import { ArrowLeft, Calendar, User, Eye, MessageCircle, ThumbsUp, MapPin, Clock, ChevronLeft, ChevronRight, Heart } from 'lucide-react'
+import { ArrowLeft, Calendar, User, Eye, MessageCircle, ThumbsUp, MapPin, Clock, ChevronLeft, ChevronRight, Heart, ArrowUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -345,6 +345,13 @@ export function BlogArticlePage() {
 
         {/* Comments Section */}
         <section className="mt-16 pt-8 border-t border-border">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="mb-6 flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mx-auto"
+          >
+            <ArrowUp className="w-4 h-4" />
+            回到顶部
+          </button>
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             <MessageCircle className="w-6 h-6" />
             Comments ({comments.length})
