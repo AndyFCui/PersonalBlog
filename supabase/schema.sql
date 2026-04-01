@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS blogs (
   content TEXT NOT NULL,
   cover_image VARCHAR(500),
   tags TEXT[] DEFAULT '{}',
+  category_id UUID REFERENCES categories(id) ON DELETE SET NULL,
   published BOOLEAN DEFAULT false,
   published_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -128,6 +129,35 @@ CREATE POLICY "Public insert likes"
 -- Policy: Everyone can delete likes (unlike)
 CREATE POLICY "Public delete likes"
   ON comment_likes FOR DELETE
+  USING (true);
+
+-- ============================================
+-- BLOG LIKES TABLE - Track who liked which blog post
+-- ============================================
+CREATE TABLE IF NOT EXISTS blog_likes (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  blog_id UUID NOT NULL REFERENCES blogs(id) ON DELETE CASCADE,
+  visitor_id VARCHAR(100) NOT NULL, -- anonymous visitor identifier
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(blog_id, visitor_id)
+);
+
+-- Enable RLS
+ALTER TABLE blog_likes ENABLE ROW LEVEL SECURITY;
+
+-- Policy: Everyone can read likes
+CREATE POLICY "Public read blog likes"
+  ON blog_likes FOR SELECT
+  USING (true);
+
+-- Policy: Everyone can insert likes
+CREATE POLICY "Public insert blog likes"
+  ON blog_likes FOR INSERT
+  WITH CHECK (true);
+
+-- Policy: Everyone can delete likes (unlike)
+CREATE POLICY "Public delete blog likes"
+  ON blog_likes FOR DELETE
   USING (true);
 
 -- ============================================

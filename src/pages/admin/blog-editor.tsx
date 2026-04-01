@@ -9,6 +9,7 @@ import gfm from '@bytemd/plugin-gfm'
 import 'bytemd/dist/index.css'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
+import { useCategories } from '@/hooks/useCategories'
 import type { Blog } from '@/hooks/useBlogs'
 
 const plugins = [gfm()]
@@ -17,6 +18,7 @@ export function BlogEditor() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { user } = useAuth()
+  const { categories } = useCategories()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [title, setTitle] = useState('')
   const [slug, setSlug] = useState('')
@@ -24,6 +26,7 @@ export function BlogEditor() {
   const [content, setContent] = useState('')
   const [coverImage, setCoverImage] = useState('')
   const [tags, setTags] = useState('')
+  const [categoryId, setCategoryId] = useState('')
   const [published, setPublished] = useState(false)
   const [saving, setSaving] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -49,6 +52,7 @@ export function BlogEditor() {
             setContent(data.content || '')
             setCoverImage(data.cover_image || '')
             setTags(data.tags?.join(', ') || '')
+            setCategoryId(data.category_id || '')
             setPublished(data.published || false)
           }
           setLoading(false)
@@ -75,6 +79,7 @@ export function BlogEditor() {
       content,
       cover_image: coverImage.trim() || null,
       tags: tagsArray,
+      category_id: categoryId || null,
       published,
       published_at: publishedAt,
     }
@@ -216,6 +221,22 @@ export function BlogEditor() {
                   placeholder="blog-url-slug"
                   className="w-full"
                 />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Category</label>
+                <select
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                  className="w-full h-10 px-4 rounded-xl border border-input bg-secondary text-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary/50"
+                >
+                  <option value="">No category</option>
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.icon} {cat.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="space-y-2">

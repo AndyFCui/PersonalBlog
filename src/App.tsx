@@ -8,6 +8,9 @@ const PortfolioPage = lazy(() => import('@/pages/portfolio').then(m => ({ defaul
 const DesignSystemPage = lazy(() => import('@/pages/design-system').then(m => ({ default: m.DesignSystemPage })))
 const BlogPage = lazy(() => import('@/pages/blog').then(m => ({ default: m.BlogPage })))
 const BlogArticlePage = lazy(() => import('@/pages/blog-article').then(m => ({ default: m.BlogArticlePage })))
+const BlogTagsPage = lazy(() => import('@/pages/blog-tags').then(m => ({ default: m.BlogTagsPage })))
+const BlogCategoriesPage = lazy(() => import('@/pages/blog-categories').then(m => ({ default: m.BlogCategoriesPage })))
+const BlogTimelinePage = lazy(() => import('@/pages/blog-timeline').then(m => ({ default: m.BlogTimelinePage })))
 const AdminLogin = lazy(() => import('@/pages/admin/login').then(m => ({ default: m.AdminLogin })))
 const AdminBlogList = lazy(() => import('@/pages/admin/blog-list').then(m => ({ default: m.AdminBlogList })))
 const AdminBlogEditor = lazy(() => import('@/pages/admin/blog-editor').then(m => ({ default: m.BlogEditor })))
@@ -40,6 +43,9 @@ function App() {
             <Route path="/design-system" element={<DesignSystemPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
+            <Route path="/blog/tags" element={<BlogTagsPage />} />
+            <Route path="/blog/categories" element={<BlogCategoriesPage />} />
+            <Route path="/blog/timeline" element={<BlogTimelinePage />} />
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/blogs" element={<AdminLayout><AdminBlogList /></AdminLayout>} />

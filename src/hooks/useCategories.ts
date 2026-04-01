@@ -28,13 +28,40 @@ export function useCategories(): UseCategoriesReturn {
       }
 
       try {
-        const { data, error: supabaseError } = await supabase
+        // Fetch categories
+        const { data: categoriesData, error: catError } = await supabase
           .from('categories')
           .select('*')
-          .order('count', { ascending: false })
+          .order('created_at', { ascending: false })
 
-        if (supabaseError) throw supabaseError
-        setCategories(data || [])
+        if (catError) throw catError
+
+        // Fetch blog counts grouped by category_id
+        const { data: blogCounts, error: countError } = await supabase
+          .from('blogs')
+          .select('category_id')
+          .not('category_id', 'is', null)
+
+        if (countError) throw countError
+
+        // Count blogs per category
+        const countMap: Record<string, number> = {}
+        blogCounts?.forEach((blog) => {
+          if (blog.category_id) {
+            countMap[blog.category_id] = (countMap[blog.category_id] || 0) + 1
+          }
+        })
+
+        // Merge counts with categories
+        const categoriesWithCount = (categoriesData || []).map((cat) => ({
+          ...cat,
+          count: countMap[cat.id] || 0,
+        }))
+
+        // Sort by count descending
+        categoriesWithCount.sort((a, b) => b.count - a.count)
+
+        setCategories(categoriesWithCount)
         setError(null)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch categories')

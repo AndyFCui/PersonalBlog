@@ -1,6 +1,7 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, Eye, Calendar, User, Search } from 'lucide-react'
+import { ArrowRight, Eye, Calendar, User, Search, Tag } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -139,6 +140,17 @@ export function BlogPage() {
   const { author } = useAuthor()
   const authorName = author?.name || 'Admin'
 
+  // Extract all unique tags from blogs
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>()
+    blogs.forEach((blog) => {
+      if (blog.tags && Array.isArray(blog.tags)) {
+        blog.tags.forEach((tag) => tagSet.add(tag))
+      }
+    })
+    return Array.from(tagSet).sort()
+  }, [blogs])
+
   return (
     <div id="main-content" className="min-h-screen bg-background">
       <BlogHeader />
@@ -215,6 +227,31 @@ export function BlogPage() {
                 {blogs.slice(0, 4).map((blog) => (
                   <PopularNewsCard key={blog.id} blog={blog} />
                 ))}
+              </div>
+            </div>
+
+            {/* Tags */}
+            <div className="bg-card rounded-2xl p-5 shadow-lg">
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                <span className="w-1 h-5 bg-primary rounded-full" />
+                Tags
+              </h3>
+              <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto scrollbar-thin">
+                {allTags.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">No tags yet</p>
+                ) : (
+                  allTags.map((tag) => (
+                    <Link key={tag} to={`/blog/tags`}>
+                      <Badge
+                        variant="outline"
+                        className="text-xs border-primary/30 text-primary hover:bg-primary/10 cursor-pointer transition-colors"
+                      >
+                        <Tag className="w-3 h-3 mr-1" />
+                        {tag}
+                      </Badge>
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
 
