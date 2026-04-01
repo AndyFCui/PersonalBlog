@@ -1,12 +1,38 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import { Plus, FileText, Settings, ArrowLeft, Edit2, Trash2, Eye, LogOut, Tag, User } from 'lucide-react'
 import { useBlogs, type Blog } from '@/hooks/useBlogs'
 import { Badge } from '@/components/ui/badge'
 import { useAuth } from '@/lib/auth-context'
+import { supabase } from '@/lib/supabase'
 
-function BlogRow({ blog }: { blog: Blog }) {
+function BlogRow({ blog, refresh }: { blog: Blog; refresh: () => void }) {
+  const [deleting, setDeleting] = useState(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+
+  const handleDelete = async () => {
+    setDeleting(true)
+    const { error } = await supabase.from('blogs').delete().eq('id', blog.id)
+
+    if (error) {
+      alert('删除失败：' + error.message)
+    } else {
+      refresh()
+    }
+    setDeleting(false)
+    setShowDeleteDialog(false)
+  }
+
   return (
     <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 hover:bg-secondary/80 transition-all">
       <div className="flex-1">
@@ -15,29 +41,76 @@ function BlogRow({ blog }: { blog: Blog }) {
       </div>
       <div className="flex items-center gap-2 ml-4">
         {blog.published ? (
-          <Badge variant="default" className="bg-primary/20 text-primary border-primary/30">
+          <span style={{
+            background: 'linear-gradient(135deg, rgba(22, 163, 74, 0.9) 0%, rgba(34, 197, 94, 0.6) 100%)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(34, 197, 94, 0.5)',
+            color: 'white',
+            padding: '2px 8px',
+            borderRadius: '9999px',
+            fontSize: '12px',
+            fontWeight: '500'
+          }}>
             Published
-          </Badge>
+          </span>
         ) : (
-          <Badge variant="outline" className="text-muted-foreground">
+          <span style={{
+            background: 'linear-gradient(135deg, rgba(22, 163, 74, 0.9) 0%, rgba(34, 197, 94, 0.6) 100%)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(34, 197, 94, 0.5)',
+            color: 'white',
+            padding: '2px 8px',
+            borderRadius: '9999px',
+            fontSize: '12px',
+            fontWeight: '500'
+          }}>
             Draft
-          </Badge>
+          </span>
         )}
         <Button size="icon-sm" variant="ghost" asChild>
           <Link to={`/admin/blog/${blog.id}/edit`}>
             <Edit2 className="h-4 w-4" />
           </Link>
         </Button>
-        <Button size="icon-sm" variant="ghost" className="text-destructive hover:text-destructive">
+        <Button
+          size="icon-sm"
+          variant="ghost"
+          className="text-destructive hover:text-destructive"
+          onClick={() => setShowDeleteDialog(true)}
+          disabled={deleting}
+        >
           <Trash2 className="h-4 w-4" />
         </Button>
       </div>
+
+      <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>确认删除</DialogTitle>
+            <DialogDescription>
+              确定要删除文章「{blog.title}」吗？此操作不可恢复。
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowDeleteDialog(false)}>
+              取消
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={handleDelete}
+              disabled={deleting}
+            >
+              {deleting ? '删除中...' : '删除'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
 
 export function AdminBlogList() {
-  const { blogs, loading, error } = useBlogs()
+  const { blogs, loading, error, refresh } = useBlogs(false)
   const { signOut, user } = useAuth()
 
   const handleLogout = async () => {
@@ -166,7 +239,7 @@ export function AdminBlogList() {
             ) : (
               <div className="space-y-3">
                 {blogs.map((blog) => (
-                  <BlogRow key={blog.id} blog={blog} />
+                  <BlogRow key={blog.id} blog={blog} refresh={refresh} />
                 ))}
               </div>
             )}

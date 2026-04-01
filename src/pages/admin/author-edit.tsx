@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Save, Globe } from 'lucide-react'
+import { ArrowLeft, Save, Globe, Upload, X, Image as ImageIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { useAuthor } from '@/hooks/useAuthor'
+import { useAuth } from '@/lib/auth-context'
 import { supabase } from '@/lib/supabase'
 
 export function AdminAuthorEdit() {
   const { author, loading } = useAuthor()
+  const { user } = useAuth()
+  const wechatQrRef = useRef<HTMLInputElement>(null)
+  const alipayQrRef = useRef<HTMLInputElement>(null)
+  const venmoQrRef = useRef<HTMLInputElement>(null)
   const [name, setName] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
   const [bio, setBio] = useState('')
@@ -17,8 +22,12 @@ export function AdminAuthorEdit() {
   const [email, setEmail] = useState('')
   const [bilibili, setBilibili] = useState('')
   const [wechat, setWechat] = useState('')
+  const [wechatQr, setWechatQr] = useState('')
+  const [alipayQr, setAlipayQr] = useState('')
+  const [venmoQr, setVenmoQr] = useState('')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [uploading, setUploading] = useState<string | null>(null)
 
   useEffect(() => {
     if (author) {
@@ -29,8 +38,40 @@ export function AdminAuthorEdit() {
       setEmail(author.email || '')
       setBilibili(author.bilibili || '')
       setWechat(author.wechat || '')
+      setWechatQr(author.wechat_qr || '')
+      setAlipayQr(author.alipay_qr || '')
+      setVenmoQr(author.venmo_qr || '')
     }
   }, [author])
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'wechat' | 'alipay' | 'venmo') => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploading(type)
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${type}-qr-${Date.now()}.${fileExt}`
+
+    try {
+      const { data, error: uploadError } = await supabase.storage
+        .from('blog-images')
+        .upload(fileName, file, { cacheControl: '3600', upsert: true })
+
+      if (uploadError) throw uploadError
+
+      const { data: urlData } = supabase.storage
+        .from('blog-images')
+        .getPublicUrl(fileName)
+
+      if (type === 'wechat') setWechatQr(urlData.publicUrl)
+      else if (type === 'alipay') setAlipayQr(urlData.publicUrl)
+      else setVenmoQr(urlData.publicUrl)
+    } catch (err) {
+      console.error('Upload failed:', err)
+    } finally {
+      setUploading(null)
+    }
+  }
 
   const handleSave = async () => {
     setSaving(true)
@@ -44,6 +85,9 @@ export function AdminAuthorEdit() {
       email: email || null,
       bilibili: bilibili || null,
       wechat: wechat || null,
+      wechat_qr: wechatQr || null,
+      alipay_qr: alipayQr || null,
+      venmo_qr: venmoQr || null,
     }
 
     if (author) {
@@ -201,6 +245,136 @@ export function AdminAuthorEdit() {
                     onChange={(e) => setWechat(e.target.value)}
                     placeholder="Your WeChat ID"
                   />
+                </div>
+              </div>
+            </div>
+
+            {/* Payment QR Codes */}
+            <div className="border-t border-border pt-6">
+              <h4 className="text-sm font-medium mb-4 text-muted-foreground">Payment QR Codes (for Donations)</h4>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                {/* WeChat QR */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">WeChat Pay</label>
+                  <input
+                    type="file"
+                    ref={wechatQrRef}
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, 'wechat')}
+                    className="hidden"
+                  />
+                  {wechatQr ? (
+                    <div className="relative rounded-xl overflow-hidden border border-border">
+                      <img src={wechatQr} alt="WeChat QR" className="w-full h-40 object-cover" />
+                      <div className="absolute top-2 right-2 flex gap-2">
+                        <Button size="icon-sm" variant="secondary" onClick={() => wechatQrRef.current?.click()} disabled={uploading === 'wechat'}>
+                          <Upload className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon-sm" variant="secondary" onClick={() => setWechatQr('')}>
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => wechatQrRef.current?.click()}
+                      disabled={uploading === 'wechat'}
+                      className="w-full h-32 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-2 text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer"
+                    >
+                      {uploading === 'wechat' ? (
+                        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <>
+                          <ImageIcon className="h-8 w-8" />
+                          <span className="text-xs">Upload QR Code</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+                </div>
+
+                {/* Alipay QR */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Alipay</label>
+                  <input
+                    type="file"
+                    ref={alipayQrRef}
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, 'alipay')}
+                    className="hidden"
+                  />
+                  {alipayQr ? (
+                    <div className="relative rounded-xl overflow-hidden border border-border">
+                      <img src={alipayQr} alt="Alipay QR" className="w-full h-40 object-cover" />
+                      <div className="absolute top-2 right-2 flex gap-2">
+                        <Button size="icon-sm" variant="secondary" onClick={() => alipayQrRef.current?.click()} disabled={uploading === 'alipay'}>
+                          <Upload className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon-sm" variant="secondary" onClick={() => setAlipayQr('')}>
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => alipayQrRef.current?.click()}
+                      disabled={uploading === 'alipay'}
+                      className="w-full h-32 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-2 text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer"
+                    >
+                      {uploading === 'alipay' ? (
+                        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <>
+                          <ImageIcon className="h-8 w-8" />
+                          <span className="text-xs">Upload QR Code</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+                </div>
+
+                {/* Venmo QR */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Venmo</label>
+                  <input
+                    type="file"
+                    ref={venmoQrRef}
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, 'venmo')}
+                    className="hidden"
+                  />
+                  {venmoQr ? (
+                    <div className="relative rounded-xl overflow-hidden border border-border">
+                      <img src={venmoQr} alt="Venmo QR" className="w-full h-40 object-cover" />
+                      <div className="absolute top-2 right-2 flex gap-2">
+                        <Button size="icon-sm" variant="secondary" onClick={() => venmoQrRef.current?.click()} disabled={uploading === 'venmo'}>
+                          <Upload className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon-sm" variant="secondary" onClick={() => setVenmoQr('')}>
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => venmoQrRef.current?.click()}
+                      disabled={uploading === 'venmo'}
+                      className="w-full h-32 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-2 text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer"
+                    >
+                      {uploading === 'venmo' ? (
+                        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <>
+                          <ImageIcon className="h-8 w-8" />
+                          <span className="text-xs">Upload QR Code</span>
+                        </>
+                      )}
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
