@@ -25,6 +25,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Icons8Coffee } from '@/components/icons8-coffee'
+import { Icons8Coins } from '@/components/icons8-coins'
 import { ArticleToc } from '@/components/article-toc'
 
 const plugins = [gfm(), mermaid()]
@@ -287,10 +288,10 @@ export function BlogArticlePage() {
                 onClick={() => {
                   document.getElementById('support-author')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
+                className="flex items-center gap-1 hover:text-yellow-400 transition-colors"
               >
-                <Heart className="w-4 h-4" />
-                打赏博主
+                <Icons8Coins size={18} className="text-yellow-600" />
+                <span className="golden-text">打赏博主</span>
               </button>
             )}
           </div>
@@ -337,19 +338,19 @@ export function BlogArticlePage() {
           <div className="mt-12 py-6 border-t border-border flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Button
-                variant={hasLiked ? 'default' : 'outline'}
+                variant="outline"
                 size="sm"
-                className={`gap-2 ${hasLiked ? 'bg-primary text-primary-foreground' : 'dark:text-white'}`}
+                className={`gap-2 border-2 border-black/50 shadow-md hover:bg-red-500 hover:border-red-500 active:bg-red-600 ${hasLiked ? 'bg-red-500 border-red-500 text-white' : 'dark:text-black text-black'}`}
                 onClick={toggleLike}
               >
-                <Heart className={`w-4 h-4 ${hasLiked ? 'fill-current' : ''}`} />
+                <Heart className={`w-4 h-4 ${hasLiked ? 'fill-white' : ''}`} />
                 <span className="text-sm">点赞 {likes > 0 && `(${likes})`}</span>
               </Button>
             </div>
             <Button
               variant="outline"
               size="sm"
-              className="gap-2 dark:text-white"
+              className="gap-2 border-2 border-black/50 shadow-md hover:bg-primary hover:border-primary active:bg-primary/80 dark:text-black text-black"
               onClick={async () => {
                 navigator.clipboard.writeText(window.location.href)
                 await share()
@@ -461,34 +462,34 @@ export function BlogArticlePage() {
           <DialogHeader>
             <DialogTitle className="text-center">Support the Author ☕</DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-3 gap-4 py-4">
+          <div className="tip-modal-grid grid grid-cols-3 gap-4 py-4">
             {author?.wechat_qr && (
-              <div className="text-center">
-                <p className="text-sm font-medium mb-2">WeChat</p>
+              <div className="tip-item group relative z-10">
+                <p className="text-sm font-medium mb-2 text-center">WeChat</p>
                 <img
                   src={author.wechat_qr}
                   alt="WeChat Pay"
-                  className="w-full rounded-xl"
+                  className="w-full rounded-xl transition-all duration-300 scale-100 group-hover:scale-[1.8] group-hover:z-50 group-hover:shadow-2xl"
                 />
               </div>
             )}
             {author?.alipay_qr && (
-              <div className="text-center">
-                <p className="text-sm font-medium mb-2">Alipay</p>
+              <div className="tip-item group relative z-10">
+                <p className="text-sm font-medium mb-2 text-center">Alipay</p>
                 <img
                   src={author.alipay_qr}
                   alt="Alipay"
-                  className="w-full rounded-xl"
+                  className="w-full rounded-xl transition-all duration-300 scale-100 group-hover:scale-[1.8] group-hover:z-50 group-hover:shadow-2xl"
                 />
               </div>
             )}
             {author?.venmo_qr && (
-              <div className="text-center">
-                <p className="text-sm font-medium mb-2">Venmo</p>
+              <div className="tip-item group relative z-10">
+                <p className="text-sm font-medium mb-2 text-center">Venmo</p>
                 <img
                   src={author.venmo_qr}
                   alt="Venmo"
-                  className="w-full rounded-xl"
+                  className="w-full rounded-xl transition-all duration-300 scale-100 group-hover:scale-[1.8] group-hover:z-50 group-hover:shadow-2xl"
                 />
               </div>
             )}
