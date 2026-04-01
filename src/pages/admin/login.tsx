@@ -84,15 +84,9 @@ export function AdminLogin() {
         />
       ))}
 
-      {/* Grid lines background */}
+      {/* SVG background */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(0,140,255,0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0,140,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-        }} />
+        <img src="/images/background_login.svg" alt="" className="w-full h-full object-cover" />
       </div>
 
       {/* Glowing orbs */}
