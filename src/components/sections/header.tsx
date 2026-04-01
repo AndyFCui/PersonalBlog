@@ -91,7 +91,7 @@ export function Header({ data }: HeaderProps) {
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/header-background.jpg)' }}
+        style={{ backgroundImage: 'url(/images/header-background.webp)' }}
       />
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/80 to-primary/20" />
