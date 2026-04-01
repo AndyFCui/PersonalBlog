@@ -10,6 +10,9 @@ export interface Author {
   email: string | null
   bilibili: string | null
   wechat: string | null
+  wechat_qr: string | null
+  alipay_qr: string | null
+  venmo_qr: string | null
   created_at: string
 }
 

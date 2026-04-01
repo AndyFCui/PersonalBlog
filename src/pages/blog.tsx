@@ -6,84 +6,87 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { useBlogs, type Blog } from '@/hooks/useBlogs'
 import { useCategories } from '@/hooks/useCategories'
+import { useAuthor } from '@/hooks/useAuthor'
 import { AuthorSidebar } from '@/pages/blog-author-card'
 import { BlogHeader } from '@/components/blog-header'
 
-function BlogCard({ blog }: { blog: Blog }) {
+function BlogCard({ blog, authorName }: { blog: Blog; authorName: string }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col md:flex-row bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
-    >
-      {/* Cover Image */}
-      <div className="md:w-[40%] relative overflow-hidden">
-        {blog.cover_image ? (
-          <img
-            src={blog.cover_image}
-            alt={blog.title}
-            className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : (
-          <div className="w-full h-48 md:h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-            <span className="text-6xl opacity-30">📄</span>
-          </div>
-        )}
-        {/* Category Tag on Image */}
-        {blog.tags && blog.tags[0] && (
-          <Badge className="absolute top-4 left-4 bg-primary/90 text-white backdrop-blur-sm">
-            {blog.tags[0].toUpperCase()}
-          </Badge>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 p-6 flex flex-col">
-        <div className="flex-1">
-          {/* Category above title */}
-          <div className="mb-3">
-            <Badge variant="outline" className="text-xs border-primary/30 text-primary">
-              {blog.tags?.[0] || 'Article'}
+    <Link to={`/blog/${blog.slug}`}>
+      <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col md:flex-row bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
+      >
+        {/* Cover Image */}
+        <div className="md:w-[40%] relative overflow-hidden">
+          {blog.cover_image ? (
+            <img
+              src={blog.cover_image}
+              alt={blog.title}
+              className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            <div className="w-full h-48 md:h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <span className="text-6xl opacity-30">📄</span>
+            </div>
+          )}
+          {/* Category Tag on Image */}
+          {blog.tags && blog.tags[0] && (
+            <Badge className="absolute top-4 left-4 bg-primary/90 text-white backdrop-blur-sm">
+              {blog.tags[0].toUpperCase()}
             </Badge>
-          </div>
-
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
-            {blog.title}
-          </h2>
-
-          {/* Excerpt */}
-          <p className="text-muted-foreground mb-4 line-clamp-2">
-            {blog.excerpt || 'No description available for this article.'}
-          </p>
+          )}
         </div>
 
-        {/* Meta Info */}
-        <div className="flex items-center justify-between pt-4 border-t border-border/30">
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <User className="w-3 h-3" />
-              By Admin
-            </span>
-            <span className="flex items-center gap-1">
-              <Eye className="w-3 h-3" />
-              {Math.floor(Math.random() * 5000 + 1000).toLocaleString()} Views
-            </span>
-            <span className="flex items-center gap-1">
-              <Calendar className="w-3 h-3" />
-              {blog.published_at
-                ? new Date(blog.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-                : 'Recently'}
-            </span>
+        {/* Content */}
+        <div className="flex-1 p-6 flex flex-col">
+          <div className="flex-1">
+            {/* Category above title */}
+            <div className="mb-3">
+              <Badge variant="outline" className="text-xs border-primary/30 text-primary">
+                {blog.tags?.[0] || 'Article'}
+              </Badge>
+            </div>
+
+            {/* Title */}
+            <h2 className="text-xl md:text-2xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+              {blog.title}
+            </h2>
+
+            {/* Excerpt */}
+            <p className="text-muted-foreground mb-4 line-clamp-2">
+              {blog.excerpt || 'No description available for this article.'}
+            </p>
           </div>
 
-          {/* Read More Button */}
-          <Button size="icon" variant="ghost" className="rounded-full bg-primary/10 hover:bg-primary/20 text-primary">
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          {/* Meta Info */}
+          <div className="flex items-center justify-between pt-4 border-t border-border/30">
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <User className="w-3 h-3" />
+                By {authorName}
+              </span>
+              <span className="flex items-center gap-1">
+                <Eye className="w-3 h-3" />
+                {(blog.views || 0).toLocaleString()} Views
+              </span>
+              <span className="flex items-center gap-1">
+                <Calendar className="w-3 h-3" />
+                {blog.published_at
+                  ? new Date(blog.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                  : 'Recently'}
+              </span>
+            </div>
+
+            {/* Read More Button */}
+            <Button size="icon" variant="ghost" className="rounded-full bg-primary/10 hover:bg-primary/20 text-primary">
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
-      </div>
-    </motion.article>
+      </motion.article>
+    </Link>
   )
 }
 
@@ -133,6 +136,8 @@ function PopularNewsCard({ blog }: { blog: Blog }) {
 export function BlogPage() {
   const { blogs, loading, error } = useBlogs()
   const { categories } = useCategories()
+  const { author } = useAuthor()
+  const authorName = author?.name || 'Admin'
 
   return (
     <div id="main-content" className="min-h-screen bg-background">
@@ -166,7 +171,7 @@ export function BlogPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <BlogCard blog={blog} />
+                    <BlogCard blog={blog} authorName={authorName} />
                   </motion.div>
                 ))}
               </div>

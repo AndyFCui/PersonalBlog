@@ -1,37 +1,140 @@
-import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate, Link, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { ArrowLeft, Save, Eye, X } from 'lucide-react'
+import { ArrowLeft, Save, Eye, X, Upload, Image as ImageIcon } from 'lucide-react'
 import { Editor } from '@bytemd/react'
 import gfm from '@bytemd/plugin-gfm'
 import 'bytemd/dist/index.css'
+import { supabase } from '@/lib/supabase'
+import { useAuth } from '@/lib/auth-context'
 import type { Blog } from '@/hooks/useBlogs'
 
 const plugins = [gfm()]
 
-interface BlogEditorProps {
-  blog?: Blog
-}
-
-export function BlogEditor({ blog }: BlogEditorProps) {
+export function BlogEditor() {
+  const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const [title, setTitle] = useState(blog?.title || '')
-  const [slug, setSlug] = useState(blog?.slug || '')
-  const [excerpt, setExcerpt] = useState(blog?.excerpt || '')
-  const [content, setContent] = useState(blog?.content || '')
-  const [coverImage, setCoverImage] = useState(blog?.cover_image || '')
-  const [tags, setTags] = useState(blog?.tags?.join(', ') || '')
-  const [published, setPublished] = useState(blog?.published || false)
+  const { user } = useAuth()
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [title, setTitle] = useState('')
+  const [slug, setSlug] = useState('')
+  const [excerpt, setExcerpt] = useState('')
+  const [content, setContent] = useState('')
+  const [coverImage, setCoverImage] = useState('')
+  const [tags, setTags] = useState('')
+  const [published, setPublished] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [uploading, setUploading] = useState(false)
+
+  // Fetch blog data if editing existing blog
+  useEffect(() => {
+    if (id) {
+      setLoading(true)
+      supabase
+        .from('blogs')
+        .select('*')
+        .eq('id', id)
+        .single()
+        .then(({ data, error: fetchError }) => {
+          if (fetchError) {
+            setError(fetchError.message)
+          } else if (data) {
+            setTitle(data.title || '')
+            setSlug(data.slug || '')
+            setExcerpt(data.excerpt || '')
+            setContent(data.content || '')
+            setCoverImage(data.cover_image || '')
+            setTags(data.tags?.join(', ') || '')
+            setPublished(data.published || false)
+          }
+          setLoading(false)
+        })
+    }
+  }, [id])
 
   const handleSave = async () => {
+    if (!title.trim()) {
+      setError('Title is required')
+      return
+    }
+
     setSaving(true)
-    // TODO: Implement Supabase save logic
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setSaving(false)
-    navigate('/admin/blogs')
+    setError(null)
+
+    const tagsArray = tags.split(',').map(t => t.trim()).filter(Boolean)
+    const publishedAt = published ? new Date().toISOString() : null
+
+    const blogData = {
+      title: title.trim(),
+      slug: slug.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      excerpt: excerpt.trim() || null,
+      content,
+      cover_image: coverImage.trim() || null,
+      tags: tagsArray,
+      published,
+      published_at: publishedAt,
+    }
+
+    try {
+      if (id) {
+        // Update existing blog
+        const { error: updateError } = await supabase
+          .from('blogs')
+          .update(blogData)
+          .eq('id', id)
+
+        if (updateError) throw updateError
+      } else {
+        // Create new blog
+        const { error: insertError } = await supabase
+          .from('blogs')
+          .insert(blogData)
+
+        if (insertError) throw insertError
+      }
+
+      navigate('/admin/blogs')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save blog')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !user) return
+
+    setUploading(true)
+    setError(null)
+
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
+
+    try {
+      const { data, error: uploadError } = await supabase.storage
+        .from('blog-images')
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+      if (uploadError) throw uploadError
+
+      const { data: urlData } = supabase.storage
+        .from('blog-images')
+        .getPublicUrl(fileName)
+
+      setCoverImage(urlData.publicUrl)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to upload image')
+    } finally {
+      setUploading(false)
+    }
   }
 
   const generateSlug = () => {
@@ -40,6 +143,17 @@ export function BlogEditor({ blog }: BlogEditorProps) {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '')
     setSlug(generated)
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -52,7 +166,7 @@ export function BlogEditor({ blog }: BlogEditorProps) {
               <ArrowLeft className="h-4 w-4" />
               Back to Blogs
             </Link>
-            <h1 className="text-3xl font-bold">{blog ? 'Edit Blog Post' : 'New Blog Post'}</h1>
+            <h1 className="text-3xl font-bold">{id ? 'Edit Blog Post' : 'New Blog Post'}</h1>
           </div>
           <div className="flex gap-3">
             <Button variant="outline" asChild>
@@ -67,6 +181,13 @@ export function BlogEditor({ blog }: BlogEditorProps) {
             </Button>
           </div>
         </div>
+
+        {/* Error Display */}
+        {error && (
+          <div className="mb-6 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive">
+            {error}
+          </div>
+        )}
 
         {/* Form */}
         <div className="space-y-6">
@@ -116,13 +237,61 @@ export function BlogEditor({ blog }: BlogEditorProps) {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Cover Image URL</label>
-                <Input
-                  value={coverImage}
-                  onChange={(e) => setCoverImage(e.target.value)}
-                  placeholder="https://example.com/image.jpg"
-                  className="w-full"
+                <label className="text-sm font-medium text-foreground">Cover Image</label>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
                 />
+                {coverImage ? (
+                  <div className="relative rounded-xl overflow-hidden border border-border">
+                    <img
+                      src={coverImage}
+                      alt="Cover preview"
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="absolute top-2 right-2 flex gap-2">
+                      <Button
+                        size="icon-sm"
+                        variant="secondary"
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={uploading}
+                      >
+                        <Upload className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        size="icon-sm"
+                        variant="secondary"
+                        onClick={() => setCoverImage('')}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    {uploading && (
+                      <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
+                        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploading}
+                    className="w-full h-32 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-2 text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer"
+                  >
+                    {uploading ? (
+                      <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <ImageIcon className="h-8 w-8" />
+                        <span className="text-sm">Click to upload cover image</span>
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -147,7 +316,6 @@ export function BlogEditor({ blog }: BlogEditorProps) {
                 className="border border-input rounded-xl overflow-hidden bytemd-editor-container"
                 style={{
                   minHeight: '400px',
-                  background: 'linear-gradient(135deg, rgba(0,140,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
                 }}
               >
                 <Editor

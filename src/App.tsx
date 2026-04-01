@@ -7,6 +7,7 @@ import { ProtectedRoute } from '@/components/protected-route'
 const PortfolioPage = lazy(() => import('@/pages/portfolio').then(m => ({ default: m.PortfolioPage })))
 const DesignSystemPage = lazy(() => import('@/pages/design-system').then(m => ({ default: m.DesignSystemPage })))
 const BlogPage = lazy(() => import('@/pages/blog').then(m => ({ default: m.BlogPage })))
+const BlogArticlePage = lazy(() => import('@/pages/blog-article').then(m => ({ default: m.BlogArticlePage })))
 const AdminLogin = lazy(() => import('@/pages/admin/login').then(m => ({ default: m.AdminLogin })))
 const AdminBlogList = lazy(() => import('@/pages/admin/blog-list').then(m => ({ default: m.AdminBlogList })))
 const AdminBlogEditor = lazy(() => import('@/pages/admin/blog-editor').then(m => ({ default: m.BlogEditor })))
@@ -37,6 +38,7 @@ function App() {
             <Route path="/" element={<PortfolioPage />} />
             <Route path="/design-system" element={<DesignSystemPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogArticlePage />} />
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/blogs" element={<AdminLayout><AdminBlogList /></AdminLayout>} />
