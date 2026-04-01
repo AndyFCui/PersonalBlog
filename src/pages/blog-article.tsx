@@ -224,17 +224,6 @@ export function BlogArticlePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          {/* Cover Image */}
-          {blog.cover_image && (
-            <div className="mb-8 rounded-2xl overflow-hidden">
-              <img
-                src={blog.cover_image}
-                alt={blog.title}
-                className="w-full h-[400px] object-cover"
-              />
-            </div>
-          )}
-
           {/* Tags */}
           {blog.tags && blog.tags.length > 0 && (
             <div className="flex gap-2 mb-4">
@@ -247,7 +236,7 @@ export function BlogArticlePage() {
           )}
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">{blog.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">{blog.title}</h1>
 
           {/* Meta Info */}
           <div className="flex items-center gap-6 text-sm text-muted-foreground mb-8 pb-8 border-b border-border">
@@ -265,6 +254,18 @@ export function BlogArticlePage() {
                   })
                 : 'Recently'}
             </span>
+            {blog.updated_at && blog.updated_at !== blog.published_at && (
+              <span className="flex items-center gap-1">
+                <Clock className="w-4 h-4" />
+                Last updated: {new Date(blog.updated_at).toLocaleString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                  hour: 'numeric',
+                  minute: '2-digit',
+                })}
+              </span>
+            )}
             <span className="flex items-center gap-1">
               <Eye className="w-4 h-4" />
               {(blog.views || 0).toLocaleString()} Views
@@ -324,15 +325,15 @@ export function BlogArticlePage() {
           {(author?.wechat_qr || author?.alipay_qr || author?.venmo_qr) && (
             <div id="support-author" className="mt-12 py-8 border-t border-border">
               <div className="text-center mb-6">
-                <h3 className="text-xl font-bold mb-2">Support the Author</h3>
-                <p className="text-muted-foreground text-sm">If this article helped you, consider buying me a coffee ☕</p>
-                <p className="text-muted-foreground text-xs mt-1">如果这篇文章对您有帮助，可以打赏博主</p>
+                <h3 className="text-xl font-bold mb-2 dark:text-white">Support the Author</h3>
+                <p className="text-muted-foreground text-sm dark:text-white/70">If this article helped you, consider buying me a coffee ☕</p>
+                <p className="text-muted-foreground text-xs mt-1 dark:text-white/50">如果这篇文章对您有帮助，可以打赏博主</p>
               </div>
               <div className="flex justify-center">
                 <Button
                   variant="outline"
                   onClick={() => setShowTipModal(true)}
-                  className="gap-2"
+                  className="gap-2 dark:text-white"
                 >
                   <Icons8Coffee size={20} />
                   Buy me a coffee
@@ -352,8 +353,8 @@ export function BlogArticlePage() {
             <ArrowUp className="w-4 h-4" />
             回到顶部
           </button>
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <MessageCircle className="w-6 h-6" />
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 dark:text-white">
+            <MessageCircle className="w-6 h-6 dark:text-white" />
             Comments ({comments.length})
           </h2>
 

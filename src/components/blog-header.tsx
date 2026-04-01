@@ -52,8 +52,8 @@ export function BlogHeader() {
                   to={item.href}
                   className={`text-sm font-medium transition-colors ${
                     isActive
-                      ? 'text-primary'
-                      : 'text-foreground/80 hover:text-primary'
+                      ? 'text-primary dark:text-primary'
+                      : 'text-black/80 dark:text-white/80 hover:text-primary'
                   }`}
                 >
                   {item.label}
@@ -62,7 +62,7 @@ export function BlogHeader() {
             })}
 
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === 'dark' ? <Sun className="h-5 w-5 dark:text-white" /> : <Moon className="h-5 w-5" />}
             </Button>
 
             <Link to="/admin/login" className="ml-2 opacity-0 hover:opacity-100 transition-opacity duration-300">
@@ -79,7 +79,7 @@ export function BlogHeader() {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-2">
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === 'dark' ? <Sun className="h-5 w-5 dark:text-white" /> : <Moon className="h-5 w-5" />}
             </Button>
             <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

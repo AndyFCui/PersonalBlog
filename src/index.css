@@ -83,38 +83,41 @@ body {
    ======================================== */
 
 .dark {
-  --primary: rgb(0, 130, 240);
-  --primary-rgb: 0, 130, 240;
-  --primary-foreground: rgb(250, 250, 255);
+  --primary: rgb(153, 206, 255);
+  --primary-rgb: 153, 206, 255;
+  --primary-foreground: rgb(0, 0, 0);
 
-  --secondary: rgb(30, 30, 40);
-  --secondary-foreground: rgb(235, 235, 240);
+  --secondary: rgb(51, 166, 204);
+  --secondary-foreground: rgb(0, 0, 0);
 
-  --accent: rgb(104, 65, 234);
-  --accent-foreground: rgb(250, 250, 255);
+  --accent: rgb(135, 206, 235);
+  --accent-foreground: rgb(0, 0, 0);
 
-  --background: rgb(30, 30, 40);
-  --background-rgb: 30, 30, 40;
+  --background: rgb(26, 29, 35);
+  --background-rgb: 26, 29, 35;
 
-  --foreground: rgb(235, 235, 240);
+  --foreground: rgb(229, 229, 229);
 
-  --muted: rgb(50, 50, 60);
-  --muted-foreground: rgb(100, 100, 120);
+  --muted: rgb(68, 68, 68);
+  --muted-foreground: rgb(163, 163, 163);
 
-  --card: rgb(45, 45, 55);
-  --card-foreground: rgb(235, 235, 240);
+  --card: rgb(47, 52, 54);
+  --card-foreground: rgb(229, 229, 229);
 
-  --border: rgb(60, 60, 75);
+  --popover: rgb(47, 52, 54);
+  --popover-foreground: rgb(229, 229, 229);
 
-  --input: rgb(50, 50, 60);
+  --border: rgb(68, 68, 68);
 
-  --ring: rgb(0, 130, 240);
+  --input: rgb(68, 68, 68);
+
+  --ring: rgb(153, 206, 255);
 
   --success: rgb(34, 197, 94);
   --success-foreground: rgb(250, 250, 255);
 
-  --destructive: rgb(200, 50, 50);
-  --destructive-foreground: rgb(250, 250, 255);
+  --destructive: rgb(239, 68, 68);
+  --destructive-foreground: rgb(255, 255, 255);
 }
 
 /* ========================================
