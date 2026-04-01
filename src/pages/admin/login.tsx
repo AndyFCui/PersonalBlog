@@ -85,7 +85,7 @@ export function AdminLogin() {
       ))}
 
       {/* SVG background */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 bg-neutral-900">
         <img src="/images/background_login.svg" alt="" className="w-full h-full object-cover" />
       </div>
 
@@ -115,7 +115,7 @@ export function AdminLogin() {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-xl opacity-50" />
 
-        <div className="relative bg-background/80 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 shadow-2xl">
+        <div className="relative bg-gray-800/80 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 shadow-2xl shadow-black">
           {/* Header */}
           <div className="text-center mb-8">
             <motion.div
@@ -137,7 +137,7 @@ export function AdminLogin() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground/80">Email</label>
+              <label className="text-sm font-medium text-white">Email</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
                 <Input
@@ -152,7 +152,7 @@ export function AdminLogin() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground/80">Password</label>
+              <label className="text-sm font-medium text-white">Password</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
                 <Input
