@@ -97,7 +97,7 @@ PersonalBlog/
 │   ├── images/                     # 图片资源
 │   │   ├── logos/                 # 技术栈 Logo
 │   │   ├── portfolio/              # 项目截图
-│   │   ├── header-background.jpg   # Hero 背景图
+│   │   ├── header-background.webp   # Hero 背景图 (WebP 格式)
 │   │   └── profilepic.jpg          # 头像
 │   ├── resumeData.json             # 简历数据 (JSON API)
 │   └── CUIXIANGYU.pdf             # 简历 PDF 下载
