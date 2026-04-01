@@ -10,7 +10,7 @@ export function Icons8Coffee({ size = 20, className = '' }: Icons8CoffeeProps) {
       alt="Coffee"
       width={size}
       height={size}
-      className={className}
+      className={`dark:invert ${className}`}
     />
   )
 }
