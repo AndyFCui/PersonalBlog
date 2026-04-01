@@ -65,13 +65,14 @@ export function BlogHeader() {
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
-            <Link to="/admin/login" className="ml-2">
-              <Avatar className="w-8 h-8 hover:ring-2 hover:ring-primary transition-all">
-                <AvatarImage src="/images/profilepic.jpg" alt="Admin" />
-                <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-sm">
-                  A
-                </AvatarFallback>
-              </Avatar>
+            <Link to="/admin/login" className="ml-2 opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <img
+                src="/icons/icons8-backend-development-48.png"
+                alt="Admin"
+                className="w-8 h-8 rounded-full hover:ring-2 hover:ring-primary transition-all"
+                onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).src = '/icons/icons8-backend-development-48.gif'}
+                onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).src = '/icons/icons8-backend-development-48.png'}
+              />
             </Link>
           </div>
 
