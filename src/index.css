@@ -484,11 +484,16 @@ body {
   border-radius: 8px;
   padding: 16px;
   text-align: center;
+  display: block;
+  overflow-x: auto;
+  min-height: 100px;
 }
 
 .bytemd-viewer-container .markdown-body .mermaid svg {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* ========================================
