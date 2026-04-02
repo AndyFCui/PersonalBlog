@@ -28,7 +28,9 @@ import { Icons8Coffee } from '@/components/icons8-coffee'
 import { Icons8Coins } from '@/components/icons8-coins'
 import { ArticleToc } from '@/components/article-toc'
 
-const plugins = [gfm(), mermaid()]
+const plugins = [gfm(), mermaid({
+  theme: 'dark',
+})]
 const rehypePlugins = [rehypeSlug, rehypeAutolink]
 
 function CommentCard({ comment, visitorId, onLike, onUnlike }: {

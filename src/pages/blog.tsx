@@ -254,19 +254,6 @@ export function BlogPage() {
                 )}
               </div>
             </div>
-
-            {/* Newsletter CTA */}
-            <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-5 border border-primary/20">
-              <h3 className="text-lg font-bold mb-2">Subscribe</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Get the latest articles delivered to your inbox.
-              </p>
-              <Input
-                placeholder="Your email"
-                className="mb-3 bg-background/50"
-              />
-              <Button className="w-full">Subscribe</Button>
-            </div>
           </aside>
         </div>
       </main>
