@@ -43,7 +43,7 @@ export function Portfolio({ data }: PortfolioProps) {
                 {/* Project image */}
                 <div className="aspect-video overflow-hidden">
                   <img
-                    src={`/images/portfolio/${project.image}`}
+                    src={project.image.startsWith('http') ? project.image : `/images/portfolio/${project.image}`}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
@@ -84,7 +84,7 @@ export function Portfolio({ data }: PortfolioProps) {
               <div>
                 <div className="relative mb-4 rounded-lg overflow-hidden">
                   <img
-                    src={`/images/portfolio/${selectedProject.image}`}
+                    src={selectedProject.image.startsWith('http') ? selectedProject.image : `/images/portfolio/${selectedProject.image}`}
                     alt={selectedProject.title}
                     className="w-full aspect-video object-cover"
                   />

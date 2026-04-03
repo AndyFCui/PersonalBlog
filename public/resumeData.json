@@ -2,7 +2,7 @@
   "main": {
     "name":"Andy (Xiang-Yu) Cui",
     "occupation":"  5 Years PM with software experience, 2 years Data Engineer and 1 year Full Stack Engineer.",
-    "image":"profilepic.jpg",
+    "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/profilepic.jpg",
     "intro":{
       "role": "Senior Full Stack Software Engineer",
       "company": "King 7 Club Corp"
@@ -12,38 +12,38 @@
       {
         "category": "Cloud & DevOps",
         "items": [
-          {"name": "AWS", "image": "images/logos/aws.png"},
-          {"name": "Docker", "image": "images/logos/docker.png"},
-          {"name": "Supabase", "image": "images/logos/supabase.png"}
+          {"name": "AWS", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/aws.png"},
+          {"name": "Docker", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/docker.png"},
+          {"name": "Supabase", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/supabase.png"}
         ]
       },
       {
         "category": "AI & Development Tools",
         "items": [
-          {"name": "Cursor", "image": "images/logos/cursor.png"},
-          {"name": "Deepseek", "image": "images/logos/deepseek.png"},
-          {"name": "GPT2", "image": "images/logos/gpt2.png"}
+          {"name": "Cursor", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/cursor.png"},
+          {"name": "Deepseek", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/deepseek.png"},
+          {"name": "GPT2", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/gpt2.png"}
         ]
       },
       {
         "category": "Programming & Frameworks",
         "items": [
-          {"name": "Python", "image": "images/logos/python.png"},
-          {"name": "NodeJS", "image": "images/logos/nodejs.png"},
-          {"name": "Java", "image": "images/logos/java.png"}
+          {"name": "Python", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/python.png"},
+          {"name": "NodeJS", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/nodejs.png"},
+          {"name": "Java", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/java.png"}
         ]
       },
       {
         "category": "Operating Systems",
         "items": [
-          {"name": "Ubuntu", "image": "images/logos/ubuntu.png"},
-          {"name": "Gentoo", "image": "images/logos/gentoo.png"}
+          {"name": "Ubuntu", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/ubuntu.png"},
+          {"name": "Gentoo", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/gentoo.png"}
         ]
       },
       {
         "category": "Databases",
         "items": [
-          {"name": "MySQL", "image": "images/logos/mysql.png"}
+          {"name": "MySQL", "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/mysql.png"}
         ]
       }
     ],
@@ -83,7 +83,7 @@
         "graduated":"Dec 2023",
         "Coursework":"Object-Oriented Design, Natural Language Processing, Game Artificial Intelligence, Machine Learning, Computer/Human Interaction, Algorithm, Wireless Sensor/Internet Things, Deterministic Ops Reaserch, Database Managemen",
         "description":"Relevant Coursework: ",
-        "image": "education.jpg",
+        "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/education.jpg",
         "honor": "",
         "awards": ""
       },
@@ -93,7 +93,7 @@
         "graduated":"May 2020",
         "description":"Relevant Coursework: ",
         "Coursework":"Wireless Communication Networks, Automata Theory, Unix Programming, Discrete Structure, Internet Systems & Programming, VR Programming of Unity, Numerical Analysis, Data Structure & Algorithm, Operating Systems Kernels, Basic Programming",
-        "image": "education2.png",
+        "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/education2.png",
         "honor": "Authentication Place in ICPC ACM 2017 Central American Finals",
         "awards": "Awards:"
       },
@@ -103,8 +103,8 @@
         "graduated":"July 2015 - Transfered to University of Nebraska Lincoln",
         "description":"Relevant Coursework: ",
         "Coursework":"Embedded System Programming, Sensor & Signal Theory, C Basic Programming, Analog Circuit, Digital Circuit, CAD Engineering Drawing, PCB Design with Auto CAD, TCP/IP Network Programming",
-        "image": "education3.png",
-        "honor": "1st Prize in Computer Business Entrepreneurship Contest, Winner of 2015 Freescale Smart Car Competition", 
+        "image": "https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/education3.png",
+        "honor": "1st Prize in Computer Business Entrepreneurship Contest, Winner of 2015 Freescale Smart Car Competition",
         "awards": "Awards:"
       }
     ],
@@ -113,7 +113,7 @@
         "company":"King 7 Club Corp",
         "title":"Senior Full Stack Software Engineer - Full Time",
         "years":"Jan 2025 - Present, Los Angeles, CA, United States",
-        "image":"kingsclub.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/kingsclub.png",
         "description":
         [
         "Developed and deployed a responsive website using Node.js for the frontend and FastAPI for the backend, with component-based architecture for modular scalability. Implemented dynamic UI with custom JavaScript logic and CSS animations to ensure a seamless user experience across devices and languages.\n ",
@@ -122,28 +122,28 @@
         "Integrated Google Analytics Reporting API to track traffic and user behavior, enabling the development of interactive dashboards to monitor key metrics such as page views and user engagement across platforms like TikTok, Red Book (Xiaohongshu), and YouTube. This real-time data integration streamlined reporting workflows and automated insight generation, improving backend operational efficiency by 80%.\n",
         "Enhanced backend performance and frontend delivery using CDN and caching strategies, and structured API responses in JSON format for clean integration. "
       ]
-                
+
       },
-      
+
       {
         "company":"CAC Auto Group LLC",
         "title":"Software Engineer - Full Time",
         "years":"Feb 2024 - Dec 2024, Southborough, MA, United States",
-        "image":"cacauto.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/cacauto.png",
         "description":
         [
         "Developed and maintained a predictive pricing system for vehicles on CarGurus using AWS serverless architecture, enhancing market compatibility and streamlining operations. Leveraged key AWS services including S3, Lambda, DynamoDB, SNS, CloudWatch, and Kinesis, and used Python with AWS CloudFormation for scalable infrastructure deployment.\n ",
         "Designed and implemented a fully serverless data pipeline to continuously monitor target data sources using Kinesis streams and Lambda triggers, eliminating the need for traditional polling. This approach reduced infrastructure and processing costs by 80%, while maintaining high scalability and responsiveness. \n",
         "Integrated real-time monitoring to track market data fluctuations, enabling automated detection and adjustment of vehicle prices in response to deviations. This solution boosted daily operational efficiency by 80% and improved pricing accuracy by over 50% compared to industry standards."
       ]
-                
+
       },
 
       {
         "company":"AlpaLifeBio LLC",
         "title":"Software Engineer of Data Engineer  - Intership",
         "years":"Dec 2022 - Jun 2023, Woburn, MA, United States",
-        "image":"alpalife_logo.jpg",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/alpalife_logo.jpg",
         "description":
         [
         "Built and managed a robust AWS streaming data pipeline to automate biomedical data ingestion from multiple public databases into Kinesis Data Stream. This system processed over 500,000 data entries daily, using Lambda Functions for real-time data transfer and S3 and DynamoDB for efficient, scalable storage and retrieval. This architecture allowed seamless handling of high-volume data with minimized latency and reduced operational costs.  \n ",
@@ -151,14 +151,14 @@
         "Applied advanced data matching algorithms and TF-IDF (Term Frequency-Inverse Document Frequency) techniques to perform data comparison and accurately identify potential client profiles with a 95% match rate. This methodology directly supported targeted marketing strategies by enabling precise identification of high-value clients within the biomedical field. \n",
         "Enabled real-time notifications for data updates by setting up DynamoDB Streams to capture table modifications. Configured Lambda Functions to process these events and send automated alert emails through Amazon SES, enhancing response times by 30% and streamlining the data update workflow."
       ]
-                
+
       },
 
       {
         "company":"Dutchgo LLC",
         "title":"Software Engineer - Self-employed & Co-founder",
         "years":"Oct 2020 - Apr 2022, Omaha, NE, United States",
-        "image":"dutchgo.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/dutchgo.png",
         "description":
         [
         "Developed a customer demand analysis pipeline during the Covid-19 pandemic using AWS S3 for secure data storage and Lambda for serverless processing, combined with SQL and Python. Built and deployed a Random Forest model on AWS SageMaker to identify high-potential user profiles for conversion, achieving an accuracy of 98%. This automated approach saved considerable processing time and improved prediction accuracy for strategic marketing efforts. \n ",
@@ -167,20 +167,20 @@
         "Constructed real-time monitoring dashboards using Tableau to track essential investment metrics, such as ROI (Return on Investment), growth rate, and portfolio balance. Integrated AWS Kinesis for real-time data streaming, enabling prompt anomaly detection and root cause analysis. This system provided stakeholders with actionable insights on data trends, supporting a 30% faster decision-making process for adjusting business strategies. \n",
         "Set up AWS CloudFormation templates to manage and automate infrastructure provisioning, ensuring efficient resource management and scalability of the analysis system. Leveraged AWS IAM to implement robust access control, securing data and model resources across the team."
       ]
-                
+
       },
 
       {
         "company":"Chatchup(Zhuiguang) Information Technology Co. Ltd",
         "title":"Project Manager & Project Analyst",
         "years":"Jan 2019 - Sept 2020, Henan, Zhengzhou, China",
-        "image":"catchup.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/catchup.png",
         "description":
         [
           "Analyzed customer requirements to draft an activity diagram and outlined preliminary UML page functionality scenarios. Initiated the development of customized software (Web & App) tailored to customer needs. \n",
           "Employed advanced SQL queries and Python to analyze over 50GB of market data on similar products, identifying customer usage patterns and business requirements. \n",
           "Conducted exploratory data analysis on numerical, categorical, and time-series data using Matplotlib and Seaborn. Constructed multivariance Time Series Clustering model, DTW (Dynamic Time Warping) with Hierarchical clustering, on 120 features to group customers, segment market and described the clustering centroid by DBA (DTW Barycenter Averaging). \n",
-          "Trained market demand models, including Isolation Forest and Robust PCA (Principal Component Analysis), as well as Linear Models and Random Forests, to establish a system for identifying and responding to customers' potential requirements.\n", 
+          "Trained market demand models, including Isolation Forest and Robust PCA (Principal Component Analysis), as well as Linear Models and Random Forests, to establish a system for identifying and responding to customers' potential requirements.\n",
           "Constructed dashboards with Tableau to depict customer usage activities and submitted analytical reports to clients."
         ]
       },
@@ -188,7 +188,7 @@
         "company":"Dell Inc",
         "title":"IT Support Specialist",
         "years":"Oct 2013 - Oct 2015, Dalian, LiaoNing, China",
-        "image":"dell_logo.jpg",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/dell_logo.jpg",
         "description":
         [
           "Organized on-campus after sales technology support events for Dell products. \n",
@@ -354,74 +354,74 @@
       {
         "title":"Employment Website Design",
         "category":"– A Web-based Axure based on CRAP interface interaction",
-        "description": 
+        "description":
         ["Designed a co-op-focused Employment Website using HCI principles to offer an intuitive experience catering to non-technical users, ensuring broad usability.",
         "Applied CRAP design principles to create a visually cohesive and navigable interface, addressing existing website pain points by incorporating critical features such as visa type and field of work.",
         "Led the unification of UI design across the platform, ensuring a smooth and accessible user experience for a broad audience. Validated design success and user satisfaction with thorough usability testing, confirming high effectiveness and gratification."
         ],
-        "image":"EmploymentWebsiteDesign/job_web.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/portfolio/EmploymentWebsiteDesign/job_web.png",
         "url":"https://github.com/AndyFCui/HCI_Design_Job_website"
       },
-      
+
       {
         "title":"Amazon QA robot trained by BERT & GPT-2",
         "category":"– Trained amazon toy customers' comment to train a QA robot",
-        "description": 
+        "description":
         ["Developed a Question Answering (QA) system using GPT-2 and BERT models focused on Amazon product reviews, assessing their performance in natural language processing tasks.",
         "Applied advanced NLP techniques, including TF-IDF Vectorization, CBOW, and Skip-gram, for effective data preprocessing and analysis.",
         "Conducted K-Fold Cross-Validation and ablation studies to optimize model performance and robustness, utilizing comprehensive model training and fine-tuning with a Kaggle dataset. We focused on accuracy, LOSS, and BLEU score metrics for evaluation, ultimately achieving high precision with an Accuracy F1 score of up to 94%."
       ],
-        "image":"amazonQArobot/qaRobot.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/portfolio/amazonQArobot/qaRobot.png",
         "url":"https://github.com/AndyFCui/Amazon_QA_Robot"
       },
       {
         "title":"Online Shop Database",
         "category":"– A online shop database system, deploy by SQL and python.",
-        "description": 
+        "description":
         ["Developed a Python and MySQL-based Robot Store Management System to streamline operations for small supermarkets, featured in a terminal user interface.",
         "Implemented SQL database structures and Python-MySQL connections, enabling efficient user account, order, and refund management.",
         "Constructed and documented a secure, offline management system, accommodating customer and operator interactions with potential for web expansion using Django.",
         "Managed project version control with Anaconda and maintained code repository on GitHub, with comprehensive end-user documentation and test cases."
         ],
-        "image":"onlineDatabase/onlineDatabase.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/portfolio/onlineDatabase/onlineDatabase.png",
         "url":"https://github.com/AndyFCui/OnlineShop-Database"
       },
       {
         "title":"Crash Loyal AI Agent collision method",
         "category":"– An AI agent's collision method implemented Crash Loyalty game",
-        "description": 
+        "description":
         ["Implemented character behavior logic that prioritizes enemy engagements and tactical decisions, ensuring actions adhere to game rationality and strategy.",
         "Conducted thorough testing and debugging to maintain game balance and performance, ensuring characters operate within defined routes and adhere to game boundaries.",
         "Orchestrated a dynamic unit deployment and resource management mechanic, incorporating a strategic elixir accumulation system for gameplay depth.",
         "Managed project documentation and version control, ensuring robust testing and functionality within the set development timeframe."
         ],
-        "image":"aiAgent_CrashLoyal/aiAgent.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/portfolio/aiAgent_CrashLoyal/aiAgent.png",
         "url":"https://github.com/AndyFCui/CrashLoyal_AI_agent"
       },
       {
         "title":"Doctor Lucky java Jframe game",
         "category":"– An OOD use MVC implemented by java Jframe game",
-        "description": 
+        "description":
         ["Implemented character behavior logic that prioritizes enemy engagements and tactical decisions, ensuring actions adhere to game rationality and strategy.",
         "Conducted thorough testing and debugging to maintain game balance and performance, ensuring characters operate within defined routes and adhere to game boundaries.",
         "Orchestrated a dynamic unit deployment and resource management mechanic, incorporating a strategic elixir accumulation system for gameplay depth.",
         "Managed project documentation and version control, ensuring robust testing and functionality within the set development timeframe."
         ],
-        "image":"doctorLucky/doctorLucky.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/portfolio/doctorLucky/doctorLucky.png",
         "url":"https://github.com/AndyFCui/DuctorLuctorMVC"
       },
       {
         "title":"Gobang AI Game Agent",
         "category":"– An alpha-beta AI Agent implemented with Bobang",
-        "description": 
+        "description":
         ["Implemented a Gobang AI agent leveraging alpha-beta pruning to calculate stepwise rewards, enabling the agent to strategically discard less rewarding moves for enhanced gameplay efficacy.",
         "Architected predefined Gobang chess strategies with assigned value metrics, which were intricately incorporated into the AI's decision-making process, augmenting the competitiveness of the agent.",
         "Synthesized traditional Gobang tactics with algorithmic precision, optimizing the AI's play style to reflect a deep understanding of the game's cultural strategy elements."
         ],
-        "image":"goBang_agent/goBang.png",
+        "image":"https://rlrzmqbdpjkpxbfdgnlm.supabase.co/storage/v1/object/public/blog-images/portfolio/goBang_agent/goBang.png",
         "url":"https://github.com/AndyFCui/Gobang_AI_Agent__alphaBetaa"
       }
     ]
   }
-  
+
 }

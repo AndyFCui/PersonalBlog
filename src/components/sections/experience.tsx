@@ -56,7 +56,7 @@ export function Experience({ data }: ExperienceProps) {
                       <div className="flex items-start gap-4 mb-4">
                         <Avatar className="w-16 h-16 border-2 border-primary/20">
                           <AvatarImage
-                            src={`/images/${work.image}`}
+                            src={work.image.startsWith('http') ? work.image : `/images/${work.image}`}
                             alt={work.company}
                             loading="lazy"
                           />
