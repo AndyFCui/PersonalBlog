@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { Plus, FileText, Settings, ArrowLeft, Edit2, Trash2, Eye, LogOut, Tag, User } from 'lucide-react'
+import { Plus, FileText, Settings, ArrowLeft, Edit2, Trash2, Eye, LogOut, Tag, User, FileEdit } from 'lucide-react'
 import { useBlogs, type Blog } from '@/hooks/useBlogs'
 import { Badge } from '@/components/ui/badge'
 import { useAuth } from '@/lib/auth-context'
@@ -203,6 +203,12 @@ export function AdminBlogList() {
                 <Link to="/admin/author">
                   <User className="h-4 w-4 mr-2" />
                   Author Profile
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" className="w-full justify-start" asChild>
+                <Link to="/admin/resume">
+                  <FileEdit className="h-4 w-4 mr-2" />
+                  Resume Editor
                 </Link>
               </Button>
             </CardContent>

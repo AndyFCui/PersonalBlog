@@ -38,7 +38,7 @@ export function Education({ data }: EducationProps) {
                   <div className="flex items-start gap-4 mb-4">
                     <Avatar className="w-16 h-16 border-2 border-primary/20">
                       <AvatarImage
-                        src={`/images/${edu.image}`}
+                        src={edu.image.startsWith('http') ? edu.image : `/images/${edu.image}`}
                         alt={edu.school}
                         loading="lazy"
                       />

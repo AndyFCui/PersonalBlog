@@ -54,7 +54,7 @@ export function About({ data }: AboutProps) {
               <div className="relative">
                 <Avatar className="w-56 h-56 border-4 border-primary/30 shadow-2xl">
                   <AvatarImage
-                    src={`/images/${data.image}`}
+                    src={data.image.startsWith('http') ? data.image : `/images/${data.image}`}
                     alt={data.name}
                     loading="lazy"
                   />
@@ -152,7 +152,7 @@ export function About({ data }: AboutProps) {
             </motion.div>
           </motion.div>
 
-          {/* Right column - Bio and skills */}
+          {/* Right column - Bio */}
           <motion.div
             className="space-y-10"
             initial={{ opacity: 0, x: 30 }}
@@ -172,58 +172,6 @@ export function About({ data }: AboutProps) {
                 Biography
               </h3>
               <p className="text-base leading-relaxed text-foreground/90">{data.bio}</p>
-            </motion.div>
-
-            {/* Tech stack */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-                <span className="w-8 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
-                Tech Stack
-              </h3>
-              <div className="space-y-6">
-                {data.skills.map((category, categoryIndex) => (
-                  <motion.div
-                    key={category.category}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: categoryIndex * 0.1 }}
-                  >
-                    <h4 className="text-sm font-medium text-foreground/50 mb-4 uppercase tracking-wider">
-                      {category.category}
-                    </h4>
-                    <div className="flex flex-wrap gap-3">
-                      {category.items.map((item, itemIndex) => (
-                        <motion.div
-                          key={item.name}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: categoryIndex * 0.1 + itemIndex * 0.05 }}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                        >
-                          <Badge
-                            variant="secondary"
-                            className="px-4 py-2.5 text-sm font-medium hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 cursor-default"
-                          >
-                            <img
-                              src={`/${item.image}`}
-                              alt={item.name}
-                              className="w-5 h-5 mr-2"
-                              loading="lazy"
-                            />
-                            {item.name}
-                          </Badge>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
           </motion.div>
         </div>
