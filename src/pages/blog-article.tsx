@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Viewer } from '@bytemd/react'
 import gfm from '@bytemd/plugin-gfm'
 import mermaid from '@bytemd/plugin-mermaid'
+import mermaidLib from 'mermaid'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolink from 'rehype-autolink-headings'
 import 'bytemd/dist/index.css'
@@ -108,6 +109,61 @@ export function BlogArticlePage() {
   const { author } = useAuthor()
   const [showTipModal, setShowTipModal] = useState(false)
   const [showToc, setShowToc] = useState(true)
+  const [renderKey, setRenderKey] = useState(0)
+
+  // Force re-render after mount to ensure mermaid diagrams render
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setRenderKey(k => k + 1)
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [slug])
+
+  // Manual mermaid rendering as fallback
+  useEffect(() => {
+    if (!blog?.content) return
+
+    const renderPendingMermaid = async () => {
+      const viewerEl = document.querySelector('.bytemd-viewer-container')
+      if (!viewerEl) return
+
+      const codeEls = viewerEl.querySelectorAll('pre>code.language-mermaid:not([data-rendered])')
+      if (codeEls.length === 0) return
+
+      try {
+        const mermaid = (mermaidLib as any).default || mermaidLib
+        if (!mermaid.initialize) return
+
+        mermaid.initialize({ startOnLoad: false })
+
+        for (let i = 0; i < codeEls.length; i++) {
+          const el = codeEls[i] as HTMLElement
+          const pre = el.parentElement
+          if (!pre || pre.classList.contains('mermaid')) continue
+
+          el.setAttribute('data-rendered', 'true')
+          const source = el.innerText
+          const container = document.createElement('div')
+          container.className = 'mermaid'
+          container.style.background = 'var(--card)'
+          container.style.borderRadius = '8px'
+          container.style.padding = '16px'
+          container.style.margin = '16px 0'
+          container.style.textAlign = 'center'
+          pre.replaceWith(container)
+
+          const id = `mermaid-${Date.now()}-${i}`
+          const { svg } = await mermaid.render(id, source)
+          container.innerHTML = svg
+        }
+      } catch (err) {
+        console.error('Mermaid fallback render error:', err)
+      }
+    }
+
+    const timer = setTimeout(renderPendingMermaid, 800)
+    return () => clearTimeout(timer)
+  }, [blog?.content, renderKey])
 
   const visitorId = (() => {
     let id = localStorage.getItem('visitor_id')
@@ -138,6 +194,8 @@ export function BlogArticlePage() {
 
         if (fetchError) throw fetchError
         setBlog(data)
+        // Trigger re-render to ensure mermaid diagrams render
+        setRenderKey(k => k + 1)
 
         // Increment view count
         if (data?.id) {
@@ -332,7 +390,7 @@ export function BlogArticlePage() {
 
             {/* Main Content */}
             <div className={`flex-1 min-w-0 bytemd-viewer-container ${!showToc ? 'lg:ml-12' : ''}`}>
-              <Viewer value={blog.content} plugins={plugins} rehypePlugins={rehypePlugins} />
+              <Viewer key={`${slug}-${renderKey}`} value={blog.content} plugins={plugins} rehypePlugins={rehypePlugins} />
             </div>
           </div>
 
