@@ -1,8 +1,8 @@
-import { useResumeData } from '@/hooks/useResumeData'
+import { useSupabaseResumeData } from '@/hooks/useSupabaseResumeData'
 import { Header, About, Experience, Education, Portfolio, Footer } from '@/components/sections'
 
 export function PortfolioPage() {
-  const { data, loading, error } = useResumeData()
+  const { data, loading, error } = useSupabaseResumeData()
 
   if (loading) {
     return (
