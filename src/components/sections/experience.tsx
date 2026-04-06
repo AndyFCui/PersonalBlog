@@ -9,10 +9,28 @@ interface ExperienceProps {
   data: ResumeData | null
 }
 
+/* ------------------------- 时间排序：最近优先 ------------------------- */
+function parseStartYear(years: string): number {
+  const match = years.match(/(\w+)\s+(\d{4})/)
+  if (!match) return 0
+  const monthStr = match[1]
+  const year = parseInt(match[2])
+  const monthMap: Record<string, number> = {
+    Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+    Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+  }
+  return year * 12 + (monthMap[monthStr] ?? 0)
+}
+
 export function Experience({ data }: ExperienceProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   if (!data?.work) return null
+
+  // 按开始时间倒序排列（最近优先）
+  const sortedWork = [...data.work].sort((a, b) =>
+    parseStartYear(b.years) - parseStartYear(a.years)
+  )
 
   return (
     <section id="experience" className="py-20 px-4 bg-secondary/30">
@@ -31,7 +49,7 @@ export function Experience({ data }: ExperienceProps) {
           <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent" />
 
           <div className="space-y-8">
-            {data.work.map((work, index) => (
+            {sortedWork.map((work, index) => (
               <motion.div
                 key={work.company}
                 className={`relative flex flex-col md:flex-row gap-8 ${

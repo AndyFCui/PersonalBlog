@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Save, Plus, Trash2, Upload, Image as ImageIcon, GripVertical, Grid, Copy, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -19,29 +19,68 @@ export function AdminResumeEditor() {
   const [activeTab, setActiveTab] = useState('Main Info')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [lastSaved, setLastSaved] = useState<Date | null>(null)
+  const [isDirty, setIsDirty] = useState(false)
 
   // Form states
   const [mainData, setMainData] = useState<MainData | null>(null)
   const [resumeData, setResumeData] = useState<ResumeData | null>(null)
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null)
 
+  // Use refs to always have latest data (avoids state batching issues)
+  const mainDataRef = useRef<MainData | null>(null)
+  const resumeDataRef = useRef<ResumeData | null>(null)
+  const portfolioDataRef = useRef<PortfolioData | null>(null)
+
+  // Track original data for dirty checking
+  const [originalData, setOriginalData] = useState<ResumeDataJSON | null>(null)
+
   useEffect(() => {
     if (data) {
       setMainData(data.main)
       setResumeData(data.resume)
       setPortfolioData(data.portfolio)
+      setOriginalData(data)
+      // Also update refs
+      mainDataRef.current = data.main
+      resumeDataRef.current = data.resume
+      portfolioDataRef.current = data.portfolio
     }
   }, [data])
+
+  // Update refs when state changes
+  useEffect(() => {
+    mainDataRef.current = mainData
+  }, [mainData])
+
+  useEffect(() => {
+    resumeDataRef.current = resumeData
+  }, [resumeData])
+
+  useEffect(() => {
+    portfolioDataRef.current = portfolioData
+  }, [portfolioData])
+
+  // Check if data has changed
+  useEffect(() => {
+    if (!originalData || !data) return
+    const dirty = JSON.stringify({ main: mainData, resume: resumeData, portfolio: portfolioData }) !==
+                  JSON.stringify({ main: originalData.main, resume: originalData.resume, portfolio: originalData.portfolio })
+    setIsDirty(dirty)
+  }, [mainData, resumeData, portfolioData, originalData, data])
 
   const handleSave = async () => {
     setSaving(true)
     setSaved(false)
     try {
-      if (mainData) await saveMain(mainData)
-      if (resumeData) await saveResume(resumeData)
-      if (portfolioData) await savePortfolio(portfolioData)
+      // Use refs to get latest data (avoids state batching issues)
+      if (mainDataRef.current) await saveMain(mainDataRef.current)
+      if (resumeDataRef.current) await saveResume(resumeDataRef.current)
+      if (portfolioDataRef.current) await savePortfolio(portfolioDataRef.current)
       setSaved(true)
-      setTimeout(() => setSaved(false), 2000)
+      setLastSaved(new Date())
+      setIsDirty(false)
+      setTimeout(() => setSaved(false), 3000)
     } catch (err) {
       console.error('Save error:', err)
     } finally {
@@ -87,10 +126,18 @@ export function AdminResumeEditor() {
               Back to Dashboard
             </Link>
             <h1 className="text-3xl font-bold">Resume Editor</h1>
+            <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
+              {lastSaved && (
+                <span>Last saved: {lastSaved.toLocaleTimeString()}</span>
+              )}
+              {isDirty && !saving && (
+                <span className="text-yellow-500">• Unsaved changes</span>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-3">
-            {saved && <span className="text-sm text-green-500">Saved!</span>}
-            <Button onClick={handleSave} disabled={saving} className="shadow-lg">
+            {saved && <span className="text-sm text-green-500 font-medium">Saved!</span>}
+            <Button onClick={handleSave} disabled={saving || !isDirty} className="shadow-lg">
               <Save className="h-4 w-4 mr-2" />
               {saving ? 'Saving...' : 'Save All'}
             </Button>
@@ -115,7 +162,7 @@ export function AdminResumeEditor() {
           <MainInfoEditor data={mainData} onChange={setMainData} onSave={() => saveMain(mainData)} saving={saving} />
         )}
         {activeTab === 'Resume' && resumeData && (
-          <ResumeEditor data={resumeData} onChange={setResumeData} onSave={() => saveResume(resumeData)} saving={saving} />
+          <ResumeEditor data={resumeData} onChange={setResumeData} onSave={() => handleSave()} saving={saving} />
         )}
         {activeTab === 'Portfolio' && portfolioData && (
           <PortfolioEditor data={portfolioData} onChange={setPortfolioData} onSave={() => savePortfolio(portfolioData)} saving={saving} />
@@ -682,6 +729,22 @@ function ImageGallery() {
     setTimeout(() => setCopiedUrl(null), 2000)
   }
 
+  const handleDelete = async (name: string) => {
+    if (!confirm(`Delete ${name}?`)) return
+
+    try {
+      const { error } = await supabase.storage
+        .from('blog-images')
+        .remove([name])
+
+      if (error) throw error
+      fetchImages()
+    } catch (err) {
+      console.error('Delete failed:', err)
+      alert('Delete failed: ' + (err instanceof Error ? err.message : 'Unknown error'))
+    }
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -755,6 +818,14 @@ function ImageGallery() {
                     className="w-full h-32 object-cover"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => handleDelete(img.name)}
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Delete
+                    </Button>
                     <Button
                       size="sm"
                       variant="secondary"
