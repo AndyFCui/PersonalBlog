@@ -85,13 +85,14 @@ export function Experience({ data }: ExperienceProps) {
                             className="overflow-hidden"
                           >
                             <div className="pt-4 border-t border-border/50">
-                              <ul className="space-y-2">
+                              <ul className="space-y-2 list-none">
                                 {work.description.map((desc, i) => (
                                   <li
                                     key={i}
-                                    className="text-sm text-foreground/80 leading-relaxed"
+                                    className="text-sm text-foreground/80 leading-relaxed flex items-start gap-2"
                                   >
-                                    {desc}
+                                    <span className="text-primary mt-1.5">•</span>
+                                    <span>{desc}</span>
                                   </li>
                                 ))}
                               </ul>
