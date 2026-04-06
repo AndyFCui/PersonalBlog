@@ -59,7 +59,9 @@ export function useResumeAdmin(): UseResumeAdminReturn {
   }, [fetchData])
 
   const saveMain = async (mainData: ResumeDataJSON['main']) => {
-    if (!isSupabaseConfigured()) return
+    if (!isSupabaseConfigured()) {
+      throw new Error('Supabase not configured')
+    }
 
     const { error: fetchError } = await supabase
       .from('resume')
@@ -69,20 +71,23 @@ export function useResumeAdmin(): UseResumeAdminReturn {
 
     if (fetchError?.code === 'PGRST116') {
       // Insert new
-      await supabase.from('resume').insert({ section: 'main', data: mainData })
+      const { error: insertError } = await supabase.from('resume').insert({ section: 'main', data: mainData })
+      if (insertError) throw insertError
     } else {
-      // Update existing - need to get the id first
-      const { data: existing } = await supabase
+      // Update existing
+      const { data: existing, error: selectError } = await supabase
         .from('resume')
         .select('id')
         .eq('section', 'main')
         .single()
 
+      if (selectError) throw selectError
       if (existing) {
-        await supabase
+        const { error: updateError } = await supabase
           .from('resume')
           .update({ data: mainData })
           .eq('id', existing.id)
+        if (updateError) throw updateError
       }
     }
 
@@ -90,42 +95,64 @@ export function useResumeAdmin(): UseResumeAdminReturn {
   }
 
   const saveResume = async (resumeData: ResumeDataJSON['resume']) => {
-    if (!isSupabaseConfigured()) return
+    if (!isSupabaseConfigured()) {
+      throw new Error('Supabase not configured')
+    }
 
-    const { data: existing } = await supabase
+    const { data: existing, error: selectError } = await supabase
       .from('resume')
       .select('id')
       .eq('section', 'resume')
       .single()
 
+    if (selectError) {
+      console.error('Error fetching resume:', selectError)
+      throw selectError
+    }
+
     if (existing) {
-      await supabase
+      const { error: updateError } = await supabase
         .from('resume')
         .update({ data: resumeData })
         .eq('id', existing.id)
+
+      if (updateError) {
+        console.error('Error updating resume:', updateError)
+        throw updateError
+      }
     } else {
-      await supabase.from('resume').insert({ section: 'resume', data: resumeData })
+      const { error: insertError } = await supabase.from('resume').insert({ section: 'resume', data: resumeData })
+      if (insertError) {
+        console.error('Error inserting resume:', insertError)
+        throw insertError
+      }
     }
 
     setData((prev) => prev ? { ...prev, resume: resumeData } : null)
   }
 
   const savePortfolio = async (portfolioData: ResumeDataJSON['portfolio']) => {
-    if (!isSupabaseConfigured()) return
+    if (!isSupabaseConfigured()) {
+      throw new Error('Supabase not configured')
+    }
 
-    const { data: existing } = await supabase
+    const { data: existing, error: selectError } = await supabase
       .from('resume')
       .select('id')
       .eq('section', 'portfolio')
       .single()
 
+    if (selectError) throw selectError
+
     if (existing) {
-      await supabase
+      const { error: updateError } = await supabase
         .from('resume')
         .update({ data: portfolioData })
         .eq('id', existing.id)
+      if (updateError) throw updateError
     } else {
-      await supabase.from('resume').insert({ section: 'portfolio', data: portfolioData })
+      const { error: insertError } = await supabase.from('resume').insert({ section: 'portfolio', data: portfolioData })
+      if (insertError) throw insertError
     }
 
     setData((prev) => prev ? { ...prev, portfolio: portfolioData } : null)
