@@ -18,7 +18,7 @@ export function useSupabaseResumeData(): UseSupabaseResumeDataReturn {
       // Fallback to local JSON if Supabase not configured
       if (!isSupabaseConfigured()) {
         try {
-          const response = await fetch('/resumeData.json')
+          const response = await fetch(`/resumeData.json?v=${Date.now()}`)
           if (response.ok) {
             const jsonData = await response.json()
             setData(jsonData)

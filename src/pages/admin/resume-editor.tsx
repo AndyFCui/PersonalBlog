@@ -1,12 +1,35 @@
 import { useState, useEffect, useRef } from 'react'
+import { flushSync } from 'react-dom'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Save, Plus, Trash2, Upload, Image as ImageIcon, GripVertical, Grid, Copy, Check } from 'lucide-react'
+import { ArrowLeft, Save, Plus, Trash2, Upload, Image as ImageIcon, GripVertical, Grid, Copy, Check, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { useResumeAdmin } from '@/hooks/useResumeAdmin'
 import type { ResumeDataJSON, MainData, ResumeData, PortfolioData, WorkExperience, Education, PortfolioProject } from '@/types/resume'
 import { supabase } from '@/lib/supabase'
+import ReactCrop from 'react-image-crop'
+
+/* ------------------------- 工具函数：安全深拷贝 ------------------------- */
+function deepClone<T>(obj: T): T {
+  if (!obj) return obj
+  try {
+    // Use JSON round-trip for plain data objects
+    // This handles React state objects correctly (removes functions, DOM nodes, etc.)
+    return JSON.parse(JSON.stringify(obj))
+  } catch {
+    // If JSON fails (circular ref), return as-is
+    return obj
+  }
+}
+interface Crop {
+  unit: 'px' | '%'
+  x: number
+  y: number
+  width: number
+  height: number
+}
 
 // Tabs
 const TABS = ['Main Info', 'Resume', 'Portfolio', 'Images']
@@ -69,14 +92,62 @@ export function AdminResumeEditor() {
     setIsDirty(dirty)
   }, [mainData, resumeData, portfolioData, originalData, data])
 
-  const handleSave = async () => {
+  const handleSave = async (passedResumeData?: ResumeData) => {
     setSaving(true)
     setSaved(false)
     try {
-      // Use refs to get latest data (avoids state batching issues)
-      if (mainDataRef.current) await saveMain(mainDataRef.current)
-      if (resumeDataRef.current) await saveResume(resumeDataRef.current)
-      if (portfolioDataRef.current) await savePortfolio(portfolioDataRef.current)
+      // Use passed data if available, otherwise fall back to refs
+      const mainToSave = mainDataRef.current
+      const resumeToSave = passedResumeData ?? resumeDataRef.current
+      const portfolioToSave = portfolioDataRef.current
+
+      // Guard: ensure we're saving plain data objects, not DOM elements or events
+      if (!resumeToSave || typeof resumeToSave !== 'object' || resumeToSave instanceof Event || resumeToSave instanceof HTMLElement) {
+        throw new Error('Invalid resume data: expected plain object')
+      }
+
+      console.log('=== HANDLE SAVE ===')
+      console.log('resumeToSave work count:', resumeToSave?.work?.length)
+
+      // Deep clone to remove any circular references or React internals
+      const cleanMain = mainToSave ? deepClone(mainToSave) : null
+      const cleanResume = resumeToSave ? deepClone(resumeToSave) : null
+      const cleanPortfolio = portfolioToSave ? deepClone(portfolioToSave) : null
+
+      console.log('cleanResume work count:', cleanResume?.work?.length)
+      console.log('Saving main...', cleanMain?.name, cleanMain?.occupation)
+      await saveMain(cleanMain)
+      console.log('Main saved successfully')
+
+      console.log('Saving resume...')
+      await saveResume(cleanResume)
+      console.log('Resume saved successfully')
+
+      if (cleanPortfolio) {
+        console.log('Saving portfolio...')
+        await savePortfolio(cleanPortfolio)
+        console.log('Portfolio saved successfully')
+      }
+
+      // Sync avatar to authors table if image changed
+      const newImage = mainData?.image
+      if (newImage && originalData?.main.image !== newImage) {
+        await supabase
+          .from('authors')
+          .update({ avatar_url: newImage })
+          .neq('id', '00000000-0000-0000-0000-000000000000')
+          .then(async ({ error }) => {
+            if (error) {
+              console.error('Failed to sync avatar to authors:', error)
+            } else {
+              console.log('Avatar synced to authors table')
+            }
+          })
+      }
+
+      // Refresh data from database to update UI
+      await refresh()
+
       setSaved(true)
       setLastSaved(new Date())
       setIsDirty(false)
@@ -137,7 +208,7 @@ export function AdminResumeEditor() {
           </div>
           <div className="flex items-center gap-3">
             {saved && <span className="text-sm text-green-500 font-medium">Saved!</span>}
-            <Button onClick={handleSave} disabled={saving || !isDirty} className="shadow-lg">
+            <Button onClick={() => handleSave(resumeData)} disabled={saving || !isDirty} className="shadow-lg">
               <Save className="h-4 w-4 mr-2" />
               {saving ? 'Saving...' : 'Save All'}
             </Button>
@@ -162,7 +233,12 @@ export function AdminResumeEditor() {
           <MainInfoEditor data={mainData} onChange={setMainData} onSave={() => saveMain(mainData)} saving={saving} />
         )}
         {activeTab === 'Resume' && resumeData && (
-          <ResumeEditor data={resumeData} onChange={setResumeData} onSave={() => handleSave()} saving={saving} />
+          <ResumeEditor
+            data={resumeData}
+            onChange={setResumeData}
+            onSave={handleSave}
+            saving={saving}
+          />
         )}
         {activeTab === 'Portfolio' && portfolioData && (
           <PortfolioEditor data={portfolioData} onChange={setPortfolioData} onSave={() => savePortfolio(portfolioData)} saving={saving} />
@@ -178,17 +254,30 @@ export function AdminResumeEditor() {
 // Main Info Editor
 function MainInfoEditor({ data, onChange, onSave, saving }: { data: MainData, onChange: (d: MainData) => void, onSave: () => void, saving: boolean }) {
   const [uploading, setUploading] = useState(false)
+  const [showCropModal, setShowCropModal] = useState(false)
+  const [pendingCropFile, setPendingCropFile] = useState<File | null>(null)
+  const [cropField, setCropField] = useState<string>('')
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+  const handleSelectImage = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     const file = e.target.files?.[0]
     if (!file) return
+    setCropField(field)
+    setPendingCropFile(file)
+    setShowCropModal(true)
+  }
 
+  const handleCropConfirm = (croppedFile: File) => {
+    setShowCropModal(false)
+    uploadCroppedImage(croppedFile, cropField)
+  }
+
+  const uploadCroppedImage = async (file: File, field: string) => {
     setUploading(true)
-    const fileExt = file.name.split('.').pop()
+    const fileExt = file.name.split('.').pop() || 'png'
     const fileName = `${field}-${Date.now()}.${fileExt}`
 
     try {
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('blog-images')
         .upload(fileName, file, { cacheControl: '3600', upsert: true })
 
@@ -203,6 +292,7 @@ function MainInfoEditor({ data, onChange, onSave, saving }: { data: MainData, on
       console.error('Upload failed:', err)
     } finally {
       setUploading(false)
+      setPendingCropFile(null)
     }
   }
 
@@ -248,12 +338,27 @@ function MainInfoEditor({ data, onChange, onSave, saving }: { data: MainData, on
           <div className="space-y-2">
             <label className="text-sm font-medium">Profile Image</label>
             <div className="flex items-center gap-4">
-              {data.image && <img src={data.image} alt="Profile" className="w-20 h-20 rounded-full object-cover" />}
-              <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image')} className="hidden" id="image-upload" />
-              <Button variant="outline" onClick={() => document.getElementById('image-upload')?.click()} disabled={uploading}>
-                <Upload className="h-4 w-4 mr-2" />
-                {uploading ? 'Uploading...' : 'Upload Image'}
-              </Button>
+              {data.image ? (
+                <>
+                  <img src={data.image} alt="Profile" className="w-20 h-20 rounded-full object-cover" />
+                  <input type="file" accept="image/*" onChange={(e) => handleSelectImage(e, 'image')} className="hidden" id="image-upload" />
+                  <Button variant="outline" onClick={() => document.getElementById('image-upload')?.click()} disabled={uploading}>
+                    <Upload className="h-4 w-4 mr-2" />
+                    {uploading ? 'Uploading...' : 'Replace Image'}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center">
+                    <ImageIcon className="w-8 h-8 text-muted-foreground" />
+                  </div>
+                  <input type="file" accept="image/*" onChange={(e) => handleSelectImage(e, 'image')} className="hidden" id="image-upload" />
+                  <Button variant="outline" onClick={() => document.getElementById('image-upload')?.click()} disabled={uploading}>
+                    <Upload className="h-4 w-4 mr-2" />
+                    {uploading ? 'Uploading...' : 'Upload Image'}
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </CardContent>
@@ -326,12 +431,24 @@ function MainInfoEditor({ data, onChange, onSave, saving }: { data: MainData, on
       <div className="flex justify-end">
         <Button onClick={onSave} disabled={saving}><Save className="h-4 w-4 mr-2" />{saving ? 'Saving...' : 'Save Main Info'}</Button>
       </div>
+
+      <CropModal
+        open={showCropModal}
+        onClose={() => setShowCropModal(false)}
+        imageFile={pendingCropFile}
+        onCrop={handleCropConfirm}
+      />
     </div>
   )
 }
 
 // Resume Editor
-function ResumeEditor({ data, onChange, onSave, saving }: { data: ResumeData, onChange: (d: ResumeData) => void, onSave: () => void, saving: boolean }) {
+function ResumeEditor({ data, onChange, onSave, saving }: {
+  data: ResumeData,
+  onChange: (d: ResumeData) => void,
+  onSave: (data?: ResumeData) => void,  // Accept optional data param
+  saving: boolean
+}) {
   const updateWork = (index: number, field: string, value: any) => {
     const newWork = [...data.work]
     newWork[index] = { ...newWork[index], [field]: value }
@@ -339,14 +456,22 @@ function ResumeEditor({ data, onChange, onSave, saving }: { data: ResumeData, on
   }
 
   const addWork = () => {
-    onChange({
+    const newData = {
       ...data,
       work: [...data.work, { company: '', title: '', years: '', image: '', description: [''] }]
+    }
+    flushSync(() => {
+      onChange(newData)
     })
+    // Don't auto-save - user must manually save via "Save All"
   }
 
   const removeWork = (index: number) => {
-    onChange({ ...data, work: data.work.filter((_, i) => i !== index) })
+    const newData = { ...data, work: data.work.filter((_, i) => i !== index) }
+    flushSync(() => {
+      onChange(newData)
+    })
+    // Don't auto-save - user must manually save via "Save All"
   }
 
   const updateEducation = (index: number, field: string, value: any) => {
@@ -356,14 +481,22 @@ function ResumeEditor({ data, onChange, onSave, saving }: { data: ResumeData, on
   }
 
   const addEducation = () => {
-    onChange({
+    const newData = {
       ...data,
       education: [...data.education, { school: '', degree: '', graduated: '', Coursework: '', description: '', image: '', honor: '', awards: '' }]
+    }
+    flushSync(() => {
+      onChange(newData)
     })
+    // Don't auto-save - user must manually save via "Save All"
   }
 
   const removeEducation = (index: number) => {
-    onChange({ ...data, education: data.education.filter((_, i) => i !== index) })
+    const newData = { ...data, education: data.education.filter((_, i) => i !== index) }
+    flushSync(() => {
+      onChange(newData)
+    })
+    // Don't auto-save - user must manually save via "Save All"
   }
 
   const [uploadingWork, setUploadingWork] = useState<number | null>(null)
@@ -532,7 +665,7 @@ function ResumeEditor({ data, onChange, onSave, saving }: { data: ResumeData, on
       </Card>
 
       <div className="flex justify-end">
-        <Button onClick={onSave} disabled={saving}><Save className="h-4 w-4 mr-2" />{saving ? 'Saving...' : 'Save Resume'}</Button>
+        <Button onClick={() => onSave(data)} disabled={saving}><Save className="h-4 w-4 mr-2" />{saving ? 'Saving...' : 'Save Resume'}</Button>
       </div>
     </div>
   )
@@ -547,14 +680,22 @@ function PortfolioEditor({ data, onChange, onSave, saving }: { data: PortfolioDa
   }
 
   const addProject = () => {
-    onChange({
+    const newData = {
       ...data,
       projects: [...data.projects, { title: '', category: '', description: [''], image: '', url: '' }]
+    }
+    flushSync(() => {
+      onChange(newData)
     })
+    portfolioDataRef.current = newData
   }
 
   const removeProject = (index: number) => {
-    onChange({ ...data, projects: data.projects.filter((_, i) => i !== index) })
+    const newData = { ...data, projects: data.projects.filter((_, i) => i !== index) }
+    flushSync(() => {
+      onChange(newData)
+    })
+    portfolioDataRef.current = newData
   }
 
   const [uploading, setUploading] = useState<string | null>(null)
@@ -732,16 +873,33 @@ function ImageGallery() {
   const handleDelete = async (name: string) => {
     if (!confirm(`Delete ${name}?`)) return
 
+    console.log('Attempting to delete:', name)
+
     try {
-      const { error } = await supabase.storage
+      const { data, error } = await supabase.storage
         .from('blog-images')
         .remove([name])
 
-      if (error) throw error
-      fetchImages()
+      console.log('Delete result:', { data, error })
+
+      if (error) {
+        console.error('Delete error:', error)
+        alert('Delete failed: ' + error.message)
+        return
+      }
+
+      // Clear copied URL state if deleted the same image
+      setCopiedUrl(null)
+
+      // Force a complete refresh
+      setImages([])
+      setLoading(true)
+      await fetchImages()
+
+      alert(`Deleted ${name} successfully!`)
     } catch (err) {
       console.error('Delete failed:', err)
-      alert('Delete failed: ' + (err instanceof Error ? err.message : 'Unknown error'))
+      alert('Delete failed: ' + (err instanceof Error ? err.message : JSON.stringify(err)))
     }
   }
 
@@ -818,10 +976,14 @@ function ImageGallery() {
                     className="w-full h-32 object-cover"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                    <span className="text-white text-xs mb-1">Click to delete</span>
                     <Button
                       size="sm"
                       variant="destructive"
-                      onClick={() => handleDelete(img.name)}
+                      onClick={() => {
+                        console.log('Delete button clicked for:', img.name, img.url)
+                        handleDelete(img.name)
+                      }}
                     >
                       <Trash2 className="h-4 w-4 mr-1" />
                       Delete
@@ -844,6 +1006,15 @@ function ImageGallery() {
                       )}
                     </Button>
                   </div>
+                  {/* Always visible delete button for debugging */}
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    className="absolute top-1 right-1 opacity-0 group-hover:opacity-100"
+                    onClick={() => handleDelete(img.name)}
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
                   <div className="p-2 bg-muted/50">
                     <p className="text-xs text-muted-foreground truncate">{img.name}</p>
                   </div>
@@ -866,5 +1037,118 @@ function ImageGallery() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+// Crop Modal Component
+function CropModal({
+  open,
+  onClose,
+  imageFile,
+  onCrop,
+}: {
+  open: boolean
+  onClose: () => void
+  imageFile: File | null
+  onCrop: (file: File) => void
+}) {
+  const [crop, setCrop] = useState<Crop | undefined>(undefined)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const [objUrl, setObjUrl] = useState<string | null>(null)
+
+  // Create object URL when file changes
+  useEffect(() => {
+    if (imageFile) {
+      const url = URL.createObjectURL(imageFile)
+      setObjUrl(url)
+      return () => URL.revokeObjectURL(url)
+    } else {
+      setObjUrl(null)
+    }
+  }, [imageFile])
+
+  // Initialize crop when image loads
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget
+    const size = Math.min(img.width, img.height) * 0.8
+    setCrop({
+      unit: 'px',
+      x: (img.width - size) / 2,
+      y: (img.height - size) / 2,
+      width: size,
+      height: size,
+    })
+  }
+
+  const handleCropChange = (newCrop: Crop) => {
+    setCrop(newCrop)
+  }
+
+  const handleConfirm = () => {
+    const img = imgRef.current
+    if (!img || !crop) return
+
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const scaleX = img.naturalWidth / img.width
+    const scaleY = img.naturalHeight / img.height
+
+    canvas.width = crop.width
+    canvas.height = crop.height
+
+    ctx.drawImage(
+      img,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    )
+
+    canvas.toBlob((blob) => {
+      if (!blob) return
+      const file = new File([blob], imageFile?.name || 'cropped.png', { type: 'image/png' })
+      onCrop(file)
+    }, 'image/png')
+    onClose()
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle>Crop Profile Image</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          {objUrl && (
+            <div className="flex justify-center bg-muted rounded-lg p-2 overflow-hidden">
+              <ReactCrop
+                crop={crop}
+                onChange={handleCropChange}
+                aspect={1}
+                circularCrop
+              >
+                <img
+                  ref={imgRef}
+                  src={objUrl}
+                  alt="Crop preview"
+                  onLoad={handleImageLoad}
+                  className="max-h-64 object-contain"
+                />
+              </ReactCrop>
+            </div>
+          )}
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={onClose}>Cancel</Button>
+            <Button onClick={handleConfirm} disabled={!crop}>Apply Crop</Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }

@@ -2,6 +2,41 @@ import { useState, useEffect, useCallback } from 'react'
 import { supabase, isSupabaseConfigured } from '@/lib/supabase'
 import type { ResumeDataJSON } from '@/types/resume'
 
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || ''
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+
+/* ------------------------- 直接使用 fetch API ------------------------- */
+async function fetchUpdate(table: string, id: string, data: any): Promise<void> {
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/resume?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify({ data })
+  })
+  if (!response.ok) {
+    const text = await response.text()
+    throw new Error(`Update failed: ${response.status} ${text}`)
+  }
+}
+
+async function fetchSelect(table: string, section: string): Promise<{ id: string } | null> {
+  const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/resume?select=id&section=eq.${section}`,
+    {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    }
+  )
+  const result = await response.json()
+  return result[0] || null
+}
+
 interface UseResumeAdminReturn {
   data: ResumeDataJSON | null
   loading: boolean
@@ -41,8 +76,20 @@ export function useResumeAdmin(): UseResumeAdminReturn {
 
       resumeData?.forEach((item) => {
         if (item.section === 'main') result.main = item.data
-        if (item.section === 'resume') result.resume = item.data
-        if (item.section === 'portfolio') result.portfolio = item.data
+        if (item.section === 'resume') {
+          // Defensive: ensure work, education, skills are arrays
+          result.resume = {
+            skillmessage: item.data?.skillmessage || '',
+            education: Array.isArray(item.data?.education) ? item.data.education : [],
+            work: Array.isArray(item.data?.work) ? item.data.work : [],
+            skills: Array.isArray(item.data?.skills) ? item.data.skills : [],
+          }
+        }
+        if (item.section === 'portfolio') {
+          result.portfolio = {
+            projects: Array.isArray(item.data?.projects) ? item.data.projects : [],
+          }
+        }
       })
 
       setData(result)
@@ -63,32 +110,32 @@ export function useResumeAdmin(): UseResumeAdminReturn {
       throw new Error('Supabase not configured')
     }
 
-    const { error: fetchError } = await supabase
-      .from('resume')
-      .select('id')
-      .eq('section', 'main')
-      .single()
+    console.log('saveMain called, occupation:', mainData.occupation)
 
-    if (fetchError?.code === 'PGRST116') {
+    const existing = await fetchSelect('resume', 'main')
+    console.log('SELECT result:', existing)
+
+    if (!existing) {
       // Insert new
-      const { error: insertError } = await supabase.from('resume').insert({ section: 'main', data: mainData })
-      if (insertError) throw insertError
-    } else {
-      // Update existing
-      const { data: existing, error: selectError } = await supabase
-        .from('resume')
-        .select('id')
-        .eq('section', 'main')
-        .single()
-
-      if (selectError) throw selectError
-      if (existing) {
-        const { error: updateError } = await supabase
-          .from('resume')
-          .update({ data: mainData })
-          .eq('id', existing.id)
-        if (updateError) throw updateError
+      console.log('Inserting new main record')
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/resume`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify({ section: 'main', data: mainData })
+      })
+      if (!response.ok) {
+        const text = await response.text()
+        throw new Error(`Insert failed: ${response.status} ${text}`)
       }
+    } else {
+      // Update existing using fetch
+      console.log('Updating main record, id:', existing.id)
+      await fetchUpdate('resume', existing.id, mainData)
     }
 
     setData((prev) => prev ? { ...prev, main: mainData } : null)
@@ -99,33 +146,27 @@ export function useResumeAdmin(): UseResumeAdminReturn {
       throw new Error('Supabase not configured')
     }
 
-    const { data: existing, error: selectError } = await supabase
-      .from('resume')
-      .select('id')
-      .eq('section', 'resume')
-      .single()
+    const existing = await fetchSelect('resume', 'resume')
 
-    if (selectError) {
-      console.error('Error fetching resume:', selectError)
-      throw selectError
-    }
-
-    if (existing) {
-      const { error: updateError } = await supabase
-        .from('resume')
-        .update({ data: resumeData })
-        .eq('id', existing.id)
-
-      if (updateError) {
-        console.error('Error updating resume:', updateError)
-        throw updateError
+    if (!existing) {
+      // Insert new
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/resume`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify({ section: 'resume', data: resumeData })
+      })
+      if (!response.ok) {
+        const text = await response.text()
+        throw new Error(`Insert failed: ${response.status} ${text}`)
       }
     } else {
-      const { error: insertError } = await supabase.from('resume').insert({ section: 'resume', data: resumeData })
-      if (insertError) {
-        console.error('Error inserting resume:', insertError)
-        throw insertError
-      }
+      // Update using fetch
+      await fetchUpdate('resume', existing.id, resumeData)
     }
 
     setData((prev) => prev ? { ...prev, resume: resumeData } : null)
@@ -136,23 +177,27 @@ export function useResumeAdmin(): UseResumeAdminReturn {
       throw new Error('Supabase not configured')
     }
 
-    const { data: existing, error: selectError } = await supabase
-      .from('resume')
-      .select('id')
-      .eq('section', 'portfolio')
-      .single()
+    const existing = await fetchSelect('resume', 'portfolio')
 
-    if (selectError) throw selectError
-
-    if (existing) {
-      const { error: updateError } = await supabase
-        .from('resume')
-        .update({ data: portfolioData })
-        .eq('id', existing.id)
-      if (updateError) throw updateError
+    if (!existing) {
+      // Insert new
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/resume`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify({ section: 'portfolio', data: portfolioData })
+      })
+      if (!response.ok) {
+        const text = await response.text()
+        throw new Error(`Insert failed: ${response.status} ${text}`)
+      }
     } else {
-      const { error: insertError } = await supabase.from('resume').insert({ section: 'portfolio', data: portfolioData })
-      if (insertError) throw insertError
+      // Update using fetch
+      await fetchUpdate('resume', existing.id, portfolioData)
     }
 
     setData((prev) => prev ? { ...prev, portfolio: portfolioData } : null)
