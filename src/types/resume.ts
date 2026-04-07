@@ -62,6 +62,7 @@ export interface Education {
   image: string
   honor: string
   awards: string
+  schoolLink?: string
 }
 
 export interface WorkExperience {

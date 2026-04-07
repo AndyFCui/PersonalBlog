@@ -9,6 +9,20 @@ interface EducationProps {
   data: ResumeData | null
 }
 
+/* 学校名称到官网链接的映射（默认值） */
+function getSchoolLink(schoolName: string): string | null {
+  const links: Record<string, string> = {
+    'Northeastern University': 'https://www.northeastern.edu/',
+    'University of Nebraska Lincoln': 'https://www.unl.edu/',
+  }
+  return links[schoolName] || null
+}
+
+/* 获取学校链接：优先使用数据中的 schoolLink，否则使用默认映射 */
+function getSchoolUrl(edu: { school: string; schoolLink?: string | null }): string | null {
+  return edu.schoolLink || getSchoolLink(edu.school)
+}
+
 export function Education({ data }: EducationProps) {
   if (!data?.education) return null
 
@@ -46,7 +60,15 @@ export function Education({ data }: EducationProps) {
                     </Avatar>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold">{edu.degree}</h3>
-                      <p className="text-primary font-medium">{edu.school}</p>
+                      <p className="text-primary font-medium">
+                        {getSchoolUrl(edu) ? (
+                          <a href={getSchoolUrl(edu)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                            {edu.school}
+                          </a>
+                        ) : (
+                          edu.school
+                        )}
+                      </p>
                       <div className="flex items-center gap-1 mt-1 text-sm text-foreground/60">
                         <Calendar className="w-4 h-4" />
                         {edu.graduated}

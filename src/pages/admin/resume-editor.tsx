@@ -483,7 +483,7 @@ function ResumeEditor({ data, onChange, onSave, saving }: {
   const addEducation = () => {
     const newData = {
       ...data,
-      education: [...data.education, { school: '', degree: '', graduated: '', Coursework: '', description: '', image: '', honor: '', awards: '' }]
+      education: [...data.education, { school: '', degree: '', graduated: '', Coursework: '', description: '', image: '', honor: '', awards: '', schoolLink: '' }]
     }
     flushSync(() => {
       onChange(newData)
@@ -637,8 +637,12 @@ function ResumeEditor({ data, onChange, onSave, saving }: {
                   <Input value={edu.graduated} onChange={(e) => updateEducation(index, 'graduated', e.target.value)} />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Coursework</label>
-                  <Input value={edu.Coursework} onChange={(e) => updateEducation(index, 'Coursework', e.target.value)} />
+                  <label className="text-sm font-medium">Relevant Coursework (comma-separated)</label>
+                  <Input
+                    value={edu.Coursework}
+                    onChange={(e) => updateEducation(index, 'Coursework', e.target.value)}
+                    placeholder="Wireless Communication Networks, Automata Theory, Unix Programming..."
+                  />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">School Logo</label>
@@ -649,6 +653,14 @@ function ResumeEditor({ data, onChange, onSave, saving }: {
                       <Upload className="h-4 w-4 mr-1" /> {uploadingEdu === index ? 'Uploading...' : 'Upload'}
                     </Button>
                   </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">School Link</label>
+                  <Input
+                    value={edu.schoolLink || ''}
+                    onChange={(e) => updateEducation(index, 'schoolLink', e.target.value)}
+                    placeholder="https://www.example.edu/"
+                  />
                 </div>
               </div>
               <div className="space-y-2">
